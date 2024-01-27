@@ -6,7 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q67pi"]
 size = Vector2(118, 116)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
 script = ExtResource("1_omtbe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
