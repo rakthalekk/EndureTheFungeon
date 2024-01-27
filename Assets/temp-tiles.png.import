@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d0lfwqmvs6lws"
-path="res://.godot/imported/Main_Character_Walk_Cycle_Right.png-e03429d85268f6c47ecd1b5eab044b7a.ctex"
+uid="uid://cvid6q6focqs3"
+path="res://.godot/imported/temp-tiles.png-061c71367108e8562a934782db6e5edf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Character/Player/Main_Character_Walk_Cycle_Right.png"
-dest_files=["res://.godot/imported/Main_Character_Walk_Cycle_Right.png-e03429d85268f6c47ecd1b5eab044b7a.ctex"]
+source_file="res://Assets/temp-tiles.png"
+dest_files=["res://.godot/imported/temp-tiles.png-061c71367108e8562a934782db6e5edf.ctex"]
 
 [params]
 

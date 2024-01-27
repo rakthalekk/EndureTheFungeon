@@ -1,0 +1,33 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://gaxekj3uk4id"]
+
+[ext_resource type="Texture2D" uid="uid://cvid6q6focqs3" path="res://Assets/temp-tiles.png" id="1_m7lxl"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fny0f"]
+texture = ExtResource("1_m7lxl")
+texture_region_size = Vector2i(30, 30)
+0:0/next_alternative_id = 2
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-15, -15, -15, -1.25, 15, -1, 15, -15)
+0:0/1 = 1
+0:0/1/flip_v = true
+0:0/1/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/1/physics_layer_0/angular_velocity = 0.0
+0:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-15, 1, -15, 15, 15, 15, 15, 1.25)
+1:0/0 = 0
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+0:1/0 = 0
+0:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0 = 0
+1:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:1/0/physics_layer_0/angular_velocity = 0.0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-15, -15, -15, 15, 15, 15, 15, -15)
+
+[resource]
+tile_size = Vector2i(30, 30)
+physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 2
+sources/1 = SubResource("TileSetAtlasSource_fny0f")
