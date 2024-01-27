@@ -9,6 +9,10 @@ var grid = []
 
 var rng = RandomNumberGenerator.new()
 var roomScene := preload("res://src/Room.tscn")
+var playerScene := preload("res://src/player.tscn")
+
+var cam
+var currentRoom: Room
 
 func _ready():
 	for i in grid_width:
@@ -18,8 +22,20 @@ func _ready():
 	
 	GenerateMap()
 	
+	var player = playerScene.instantiate()
+	add_child(player)
+	cam = get_node("Camera2D")
+	
+	player.position = startCoords * Room.dimensions + (Room.dimensions / 2)
+	player.scale *= 0.2
+	cam.position = player.position
+
 	pass
 
+func _process(delta):
+	var tween = get_tree().create_tween()
+	tween.tween_property(cam, "position", Vector2(currentRoom.coords * Room.dimensions + (Room.dimensions / 2)), 0.5)
+	
 func GenerateMap():
 	var numRooms = rng.randi_range(min_rooms, max_rooms) * 2 - 1
 	print(numRooms + 1)
@@ -35,8 +51,6 @@ func GenerateMap():
 			continue
 
 		var numNeighbors = NumNeighbors(roomQueue.front())
-		# print(str(numRooms, " rooms left"))
-		# print(str("num emptyNeighbors: ", numNeighbors))
 
 		if numNeighbors >= 4:
 			roomQueue.pop_front()
@@ -50,7 +64,6 @@ func GenerateMap():
 		var emptyNeighborsCount = emptyNeighbors.size()
 
 		for n in emptyNeighborsCount:
-			# print(str("trying neighbor: ", n))
 			if numRooms <= 0:
 				break
 				
@@ -67,8 +80,15 @@ func GenerateMap():
 	for i in grid_width:
 		for j in grid_height:
 			if grid[i][j] != null:
-				grid[i][j].SetNeighbors(GetNeighbors(grid[i][j])) 		
+				grid[i][j].SetNeighbors(GetNeighbors(grid[i][j]))
+				
+	currentRoom = grid[startCoords.x][startCoords.y]
+	#currentRoom.cam.visible = true
+	
 	pass
+
+func ChangeActiveRoom(room: Room):
+	currentRoom = room
 
 func CreateRoom(pos: Vector2i):
 	if InBounds(pos) && !GridContains(pos):
