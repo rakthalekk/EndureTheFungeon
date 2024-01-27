@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Endure The Fungeon"
-run/main_scene="res://src/main.tscn"
+run/main_scene="res://src/jack_gun_test_scene.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -51,8 +51,9 @@ move_right={
 ]
 }
 shoot={
-"deadzone": 0.5,
-"events": []
+"deadzone": 0.49,
+"events": [null, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":1,"position":Vector2(116, 21),"global_position":Vector2(120, 62),"factor":1.0,"button_index":1,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
 }
 
 [layer_names]

@@ -14,5 +14,14 @@ texture = ExtResource("2_3k8sg")
 script = ExtResource("2_be0wl")
 speed = 300.0
 damage = 1
-despawn_time = 1.0
-acceleration = 1.0
+despawn_time = 3.0
+
+[node name="Haha" type="Sprite2D" parent="."]
+position = Vector2(119, 57)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3k8sg")
+script = ExtResource("2_be0wl")
+speed = 300.0
+damage = 1
+despawn_time = 3.0
+bullet_radius = 0.3

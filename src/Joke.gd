@@ -1,12 +1,17 @@
 class_name Joke
 extends Node
 
+const BASE_PROJECTILE = preload("res://src/projectile.tscn")
+
+@export var text_name: String
+@export var projectile_name: String
 @export var is_automatic: bool
 @export var is_charging: bool
 @export var charge_delay: float
 var charge_timer: float
 @export var fire_delay: float
 var delay_timer: float
+@export var infinite_ammo: bool
 @export var max_uses: int
 var current_uses: int
 var firing: bool
@@ -14,18 +19,23 @@ var can_fire: bool
 var current_heading = Vector2.ZERO
 var fire_pos = Vector2.ZERO
 
+var owning_player: Player
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_uses = max_uses
 	delay_timer = fire_delay
 	charge_timer = charge_delay
+	can_fire = true
 	pass # Replace with function body.
 
+func _pick_up(player: Player):
+	owning_player = player
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(is_charging && can_fire && firing):
+	if(is_charging && can_fire && firing && (infinite_ammo || current_uses > 0)):
 		charge_timer -= delta
 		if(charge_timer < 0 && is_automatic):
 			_tell_joke()
@@ -34,35 +44,46 @@ func _process(delta):
 		if(delay_timer < 0):
 			delay_timer = fire_delay;
 			can_fire = true
-	if(is_automatic && firing && can_fire):
+	if(is_automatic && firing && can_fire && (infinite_ammo || current_uses > 0)):
 		_tell_joke()
 	pass
-	
+
 func _set_heading(heading: Vector2, position: Vector2):
 	current_heading = heading;
-	
+
 func _tell_joke():
-	if(!can_fire):
+	print("tell joke " + text_name)
+	if(!can_fire || (!infinite_ammo && current_uses <=0)):
 		return;
-	#spawn bullet and set direction
+	
+	var projectile = BASE_PROJECTILE.instantiate() as Projectile
+	projectile._setup_bullet(projectile_name, current_heading)
+	projectile.global_position = owning_player.global_position
+	owning_player.get_parent().add_child(projectile)
+	
+	if(!infinite_ammo):
+		current_uses -= 1
+	
 	if(!is_automatic):
 		can_fire = false
 	if(is_charging):
 		charge_timer = charge_delay
 	pass
-	
+
 func _start_telling_joke():
-	if(firing || !can_fire || current_uses <= 0):
+	print("start telling joke " + text_name)
+	if(firing || !can_fire || (!infinite_ammo && current_uses <= 0)):
 		return;
 	firing = true;
 	if(is_automatic || is_charging):
 		return;
 	_tell_joke()
 	pass
-	
-func _stop_telling_joke():
+
+func _stop_telling_joke(unequip:bool = false):
+	print("stop telling joke " + text_name)
 	if(is_charging && !is_automatic):
-		if(charge_timer < 0):
+		if(charge_timer < 0 && !unequip):
 			_tell_joke()
 		else:
 			charge_timer = charge_delay
