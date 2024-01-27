@@ -6,7 +6,8 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q67pi"]
 size = Vector2(118, 116)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
 script = ExtResource("1_omtbe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -15,6 +16,3 @@ shape = SubResource("RectangleShape2D_q67pi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_c6llw")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-visible = false
