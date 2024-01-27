@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://dok48pyaie72b"]
+
+[ext_resource type="Script" path="res://src/Map.gd" id="2_i3ts6"]
+
+[node name="Map" type="Node2D"]
+script = ExtResource("2_i3ts6")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(1502, 839)
+zoom = Vector2(0.32, 0.32)
