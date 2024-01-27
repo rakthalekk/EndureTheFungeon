@@ -20,7 +20,7 @@ var piercing_count: int
 func _ready():
 	print("setup")
 	if(hitbox):
-		hitbox.body_entered.connect(_hit_enemy)
+		hitbox.body_entered.connect(_projectile_hit)
 	else:
 		print("NO HITBOX ASSIGNED. PLEASE FIX")
 	print("setup complete")
@@ -64,10 +64,13 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		
-		_hit_wall()
+		if(collider is Enemy):
+			_hit_enemy(collider)
+		elif(collider is CharacterBody2D):
+			_hit_wall(collider)
 
 
-func _hit_wall():
+func _hit_wall(body: CharacterBody2D):
 	print("projectile hit wall")
 	match data.on_wall_hit:
 		ProjectileData.OnHit.BREAK:
@@ -89,8 +92,9 @@ func _hit_wall():
 
 func _hit_enemy(enemy: CharacterBody2D):
 	print("projectile hit enemy")
+	var enemyBody = enemy as Enemy
 	#deal damage
-	match data.on_wall_hit:
+	match data.on_enemy_hit:
 		ProjectileData.OnHit.BREAK:
 			queue_free()
 		ProjectileData.OnHit.BOUNCE:
@@ -123,3 +127,10 @@ func _on_timer_end():
 			pass
 		ProjectileData.OnHit.PIERCE:
 			queue_free()
+
+
+func _projectile_hit(body: CharacterBody2D):
+	if(body is Enemy):
+		_hit_enemy(body)
+	else:
+		_hit_wall(body)
