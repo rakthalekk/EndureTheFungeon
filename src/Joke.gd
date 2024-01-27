@@ -25,7 +25,6 @@ var owning_player: Player
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_uses = max_uses
-	delay_timer = fire_delay
 	charge_timer = charge_delay
 	can_fire = true
 	pass # Replace with function body.
@@ -39,11 +38,14 @@ func _process(delta):
 		charge_timer -= delta
 		if(charge_timer < 0 && is_automatic):
 			_tell_joke()
-	if(is_automatic && !can_fire):
-		delay_timer -= delay_timer
+	if(!can_fire && is_automatic && delay_timer > 0):
+		
+		delay_timer -= delta
 		if(delay_timer < 0):
 			delay_timer = fire_delay;
 			can_fire = true
+	if(!is_automatic && delay_timer > 0):
+		delay_timer -= delta
 	if(is_automatic && firing && can_fire && (infinite_ammo || current_uses > 0)):
 		_tell_joke()
 	pass
@@ -53,7 +55,8 @@ func _set_heading(heading: Vector2, position: Vector2):
 
 func _tell_joke():
 	print("tell joke " + text_name)
-	if(!can_fire || (!infinite_ammo && current_uses <=0)):
+	if(!can_fire || (!infinite_ammo && current_uses <=0) || delay_timer > 0):
+		print("can't fire: ", can_fire, infinite_ammo, current_uses, delay_timer, fire_delay)
 		return;
 	
 	var projectile = BASE_PROJECTILE.instantiate() as Projectile
@@ -64,8 +67,11 @@ func _tell_joke():
 	if(!infinite_ammo):
 		current_uses -= 1
 	
+	delay_timer = fire_delay
+	
 	if(!is_automatic):
 		can_fire = false
+		
 	if(is_charging):
 		charge_timer = charge_delay
 	pass
@@ -77,7 +83,11 @@ func _start_telling_joke():
 	firing = true;
 	if(is_automatic || is_charging):
 		return;
-	_tell_joke()
+	if(delay_timer <= 0):
+		print("firing with delay timer at " , delay_timer , " of " , fire_delay)
+		_tell_joke()
+	else:
+		print("firing under cooldown: " , delay_timer, " of ", fire_delay)
 	pass
 
 func _stop_telling_joke(unequip:bool = false):
