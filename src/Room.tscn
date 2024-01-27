@@ -7,6 +7,7 @@
 size = Vector2(476, 265)
 
 [node name="Room" type="TileMap"]
+scale = Vector2(4, 4)
 tile_set = ExtResource("1_oodin")
 rendering_quadrant_size = 30
 format = 2

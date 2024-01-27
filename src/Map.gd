@@ -27,7 +27,7 @@ func _ready():
 	cam = get_node("Camera2D")
 	
 	player.position = startCoords * Room.dimensions + (Room.dimensions / 2)
-	player.scale *= 0.2
+	#player.scale *= 0.2
 	cam.position = player.position
 
 	pass

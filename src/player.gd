@@ -9,7 +9,7 @@ var jokes: Array[Joke]
 var joke_names: Array[String]
 var current_joke: int
 
-const SPEED = 300.0
+const SPEED = 700.0
 
 func _ready():
 	#MOUSE_RETICLE.instantiate()

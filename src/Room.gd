@@ -2,7 +2,7 @@ class_name Room
 
 extends TileMap
 
-static var dimensions := Vector2i(16 * 30, 9 * 30)
+static var dimensions := Vector2i(16 * 30 * 4, 9 * 30 * 4)
 
 var coords: Vector2i
 var neighbors: Array[Room]
