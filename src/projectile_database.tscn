@@ -15,6 +15,7 @@ script = ExtResource("2_be0wl")
 speed = 300.0
 damage = 1
 despawn_time = 3.0
+acceleration = 1.0
 
 [node name="Haha" type="Sprite2D" parent="."]
 position = Vector2(119, 57)
