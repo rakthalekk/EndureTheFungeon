@@ -1,5 +1,6 @@
-class_name  Player
+class_name Player
 extends CharacterBody2D
+
 var heading = Vector2.ZERO;
 @export var max_haha_points: int
 var current_haha_points: int
