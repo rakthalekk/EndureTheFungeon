@@ -8,6 +8,7 @@ enum MoveType {STANDARD, TRAP, ACCELERATE}
 @export var damage: int
 @export var despawn_time: float
 @export var acceleration: float
+@export var bullet_radius: float
 
 @export var piercing_max: int
 @export var max_bounces: int
@@ -18,6 +19,6 @@ enum MoveType {STANDARD, TRAP, ACCELERATE}
 
 @export var move_type: MoveType
 
-@export var split_projectile: Projectile
+@export var split_projectile: ProjectileData
 @export var num_split_projectiles: int
 @export var explode_radius: float
