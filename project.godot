@@ -15,6 +15,11 @@ run/main_scene="res://src/main.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+JokeDatabase="*res://src/joke_database.tscn"
+ProjectileDatabase="*res://src/projectile_database.tscn"
+
 [display]
 
 window/size/viewport_width=960

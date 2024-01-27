@@ -18,5 +18,3 @@ texture = ExtResource("2_c6llw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 visible = false
-
-[node name="Weapon" type="Node" parent="."]
