@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cun32e1vucc5a"]
+
+[ext_resource type="Script" path="res://src/projectile_database.gd" id="1_2ityc"]
+[ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="2_3k8sg"]
+[ext_resource type="Script" path="res://src/projectile_data.gd" id="2_be0wl"]
+
+[node name="ProjectileDatabase" type="Node2D"]
+script = ExtResource("1_2ityc")
+
+[node name="Basic" type="Sprite2D" parent="."]
+position = Vector2(62, 57)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3k8sg")
+script = ExtResource("2_be0wl")
+speed = 300.0
+damage = 1
+despawn_time = 1.0
+acceleration = 1.0

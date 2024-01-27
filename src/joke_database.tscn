@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://1l67n7b4ntrc"]
+
+[ext_resource type="Script" path="res://src/joke_database.gd" id="1_7jgi1"]
+[ext_resource type="Script" path="res://src/Joke.gd" id="2_dyf4u"]
+
+[node name="JokeDatabase" type="Node"]
+script = ExtResource("1_7jgi1")
+
+[node name="Joke" type="Node" parent="."]
+script = ExtResource("2_dyf4u")
