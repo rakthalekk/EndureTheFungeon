@@ -1,5 +1,5 @@
 class_name Enemy
-extends CharacterBody2D
+extends LivingBeing
 
 
 const BULLET = preload("res://src/enemy_bullet.tscn")
