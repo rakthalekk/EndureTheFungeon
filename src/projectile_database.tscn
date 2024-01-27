@@ -14,5 +14,5 @@ texture = ExtResource("2_3k8sg")
 script = ExtResource("2_be0wl")
 speed = 300.0
 damage = 1
-despawn_time = 1.0
+despawn_time = 2.0
 acceleration = 1.0
