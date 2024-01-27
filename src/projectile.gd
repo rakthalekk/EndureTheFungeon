@@ -66,11 +66,11 @@ func _physics_process(delta):
 		
 		if(collider is Enemy):
 			_hit_enemy(collider)
-		elif(collider is CharacterBody2D):
+		else:
 			_hit_wall(collider)
 
 
-func _hit_wall(body: CharacterBody2D):
+func _hit_wall(body):
 	print("projectile hit wall")
 	match data.on_wall_hit:
 		ProjectileData.OnHit.BREAK:
@@ -129,7 +129,7 @@ func _on_timer_end():
 			queue_free()
 
 
-func _projectile_hit(body: CharacterBody2D):
+func _projectile_hit(body):
 	if(body is Enemy):
 		_hit_enemy(body)
 	else:

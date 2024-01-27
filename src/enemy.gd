@@ -85,7 +85,7 @@ func shoot():
 func create_bullet():
 	var bullet = BULLET.instantiate() as EnemyBullet
 	bullet.global_position = global_position
-	bullet.heading = fire_direction
+	bullet._setup_bullet("Basic", fire_direction)
 	get_parent().add_child(bullet)
 
 
