@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://bpuypxw8m07tg"]
+
+[ext_resource type="PackedScene" uid="uid://ciovhmka66u24" path="res://src/player.tscn" id="1_f2j53"]
+[ext_resource type="PackedScene" uid="uid://bum3w87g78x1x" path="res://src/bullet_reticle.tscn" id="2_wjr11"]
+
+[node name="Node" type="Node"]
+
+[node name="Player" parent="." instance=ExtResource("1_f2j53")]
+position = Vector2(312, 188)
+
+[node name="BulletReticle" parent="." instance=ExtResource("2_wjr11")]
