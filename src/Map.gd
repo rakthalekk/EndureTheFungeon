@@ -32,9 +32,9 @@ func _ready():
 
 	pass
 
-func _process(delta):
+func _process(_delta):
 	var tween = get_tree().create_tween()
-	tween.tween_property(cam, "position", Vector2(currentRoom.coords * Room.dimensions + (Room.dimensions / 2)), 0.5)
+	tween.tween_property(cam, "position", Vector2(currentRoom.coords * Room.dimensions + (Room.dimensions / 2)), 0.4)
 	
 func GenerateMap():
 	var numRooms = rng.randi_range(min_rooms, max_rooms) * 2 - 1
@@ -83,7 +83,6 @@ func GenerateMap():
 				grid[i][j].SetNeighbors(GetNeighbors(grid[i][j]))
 				
 	currentRoom = grid[startCoords.x][startCoords.y]
-	#currentRoom.cam.visible = true
 	
 	pass
 
