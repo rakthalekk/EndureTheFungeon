@@ -31,8 +31,7 @@ func _process(delta):
 	heading = mousePos - global_position;
 	jokes[current_joke]._set_heading(heading, global_position)
 	if(i_timer > 0):
-		print("i frames: ", i_timer)
-		i_timer -= delta;
+		i_timer -= delta
 	
 	if direction.x > 0:
 		facing = "right"

@@ -46,7 +46,6 @@ _data = {
 [node name="BossClown" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_yyhjv")
-move_pattern = 4
 max_haha_points = 10
 i_frames = 0.3
 

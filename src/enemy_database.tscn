@@ -2,14 +2,17 @@
 
 [ext_resource type="Script" path="res://src/enemy_database.gd" id="1_p5nma"]
 [ext_resource type="Script" path="res://src/enemy_data.gd" id="2_8oud8"]
-[ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="2_pql0y"]
+[ext_resource type="Texture2D" uid="uid://dll7ebg306ktc" path="res://Assets/Character/Enemies/FunGuyAAAAExport5FINAL.png" id="2_65wj0"]
 
 [node name="EnemyDatabase" type="Node2D"]
 script = ExtResource("1_p5nma")
 
 [node name="Enemy" type="Sprite2D" parent="."]
-position = Vector2(129, 96)
-texture = ExtResource("2_pql0y")
+position = Vector2(199, 192)
+texture = ExtResource("2_65wj0")
+hframes = 12
 script = ExtResource("2_8oud8")
 speed = 300
 nearby_distance = 600
+max_haha_points = 5
+i_frames = 0.5
