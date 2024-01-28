@@ -181,7 +181,7 @@ func SpawnShiny():
 func SpawnBoss():
 	var boss = bossScene.instantiate()
 	call_deferred("add_child", boss)
-	boss.position = Vector2i(960, 120)
+	boss.position = Vector2i(1000, 200)
 	pass
 
 func Unlock(friendLock):

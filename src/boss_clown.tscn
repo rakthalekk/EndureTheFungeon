@@ -45,6 +45,7 @@ _data = {
 }
 
 [node name="BossClown" type="CharacterBody2D"]
+position = Vector2(240, 240)
 collision_layer = 4
 script = ExtResource("1_yyhjv")
 enemy_name = "Boss"

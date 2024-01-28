@@ -117,17 +117,17 @@ func GenerateMap():
 			currRoom.type = Room.Type.Boss
 			continue
 		
-		if remainingRareItems > 0:
-			currRoom.type = Room.Type.Shiny
-			remainingRareItems -= 1
-			continue
+		#if remainingRareItems > 0:
+			#currRoom.type = Room.Type.Shiny
+			#remainingRareItems -= 1
+			#continue
+		#
+		#if remainingItems > 0:
+			#currRoom.type = Room.Type.Item
+			#remainingItems -= 1
+			#continue
 		
-		if remainingItems > 0:
-			currRoom.type = Room.Type.Item
-			remainingItems -= 1
-			continue
-		
-		currRoom.type = Room.Type.Enemy
+		currRoom.type = Room.Type.Boss
 				
 	currentRoom = grid[startCoords.x][startCoords.y]
 	
