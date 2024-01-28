@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://ciovhmka66u24" path="res://src/player.tscn" id="1_f2j53"]
 [ext_resource type="PackedScene" uid="uid://bum3w87g78x1x" path="res://src/bullet_reticle.tscn" id="2_wjr11"]
 [ext_resource type="PackedScene" uid="uid://cniuuaah7lwy7" path="res://src/pickup.tscn" id="3_6kw4w"]
-[ext_resource type="PackedScene" uid="uid://b60ec77yn35lg" path="res://src/main_menu.tscn" id="4_tn3wk"]
+[ext_resource type="PackedScene" uid="uid://djvpa36t4et04" path="res://src/main_menu.tscn" id="4_tn3wk"]
 
 [node name="Node" type="Node"]
 
@@ -32,7 +32,7 @@ joke_restore_amount = 1.0
 [node name="trap pickup" parent="." instance=ExtResource("3_6kw4w")]
 position = Vector2(164, 581)
 pickup_type = 1
-joke_name = "Trap"
+joke_name = "Ligma"
 joke_restore_amount = 1.0
 
 [node name="DirectSine pickup" parent="." instance=ExtResource("3_6kw4w")]
@@ -56,7 +56,7 @@ joke_restore_amount = 1.0
 [node name="Charged pickup" parent="." instance=ExtResource("3_6kw4w")]
 position = Vector2(143, 938)
 pickup_type = 1
-joke_name = "Charged"
+joke_name = "YourMom"
 joke_restore_amount = 1.0
 
 [node name="FixedShot pickup" parent="." instance=ExtResource("3_6kw4w")]
@@ -68,7 +68,7 @@ joke_restore_amount = 1.0
 [node name="RandShot pickup" parent="." instance=ExtResource("3_6kw4w")]
 position = Vector2(669, 642)
 pickup_type = 1
-joke_name = "RandShotgun"
+joke_name = "KnockKnock"
 joke_restore_amount = 1.0
 
 [node name="MainMenu" parent="." instance=ExtResource("4_tn3wk")]

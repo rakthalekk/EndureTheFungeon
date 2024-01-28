@@ -24,6 +24,7 @@ const SPEED = 700.0
 func _ready():
 	#MOUSE_RETICLE.instantiate()
 	super()
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	jokes.append(JokeDatabase._get_laugh());
 	joke_names.append(jokes[0].text_name)
 	jokes[0]._pick_up(self)
@@ -161,6 +162,7 @@ func _handle_pickup(pickup: Pickup):
 	elif(pickup.pickup_type == pickup.PickupType.JOKE):
 		var joke_id = joke_names.find(pickup.joke_name);
 		if(joke_id == -1):
+			print("learning ", pickup.joke_name)
 			_learn_joke(JokeDatabase._get_joke(pickup.joke_name))
 			print("trying to learn joke. now at ", jokes.size())
 		else:

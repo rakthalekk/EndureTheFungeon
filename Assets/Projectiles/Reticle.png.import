@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c2ws1hwbh17o"
-path="res://.godot/imported/Knock2ExportFINAL.png-c2bdffd9ea85e443f05fd79ced816e76.ctex"
+uid="uid://be2peplvbah25"
+path="res://.godot/imported/Reticle.png-cc397b6255a6b6b48fc7ad411461d28b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Projectiles/Knock2ExportFINAL.png"
-dest_files=["res://.godot/imported/Knock2ExportFINAL.png-c2bdffd9ea85e443f05fd79ced816e76.ctex"]
+source_file="res://Assets/Projectiles/Reticle.png"
+dest_files=["res://.godot/imported/Reticle.png-cc397b6255a6b6b48fc7ad411461d28b.ctex"]
 
 [params]
 
