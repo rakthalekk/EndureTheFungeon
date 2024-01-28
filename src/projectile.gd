@@ -3,8 +3,11 @@ extends CharacterBody2D
 
 var data: ProjectileData
 
-var BULLET = load("res://src/projectile.tscn")
-var EXPLOSION = load("res://src/explosion.tscn")
+var BULLET = preload("res://src/projectile.tscn")
+var EXPLOSION = preload("res://src/explosion.tscn")
+var SOUND = preload("res://src/sound.tscn")
+
+var sound: AudioStream
 
 @export var projectile_name: String
 
@@ -26,6 +29,10 @@ func _ready():
 		hitbox.body_entered.connect(_projectile_hit)
 	else:
 		print("NO HITBOX ASSIGNED. PLEASE FIX")
+	
+	var s = SOUND.instantiate() 
+	get_tree().root.add_child(s)
+	s.play_sound(sound)
 
 
 func initialize_things():
@@ -49,7 +56,12 @@ func _setup_bullet(bullet_name: String, newHeading: Vector2):
 	sprite.frame = 0
 	hitbox.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	sprite.scale = Vector2(data.bullet_radius,data.bullet_radius)
+	
+	if data.sounds.size() > 0:
+		sound = data.sounds.pick_random()
 	#print("setup " , bullet_name , " with lifespan ", lifespan)
+	
+	#await get_tree().create_timer(0.01).timeout
 
 
 func _setup_bullet_data(bullet_data: ProjectileData, newHeading: Vector2):

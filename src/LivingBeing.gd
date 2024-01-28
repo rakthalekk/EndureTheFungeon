@@ -11,10 +11,13 @@ var dead = false
 
 var dodging = false
 
+var hurt_sound: AudioStreamPlayer
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	current_haha_points = max_haha_points
-	pass # Replace with function body.
+	
+	hurt_sound = get_node("HurtSound")
 
 
 func _take_damage(damage: int):
@@ -23,6 +26,8 @@ func _take_damage(damage: int):
 	if i_timer > 0 || dodging:
 		#print("i frames active")
 		return;
+	
+	hurt_sound.play()
 	#print("took ",damage," damage. Hahas at ",current_haha_points, " of ", max_haha_points)
 	current_haha_points -= damage;
 	i_timer = i_frames

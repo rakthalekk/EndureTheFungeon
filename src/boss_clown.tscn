@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://ou86lt83rcm8"]
+[gd_scene load_steps=8 format=3 uid="uid://ou86lt83rcm8"]
 
-[ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="1_qawlf"]
 [ext_resource type="Script" path="res://src/boss_clown.gd" id="1_yyhjv"]
+[ext_resource type="Texture2D" uid="uid://dpvv62fimh5lx" path="res://Assets/Character/Enemies/Final_Boss_Idle_Sheet.png" id="2_73sva"]
+[ext_resource type="AudioStream" uid="uid://bwy55fsmtnq6o" path="res://Assets/Audio/anything take damage.mp3" id="3_76c48"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n7uty"]
-size = Vector2(254.5, 255)
+size = Vector2(292, 446)
 
 [sub_resource type="Animation" id="Animation_4koo6"]
 length = 0.001
@@ -51,14 +52,14 @@ max_haha_points = 10
 i_frames = 0.3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-0.5, 2.5)
-scale = Vector2(2, 1)
+position = Vector2(-4, -8)
 shape = SubResource("RectangleShape2D_n7uty")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0.499998, 0)
-scale = Vector2(4, 2.008)
-texture = ExtResource("1_qawlf")
+scale = Vector2(2, 2)
+texture = ExtResource("2_73sva")
+hframes = 8
 
 [node name="StartTimer" type="Timer" parent="."]
 one_shot = true
@@ -68,5 +69,8 @@ autostart = true
 libraries = {
 "": SubResource("AnimationLibrary_5bww4")
 }
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_76c48")
 
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

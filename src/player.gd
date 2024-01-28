@@ -129,7 +129,7 @@ func _no_more_laughing():
 	
 	await get_tree().create_timer(2).timeout
 	
-	get_tree().change_scene_to_file("res://src/enemy_scene.tscn")
+	get_tree().change_scene_to_file("res://src/game_over.tscn")
 
 
 func _learn_joke(new_joke: Joke):

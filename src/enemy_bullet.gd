@@ -4,6 +4,10 @@ extends Projectile
 
 func _ready():
 	BULLET = load("res://src/enemy_bullet.tscn")
+	
+	var s = SOUND.instantiate() 
+	get_tree().root.add_child(s)
+	s.play_sound(sound)
 
 
 func _on_timer_timeout():

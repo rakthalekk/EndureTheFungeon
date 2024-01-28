@@ -30,3 +30,5 @@ enum MoveType {STANDARD, TRAP, ACCELERATE, DIRECTSINE, LATERALSINE}
 
 @export var sine_amplitude: float
 @export var sine_frequency: float
+
+@export var sounds: Array[AudioStream]
