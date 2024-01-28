@@ -26,10 +26,13 @@ position = Vector2(219, 127)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("4_xkt6n")
 script = ExtResource("2_be0wl")
-speed = 1400.0
+speed = 900.0
 damage = 1
-despawn_time = 3.0
-bullet_radius = 0.3
+despawn_time = 4.0
+bullet_radius = 0.4
+move_type = 4
+sine_amplitude = 30.0
+sine_frequency = 200.0
 
 [node name="Shotgun" type="Sprite2D" parent="."]
 position = Vector2(119, 57)
@@ -151,7 +154,7 @@ script = ExtResource("2_be0wl")
 speed = 400.0
 damage = 2
 despawn_time = 7.0
-bullet_radius = 0.7
+bullet_radius = 1.3
 align_to_heading = true
 piercing_max = 10
 on_enemy_hit = 4

@@ -15,6 +15,8 @@ num_bullets = 1
 is_automatic = true
 fire_delay = 0.5
 infinite_ammo = true
+spread = 5.0
+use_random_spread = true
 
 [node name="Laugh2" type="Node" parent="."]
 script = ExtResource("2_dyf4u")
@@ -66,7 +68,7 @@ is_automatic = true
 fire_delay = 0.25
 max_uses = 30
 
-[node name="Charged" type="Node" parent="."]
+[node name="YourMom" type="Node" parent="."]
 script = ExtResource("2_dyf4u")
 text_name = "Charged"
 projectile_name = "Charged"
@@ -76,7 +78,7 @@ charge_delay = 0.5
 fire_delay = 0.2
 max_uses = 18
 
-[node name="RandShotgun" type="Node" parent="."]
+[node name="KnockKnock" type="Node" parent="."]
 script = ExtResource("2_dyf4u")
 text_name = "RandShotgun"
 projectile_name = "Shotgun"

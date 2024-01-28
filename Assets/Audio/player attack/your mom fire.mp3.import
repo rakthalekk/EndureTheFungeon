@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c8vjum4yv0br"
+path="res://.godot/imported/your mom fire.mp3-acaf041b6b064bde4ff4ef53f195c074.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/player attack/your mom fire.mp3"
+dest_files=["res://.godot/imported/your mom fire.mp3-acaf041b6b064bde4ff4ef53f195c074.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,13 +1,13 @@
 [gd_scene load_steps=8 format=3 uid="uid://dyyk4ksg0wtxo"]
 
 [ext_resource type="Script" path="res://src/enemy.gd" id="1_ph1ng"]
-[ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="2_11k05"]
+[ext_resource type="Texture2D" uid="uid://dll7ebg306ktc" path="res://Assets/Character/Enemies/FunGuyAAAAExport5FINAL.png" id="2_dso32"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0swf5"]
-size = Vector2(129, 126)
+size = Vector2(129, 68)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v1sgm"]
-radius = 82.0061
+radius = 48.0937
 
 [sub_resource type="Animation" id="Animation_7aeep"]
 length = 0.001
@@ -51,13 +51,15 @@ collision_layer = 4
 script = ExtResource("1_ph1ng")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 0)
+position = Vector2(0.5, 60)
 shape = SubResource("RectangleShape2D_0swf5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_11k05")
+texture = ExtResource("2_dso32")
+hframes = 12
 
 [node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, 58)
 collision_layer = 0
 collision_mask = 2
 
@@ -74,6 +76,8 @@ one_shot = true
 
 [node name="WaitTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 
 [node name="EffectsAnimation" type="AnimationPlayer" parent="."]
 libraries = {
