@@ -3,7 +3,6 @@ extends LivingBeing
 
 const MOUSE_RETICLE = preload("res://src/bullet_reticle.tscn")
 const GAME_OVER = preload("res://src/game_over.tscn")
-const YOU_WIN = preload("res://src/you_win.tscn")
 
 var direction = Vector2.ZERO
 
@@ -182,12 +181,6 @@ func _handle_pickup(pickup: Pickup):
 	else:
 		return
 	pickup._consume()
-
-
-func _win_game():
-	can_move = false
-	var you_win = YOU_WIN.instantiate()
-	get_parent().add_child(you_win)
 
 
 func _on_dodge_cooldown_timeout():

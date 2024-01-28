@@ -16,6 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://c1uwnfs371u2j" path="res://Assets/Projectiles/Ligma3ExportFINAL.png" id="9_atl7i"]
 [ext_resource type="AudioStream" uid="uid://cfcxdiqhvyh3s" path="res://Assets/Audio/boss sfx/rapid shot.mp3" id="10_lkeud"]
 [ext_resource type="AudioStream" uid="uid://daoxhnol0haph" path="res://Assets/Audio/boss sfx/many at once shot.mp3" id="11_hxcqn"]
+[ext_resource type="Texture2D" uid="uid://dp5wvfqe8dqwc" path="res://Assets/Projectiles/SmallTear3ExportFINAL.png" id="7_ma45g"]
+[ext_resource type="Texture2D" uid="uid://dojljya8psam7" path="res://Assets/Projectiles/Ligma3ExportFINAL.png" id="9_atl7i"]
+[ext_resource type="Texture2D" uid="uid://bq2v6yav00sck" path="res://Assets/Projectiles/BEE3ExportFINAL.png" id="12_3icsl"]
 [ext_resource type="Texture2D" uid="uid://cae7st0gp1oj" path="res://Assets/Projectiles/YOURMOM3ExportFINAL.png" id="12_4w1pc"]
 [ext_resource type="AudioStream" uid="uid://yoomgbtlkvw1" path="res://Assets/Audio/boss sfx/bee singular.mp3" id="13_c65i7"]
 [ext_resource type="AudioStream" uid="uid://bkoqnxycyf6oy" path="res://Assets/Audio/boss sfx/marching shot.wav" id="14_lxsp2"]
@@ -229,12 +232,13 @@ sine_frequency = 100.0
 [node name="LateralSine" type="Sprite2D" parent="."]
 position = Vector2(422, 63)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("12_3icsl")
 script = ExtResource("2_be0wl")
 speed = 600.0
 damage = 1
 despawn_time = 10.0
 bullet_radius = 0.5
+align_to_heading = true
 move_type = 4
 sine_amplitude = 300.0
 sine_frequency = 50.0

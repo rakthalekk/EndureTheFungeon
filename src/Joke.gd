@@ -74,7 +74,7 @@ func _tell_joke():
 			else:
 				proj_heading = current_heading.rotated(deg_to_rad(-spread + (((2 * spread)/(num_bullets+1))*(i+1))))
 		
-		if projectile:
+		if is_instance_valid(projectile):
 			projectile._setup_bullet(projectile_name, proj_heading)
 			projectile.global_position = owning_player.global_position
 			owning_player.get_parent().add_child(projectile)
