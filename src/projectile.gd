@@ -89,6 +89,7 @@ func _hit_wall(body):
 func _hit_enemy(enemy: CharacterBody2D):
 	var enemyBody = enemy as Enemy
 	#deal damage
+	enemyBody._take_damage(data.damage)
 	match data.on_enemy_hit:
 		ProjectileData.OnHit.BREAK:
 			queue_free()

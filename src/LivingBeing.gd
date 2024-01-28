@@ -25,5 +25,21 @@ func _take_damage(damage: int):
 	if(current_haha_points < 0):
 		_no_more_laughing();
 
+func _heal(healing: int, ignore_max: bool = false):
+	print("healed by ", healing)
+	current_haha_points = min(max_haha_points, current_haha_points + healing)
+
+func _increase_health_max(max_haha_boost: int, heal: bool = true):
+	max_haha_points += max_haha_boost
+	if(heal):
+		_heal(max_haha_boost)
+
+func _decrease_health_max(max_haha_hit: int, damage: bool = false):
+	max_haha_points -= max_haha_hit
+	if(damage):
+		_take_damage(max_haha_hit)
+	if(current_haha_points > max_haha_points):
+		current_haha_points = max_haha_points
+
 func _no_more_laughing():
 	pass

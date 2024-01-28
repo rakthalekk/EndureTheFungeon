@@ -100,7 +100,11 @@ func _stop_telling_joke(unequip: bool = false):
 			charge_timer = charge_delay
 	
 	if(!is_automatic):
-		can_fire = true
+		can_fire = true;
+	firing = false;
+	pass
 	
-	firing = false
+func _restore_uses(percentage: float):
+	var ammo_restore = (int)(max_uses * percentage)
+	current_uses = min(current_uses + ammo_restore, max_uses)
 
