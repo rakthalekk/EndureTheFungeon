@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="2_3k8sg"]
 [ext_resource type="Script" path="res://src/projectile_data.gd" id="2_be0wl"]
 [ext_resource type="Texture2D" uid="uid://bvsakwrt3k15" path="res://Assets/Projectiles/redBALL4ExportFINAL.png" id="2_t85ss"]
-[ext_resource type="Texture2D" uid="uid://cxkqkkabn2n2u" path="res://Assets/Projectiles/HAHA5FINAL.png" id="4_xkt6n"]
+[ext_resource type="Texture2D" uid="uid://b2kcpmi2ynwmu" path="res://Assets/Projectiles/HAHAOUTLINE3ExportFINAL.png" id="4_etiv2"]
 [ext_resource type="Texture2D" uid="uid://ci6lnqhxn5got" path="res://Assets/Projectiles/KnockOUTLINE3ExportFINAL.png" id="5_hrvav"]
 [ext_resource type="Texture2D" uid="uid://dxxtxt2en4f24" path="res://Assets/Projectiles/SUSExport3FINAL.png" id="5_rihhq"]
 [ext_resource type="Texture2D" uid="uid://kl2k80ks17ha" path="res://Assets/Projectiles/Tear3ExportFINAL.png" id="6_124t7"]
@@ -31,7 +31,7 @@ bullet_radius = 0.3
 [node name="Haha" type="Sprite2D" parent="."]
 position = Vector2(219, 127)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("4_xkt6n")
+texture = ExtResource("4_etiv2")
 script = ExtResource("2_be0wl")
 speed = 900.0
 damage = 1
@@ -207,7 +207,7 @@ bullet_radius = 0.5
 move_type = 3
 sine_frequency = 100.0
 
-[node name="LateralSine" type="Sprite2D" parent="."]
+[node name="BEE" type="Sprite2D" parent="."]
 position = Vector2(422, 63)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_3k8sg")
@@ -220,7 +220,7 @@ move_type = 4
 sine_amplitude = 300.0
 sine_frequency = 50.0
 
-[node name="Accelerator" type="Sprite2D" parent="."]
+[node name="Sanic" type="Sprite2D" parent="."]
 position = Vector2(98, 130)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_3k8sg")
