@@ -3,6 +3,8 @@ extends CharacterBody2D
 
 var data: ProjectileData
 
+var BULLET = load("res://src/projectile.tscn")
+
 @export var projectile_name: String
 
 var hitbox: Area2D
@@ -17,16 +19,25 @@ var piercing_count: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	hitbox = get_node("Hitbox")
-	sprite = get_node("Sprite2D")
+	initialize_things()
 	
 	if(hitbox):
 		hitbox.body_entered.connect(_projectile_hit)
 	else:
 		print("NO HITBOX ASSIGNED. PLEASE FIX")
 
+
+func initialize_things():
+	if !hitbox:
+		hitbox = get_node("Hitbox")
+	
+	if !sprite:
+		sprite = get_node("Sprite2D")
+
+
 func _setup_bullet(bullet_name: String, newHeading: Vector2):
-	await ready
+	initialize_things()
+	
 	data = ProjectileDatabase.get_projectile_data(bullet_name)
 	lifespan = data.despawn_time
 	piercing_count = data.piercing_max
@@ -34,8 +45,11 @@ func _setup_bullet(bullet_name: String, newHeading: Vector2):
 	heading = newHeading
 	hitbox.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	sprite.scale = Vector2(data.bullet_radius,data.bullet_radius)
-	
+
+
 func _setup_bullet_data(bullet_data: ProjectileData, newHeading: Vector2):
+	initialize_things()
+	
 	data = bullet_data
 	lifespan = data.despawn_time
 	piercing_count = data.piercing_max
@@ -43,6 +57,7 @@ func _setup_bullet_data(bullet_data: ProjectileData, newHeading: Vector2):
 	heading = newHeading
 	sprite.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	hitbox.scale = Vector2(data.bullet_radius,data.bullet_radius)
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
@@ -78,8 +93,7 @@ func _hit_wall(body):
 			#bounce
 			pass
 		ProjectileData.OnHit.SPLIT:
-			#spawn new projectiles
-			pass
+			spawn_split_projectiles()
 		ProjectileData.OnHit.EXPLODE:
 			#explode
 			pass
@@ -100,8 +114,7 @@ func _hit_enemy(enemy: CharacterBody2D):
 			#bounce
 			pass
 		ProjectileData.OnHit.SPLIT:
-			#spawn new projectiles
-			pass
+			spawn_split_projectiles()
 		ProjectileData.OnHit.EXPLODE:
 			#explode
 			pass
@@ -111,6 +124,23 @@ func _hit_enemy(enemy: CharacterBody2D):
 				queue_free()
 
 
+func spawn_split_projectiles():
+	var split_direction = heading
+	var degree_delta = data.split_angle / data.num_split_projectiles
+	
+	split_direction = split_direction.rotated(deg_to_rad(-degree_delta * data.num_split_projectiles / 2.0))
+	
+	for i in data.num_split_projectiles:
+		var bullet = BULLET.instantiate() as EnemyBullet
+		bullet.global_position = global_position
+		bullet._setup_bullet(data.split_projectile, split_direction)
+		get_parent().add_child(bullet)
+		
+		split_direction = split_direction.rotated(deg_to_rad(degree_delta))
+	
+	queue_free()
+
+
 func _on_timer_end():
 	match data.on_timer_end:
 		ProjectileData.OnHit.BREAK:
@@ -118,8 +148,7 @@ func _on_timer_end():
 		ProjectileData.OnHit.BOUNCE:
 			queue_free()
 		ProjectileData.OnHit.SPLIT:
-			#spawn new projectiles
-			pass
+			spawn_split_projectiles()
 		ProjectileData.OnHit.EXPLODE:
 			#explode
 			pass

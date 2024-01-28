@@ -14,15 +14,15 @@ func pattern1():
 
 func triple():
 	fire_direction = (player.global_position - global_position).normalized()
-	make_bullet("BossBullet1")
+	make_bullet("BossTriple")
 	await get_tree().create_timer(0.3).timeout
 	
 	fire_direction = (player.global_position - global_position).normalized()
-	make_bullet("BossBullet1")
+	make_bullet("BossTriple")
 	await get_tree().create_timer(0.3).timeout
 	
 	fire_direction = (player.global_position - global_position).normalized()
-	make_bullet("BossBullet1")
+	make_bullet("BossTriple")
 	await get_tree().create_timer(1).timeout
 
 
@@ -32,7 +32,7 @@ func burst():
 	
 	for i in range(5):
 		fire_direction = fire_direction.rotated(deg_to_rad(-30))
-		make_bullet("BossBullet2")
+		make_bullet("BossBurst")
 	
 	await get_tree().create_timer(2).timeout
 
@@ -42,10 +42,16 @@ func sweep():
 	
 	for i in range(12):
 		fire_direction = fire_direction.rotated(deg_to_rad(-15))
-		make_bullet("BossBullet2")
+		make_bullet("BossSweep")
 		await get_tree().create_timer(.2).timeout
 	
 	await get_tree().create_timer(2).timeout
+
+
+func split():
+	fire_direction = (player.global_position - global_position).normalized()
+	make_bullet("BossSplit")
+	await get_tree().create_timer(3).timeout
 
 
 func make_bullet(bullet_name: String):
@@ -57,6 +63,9 @@ func make_bullet(bullet_name: String):
 
 func _on_start_timer_timeout():
 	await pattern1()
+	await split()
+	await split()
+	await split()
 	await sweep()
 	await burst()
 	await burst()

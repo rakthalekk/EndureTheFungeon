@@ -2,6 +2,10 @@ class_name EnemyBullet
 extends Projectile
 
 
+func _ready():
+	BULLET = load("res://src/enemy_bullet.tscn")
+
+
 func _on_timer_timeout():
 	queue_free()
 
