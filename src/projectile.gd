@@ -77,7 +77,6 @@ func _physics_process(delta):
 	
 	if(data.move_type == ProjectileData.MoveType.LATERALSINE):
 		velocity += velocity.rotated(PI/2).normalized() * data.sine_amplitude * sin((data.despawn_time - lifespan) *data.sine_frequency / (2*PI))
-	#print("velocity: ", velocity)
 	move_and_slide()
 	
 	lifespan -= delta
@@ -88,10 +87,13 @@ func _physics_process(delta):
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		
-		if(collider is Enemy):
+		if collider is LivingBeing:
 			_hit_enemy(collider)
 		else:
 			_hit_wall(collider)
+		
+		if data.on_wall_hit == ProjectileData.OnHit.BOUNCE:
+			heading = heading.bounce(collision.get_normal())
 
 
 func _hit_wall(body):
@@ -99,7 +101,6 @@ func _hit_wall(body):
 		ProjectileData.OnHit.BREAK:
 			queue_free()
 		ProjectileData.OnHit.BOUNCE:
-			#bounce
 			pass
 		ProjectileData.OnHit.SPLIT:
 			spawn_split_projectiles()
