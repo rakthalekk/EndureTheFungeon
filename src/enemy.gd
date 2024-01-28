@@ -13,6 +13,8 @@ var player: Player
 var direction: Vector2
 var fire_direction: Vector2
 
+var anim_player : AnimationPlayer
+
 
 func _ready():
 	super()
@@ -22,16 +24,17 @@ func _ready():
 	assign_movement_type()
 
 
-func _process(delta):
-	print("why the fuck is process not being called")
-
-
 func load_from_data(enemy_data: EnemyData):
 	data = enemy_data
 	max_haha_points = enemy_data.max_haha_points
+	current_haha_points = max_haha_points
 	i_frames = enemy_data.i_frames
 	$Sprite2D.texture = enemy_data.texture
 	$Sprite2D.hframes = enemy_data.hframes
+	
+	anim_player = enemy_data.get_node("AnimationPlayer").duplicate()
+	add_child(anim_player)
+	anim_player.play("active")
 
 
 func _physics_process(delta):

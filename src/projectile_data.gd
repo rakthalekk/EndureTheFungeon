@@ -9,6 +9,7 @@ enum MoveType {STANDARD, TRAP, ACCELERATE, DIRECTSINE, LATERALSINE}
 @export var despawn_time: float
 @export var acceleration: float
 @export var bullet_radius: float
+@export var align_to_heading: bool
 
 @export var piercing_max: int
 @export var max_bounces: int

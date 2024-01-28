@@ -44,6 +44,9 @@ func _setup_bullet(bullet_name: String, newHeading: Vector2):
 	piercing_count = data.piercing_max
 	speed = data.speed
 	heading = newHeading
+	sprite.texture = data.texture
+	sprite.hframes = data.hframes
+	sprite.frame = 0
 	hitbox.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	sprite.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	#print("setup " , bullet_name , " with lifespan ", lifespan)
@@ -78,6 +81,10 @@ func _physics_process(delta):
 	if(data.move_type == ProjectileData.MoveType.LATERALSINE):
 		velocity += velocity.rotated(PI/2).normalized() * data.sine_amplitude * sin((data.despawn_time - lifespan) *data.sine_frequency / (2*PI))
 	move_and_slide()
+	
+	
+	if(data.align_to_heading):
+		look_at(global_position + heading)
 	
 	lifespan -= delta
 	if(lifespan < 0):

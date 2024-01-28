@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://wn2538qw2rhv"]
+[gd_scene load_steps=7 format=3 uid="uid://wn2538qw2rhv"]
 
 [ext_resource type="PackedScene" uid="uid://ciovhmka66u24" path="res://src/player.tscn" id="1_35voa"]
 [ext_resource type="PackedScene" uid="uid://ou86lt83rcm8" path="res://src/boss_clown.tscn" id="2_fpl4w"]
+[ext_resource type="PackedScene" uid="uid://dyyk4ksg0wtxo" path="res://src/enemy.tscn" id="3_ytgw0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmbdf"]
 size = Vector2(1928, 29)
@@ -49,3 +50,14 @@ shape = SubResource("RectangleShape2D_tpi7p")
 
 [node name="BossClown" parent="." instance=ExtResource("2_fpl4w")]
 position = Vector2(947, 167)
+
+[node name="Enemy" parent="." instance=ExtResource("3_ytgw0")]
+position = Vector2(400, 456)
+
+[node name="Enemy2" parent="." instance=ExtResource("3_ytgw0")]
+position = Vector2(1412, 493)
+enemy_name = "FunGuyBlue"
+
+[node name="Enemy3" parent="." instance=ExtResource("3_ytgw0")]
+position = Vector2(1565, 798)
+enemy_name = "SadClown"
