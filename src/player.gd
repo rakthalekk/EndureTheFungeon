@@ -47,6 +47,18 @@ func _process(delta):
 		facing = "right"
 	elif direction.x < 0:
 		facing = "left"
+	var charge = get_node("Charge")
+	if(jokes[current_joke].is_charging):
+		charge.visible = true
+		if(!jokes[current_joke].firing):
+			charge.frame = 0
+		elif(jokes[current_joke].charge_timer < 0):
+			charge.frame = 10
+		else:
+			print((jokes[current_joke].charge_delay - jokes[current_joke].charge_timer) / jokes[current_joke].charge_delay)
+			charge.frame = (int)(10 * (jokes[current_joke].charge_delay - jokes[current_joke].charge_timer) / jokes[current_joke].charge_delay)
+	else:
+		charge.visible = false
 	
 	var current_anim = $AnimationPlayer.current_animation
 	if !dodging:

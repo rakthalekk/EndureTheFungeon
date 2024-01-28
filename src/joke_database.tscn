@@ -53,19 +53,21 @@ num_bullets = 1
 fire_delay = 1.0
 max_uses = 10
 
-[node name="LateralSine" type="Node" parent="."]
+[node name="BEES" type="Node" parent="."]
 script = ExtResource("2_dyf4u")
-text_name = "LateralSine"
-projectile_name = "LateralSine"
+text_name = "BEES"
+description = "NOT THE BEES"
+projectile_name = "BEE"
 num_bullets = 1
 is_automatic = true
 fire_delay = 0.3
 max_uses = 30
 
-[node name="Accelerator" type="Node" parent="."]
+[node name="Sanic" type="Node" parent="."]
 script = ExtResource("2_dyf4u")
-text_name = "Accelerator"
-projectile_name = "Accelerator"
+text_name = "Sanic"
+description = "Gotta go fast!"
+projectile_name = "Sanic"
 num_bullets = 1
 is_automatic = true
 fire_delay = 0.25
@@ -78,7 +80,7 @@ description = "A possible comeback for almost any insult or joke. Needs time to 
 projectile_name = "YourMom"
 num_bullets = 1
 is_charging = true
-charge_delay = 0.5
+charge_delay = 1.5
 fire_delay = 0.2
 max_uses = 18
 

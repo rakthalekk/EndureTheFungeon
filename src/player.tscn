@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://cjqry4yknwpsl" path="res://Assets/Character/Player/Main_Character_Right_Throw_Sheet_Updated.png" id="8_8tomd"]
 [ext_resource type="Texture2D" uid="uid://b462tm6ygsmjm" path="res://Assets/Character/Player/Main_Character_Death.png" id="9_rs38d"]
 [ext_resource type="AudioStream" uid="uid://bwy55fsmtnq6o" path="res://Assets/Audio/anything take damage.mp3" id="10_12rty"]
+[ext_resource type="Texture2D" uid="uid://cp2dtl287cmgc" path="res://Assets/Projectiles/Charge_Sheet.png" id="10_nxl7j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q67pi"]
 size = Vector2(118, 65)
@@ -487,5 +488,10 @@ libraries = {
 
 [node name="HurtSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_12rty")
+[node name="Charge" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.54902)
+position = Vector2(0, -122)
+texture = ExtResource("10_nxl7j")
+hframes = 10
 
 [connection signal="timeout" from="DodgeCooldown" to="." method="_on_dodge_cooldown_timeout"]

@@ -4,3 +4,6 @@
 
 [node name="PickupDatabase" type="Node"]
 script = ExtResource("1_pxfoh")
+healAmount = 2
+jokeChance = 0.3
+jokePickupRestoreAmount = 50.0

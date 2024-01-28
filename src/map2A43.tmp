@@ -26,16 +26,16 @@ numItemRooms = 3
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="MinimapBackground" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(1720, 136)
+position = Vector2(1769, 136)
 texture = ExtResource("2_gyuvw")
 
 [node name="MiniMap" type="TileMap" parent="CanvasLayer"]
-position = Vector2(1686, 119)
+position = Vector2(1735, 119)
 tile_set = SubResource("TileSet_dufdh")
 format = 2
 layer_0/tile_data = PackedInt32Array(131071, 1, 1, 0, 1, 1, 65536, 1, 1, 1, 1, 1, 65537, 1, 1, 131073, 1, 1, 131072, 1, 1)
 layer_1/tile_data = PackedInt32Array(1, 1, 2, 0, 1, 0)
 
 [node name="MinimapBorder" type="Sprite2D" parent="CanvasLayer"]
-position = Vector2(1720, 136)
+position = Vector2(1769, 136)
 texture = ExtResource("3_i4yoe")
