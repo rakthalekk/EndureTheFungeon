@@ -2,8 +2,7 @@ class_name BossClown
 extends Enemy
 
 
-func _process(delta):
-	pass
+
 
 
 func single():

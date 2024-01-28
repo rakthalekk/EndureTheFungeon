@@ -7,6 +7,7 @@ var current_haha_points: int
 var i_timer: float
 
 var sprite: Sprite2D
+var dead = false
 
 var dodging = false
 
@@ -17,9 +18,12 @@ func _ready():
 
 
 func _take_damage(damage: int):
-	if i_timer > 0 || dodging:
+	if(dead):
 		return
-	
+	if i_timer > 0 || dodging:
+		#print("i frames active")
+		return;
+	#print("took ",damage," damage. Hahas at ",current_haha_points, " of ", max_haha_points)
 	current_haha_points -= damage;
 	i_timer = i_frames
 
@@ -32,6 +36,8 @@ func _take_damage(damage: int):
 
 
 func _heal(healing: int, ignore_max: bool = false):
+	if(dead):
+		return
 	print("healed by ", healing)
 	current_haha_points = min(max_haha_points, current_haha_points + healing)
 
@@ -51,4 +57,5 @@ func _decrease_health_max(max_haha_hit: int, damage: bool = false):
 
 
 func _no_more_laughing():
+	dead = true
 	queue_free()
