@@ -9,6 +9,8 @@ var heading = Vector2.ZERO
 
 var facing = "left"
 
+var can_dodge = true
+
 var jokes: Array[Joke]
 var joke_names: Array[String]
 var current_joke: int
@@ -55,7 +57,7 @@ func _physics_process(delta):
 	if !dodging:
 		direction = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down")).normalized()
 		
-		if Input.is_action_just_pressed("dodge"):
+		if !dodging && Input.is_action_just_pressed("dodge") && can_dodge:
 			dodging = true
 			$AnimationPlayer.play("dodge")
 		
@@ -99,6 +101,8 @@ func _physics_process(delta):
 
 func end_dodge():
 	dodging = false
+	can_dodge = false
+	$DodgeCooldown.start()
 
 
 func _no_more_laughing():
@@ -154,4 +158,4 @@ func _handle_pickup(pickup: Pickup):
 
 
 func _on_dodge_cooldown_timeout():
-	pass # Replace with function body.
+	can_dodge = true
