@@ -19,7 +19,8 @@ var anim_player : AnimationPlayer
 func _ready():
 	super()
 	player = get_tree().get_first_node_in_group("player")
-	load_from_data(EnemyDatabase.get_enemy_data(enemy_name))
+	if (data == null):
+		load_from_data(EnemyDatabase.get_enemy_data(enemy_name))
 	
 	assign_movement_type()
 
@@ -106,7 +107,7 @@ func create_bullet():
 	var bullet = BULLET.instantiate() as EnemyBullet
 	bullet.global_position = global_position
 	bullet._setup_bullet("Basic", fire_direction)
-	get_parent().add_child(bullet)
+	get_tree().root.add_child(bullet)
 
 
 func _on_hitbox_body_entered(body):

@@ -131,7 +131,7 @@ func make_bullet(bullet_name: String):
 	var bullet = BULLET.instantiate() as EnemyBullet
 	bullet.global_position = global_position
 	bullet._setup_bullet(bullet_name, fire_direction)
-	get_parent().add_child(bullet)
+	get_tree().root.add_child(bullet)
 
 
 func _on_start_timer_timeout():
