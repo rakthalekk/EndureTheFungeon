@@ -1,18 +1,67 @@
-[gd_scene load_steps=4 format=3 uid="uid://ciovhmka66u24"]
+[gd_scene load_steps=8 format=3 uid="uid://ciovhmka66u24"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_omtbe"]
-[ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="2_c6llw"]
+[ext_resource type="Texture2D" uid="uid://cart1ivff2e7d" path="res://Assets/Character/Player/Main_Character_Walk_Cycle_Leftt.png" id="2_3rvnn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q67pi"]
-size = Vector2(118, 116)
+size = Vector2(118, 83)
+
+[sub_resource type="Animation" id="Animation_1daks"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_3yhs8"]
+resource_name = "idle"
+
+[sub_resource type="Animation" id="Animation_gwl20"]
+resource_name = "walk"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_s2mnm"]
+_data = {
+"RESET": SubResource("Animation_1daks"),
+"idle": SubResource("Animation_3yhs8"),
+"walk": SubResource("Animation_gwl20")
+}
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 script = ExtResource("1_omtbe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-1, 2)
+position = Vector2(-1, 33.5)
 shape = SubResource("RectangleShape2D_q67pi")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_c6llw")
+position = Vector2(172, -133)
+texture = ExtResource("2_3rvnn")
+hframes = 8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_s2mnm")
+}

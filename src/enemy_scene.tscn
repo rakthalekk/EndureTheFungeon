@@ -1,51 +1,51 @@
 [gd_scene load_steps=6 format=3 uid="uid://wn2538qw2rhv"]
 
 [ext_resource type="PackedScene" uid="uid://ciovhmka66u24" path="res://src/player.tscn" id="1_35voa"]
-[ext_resource type="PackedScene" uid="uid://dyyk4ksg0wtxo" path="res://src/enemy.tscn" id="2_0xxjh"]
+[ext_resource type="PackedScene" uid="uid://ou86lt83rcm8" path="res://src/boss_clown.tscn" id="2_fpl4w"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jmbdf"]
-size = Vector2(966, 20)
+size = Vector2(1928, 29)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpi7p"]
-size = Vector2(30, 543)
+size = Vector2(34, 1097)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ps3n0"]
-size = Vector2(987, 25)
+size = Vector2(1920, 25)
 
 [node name="EnemyScene" type="Node2D"]
+y_sort_enabled = true
 
 [node name="Player" parent="." instance=ExtResource("1_35voa")]
-position = Vector2(146, 161)
-scale = Vector2(0.5, 0.5)
-
-[node name="Enemy" parent="." instance=ExtResource("2_0xxjh")]
-position = Vector2(446, 193)
+position = Vector2(695, 831)
 
 [node name="Walls" type="Node2D" parent="."]
 
 [node name="Wall" type="StaticBody2D" parent="Walls"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall"]
-position = Vector2(473, 0)
+position = Vector2(954, -4.5)
 shape = SubResource("RectangleShape2D_jmbdf")
 
 [node name="Wall2" type="StaticBody2D" parent="Walls"]
-position = Vector2(484, 227)
+position = Vector2(1443, 496)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall2"]
 position = Vector2(477, 43.5)
 shape = SubResource("RectangleShape2D_tpi7p")
 
 [node name="Wall3" type="StaticBody2D" parent="Walls"]
-position = Vector2(-16, 500)
+position = Vector2(-9, 1050)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall3"]
-position = Vector2(505.5, 42.5)
+position = Vector2(972, 42.5)
 shape = SubResource("RectangleShape2D_ps3n0")
 
 [node name="Wall4" type="StaticBody2D" parent="Walls"]
 position = Vector2(-476, 225)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Wall4"]
-position = Vector2(477, 43.5)
+position = Vector2(479, 320.5)
 shape = SubResource("RectangleShape2D_tpi7p")
+
+[node name="BossClown" parent="." instance=ExtResource("2_fpl4w")]
+position = Vector2(947, 167)

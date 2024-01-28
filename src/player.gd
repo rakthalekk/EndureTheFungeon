@@ -3,6 +3,11 @@ extends LivingBeing
 
 const MOUSE_RETICLE = preload("res://src/bullet_reticle.tscn")
 
+const LEFT_SPRITE = preload("res://Assets/Character/Player/Main_Character_Walk_Cycle_Leftt.png")
+const RIGHT_SPRITE = preload("res://Assets/Character/Player/Main_Character_Walk_Cycle_Right.png")
+
+var direction = Vector2.ZERO
+
 var heading = Vector2.ZERO;
 
 var jokes: Array[Joke]
@@ -18,15 +23,28 @@ func _ready():
 	jokes[0]._pick_up(self)
 	current_joke = 0;
 
+
 func _process(delta):
 	var mousePos = get_global_mouse_position();
 	heading = mousePos - global_position;
 	jokes[current_joke]._set_heading(heading, global_position)
 	if(i_timer > 0):
 		i_timer -= delta;
+	
+	if direction.x > 0:
+		$Sprite2D.texture = RIGHT_SPRITE
+		$AnimationPlayer.play("walk")
+	elif direction.x < 0:
+		$Sprite2D.texture = LEFT_SPRITE
+		$AnimationPlayer.play("walk")
+	elif direction.y != 0:
+		$AnimationPlayer.play("walk")
+	else:
+		$AnimationPlayer.play("idle")
+
 
 func _physics_process(delta):
-	var direction = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down")).normalized()
+	direction = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down")).normalized()
 	velocity = direction * SPEED
 	
 	if(Input.is_action_just_pressed("shoot")):
@@ -37,19 +55,19 @@ func _physics_process(delta):
 		print("no longer shooting")
 	
 	move_and_slide()
-	
-	
 
 
 func _no_more_laughing():
 	#call game over
 	pass
 
+
 func _learn_joke(new_joke: Joke):
 	if(joke_names.find(new_joke.text_name) == -1):
 		joke_names.append(new_joke.text_name)
 		jokes.append(new_joke)
 		new_joke._pick_up(self)
+
 
 func _next_joke():
 	jokes[current_joke]._stop_telling_joke(true)

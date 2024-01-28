@@ -2,29 +2,39 @@ class_name Enemy
 extends LivingBeing
 
 
+enum MoveType {APPROACH, FLEE, STRAFE, CRAWL, IDLE}
+enum ShootType {DIRECT, SPIRAL, SPREAD, BOSS}
+
 const BULLET = preload("res://src/enemy_bullet.tscn")
+
+@export var enemy_name := "Enemy"
+@export var move_pattern: MoveType
+@export var shoot_pattern: ShootType
 
 var data: EnemyData
 
-var player: CharacterBody2D
+var player: Player
+
 var direction: Vector2
-
 var fire_direction: Vector2
-
-enum MoveType {APPROACH, FLEE, STRAFE, CRAWL}
-enum ShootType {DIRECT, SPIRAL, SPREAD}
-
-var move_pattern = MoveType.values().pick_random()
-#var move_pattern = MoveType.CRAWL
-
-var shoot_pattern = ShootType.values().pick_random()
-#var shoot_pattern = ShootType.DIRECT
 
 
 func _ready():
 	player = get_tree().get_first_node_in_group("player")
-	data = EnemyDatabase.get_enemy_data("Enemy")
+	data = EnemyDatabase.get_enemy_data(enemy_name)
 	
+	assign_movement_type()
+
+
+func _physics_process(delta):
+	movement()
+	
+	velocity = direction * data.speed
+	
+	move_and_slide()
+
+
+func assign_movement_type():
 	if move_pattern == MoveType.STRAFE:
 		$WanderTimer.start(randf_range(1, 2))
 		direction = Vector2(1, 0)
@@ -34,14 +44,6 @@ func _ready():
 	if shoot_pattern == ShootType.SPIRAL:
 		fire_direction = Vector2(0, 1)
 		$ShootTimer.start(0.5)
-
-
-func _physics_process(delta):
-	movement()
-	
-	velocity = direction * data.speed
-	
-	move_and_slide()
 
 
 func movement():
