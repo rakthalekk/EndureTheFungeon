@@ -93,8 +93,10 @@ func Lock(_body, friendLock):
 		SetLockedCells(dir)
 		
 		if friendLock:
-			SpawnEnemies()
-	
+			if (type == Type.Enemy):
+				SpawnEnemies()
+			else:
+				SpawnBoss()
 	pass
 
 func SpawnEnemies():
@@ -110,6 +112,7 @@ func SpawnEnemies():
 	while rng.randi_range(1, odds) == 1:
 		var enemyData = EnemyDatabase.get_random_enemy_data()
 		var enemy = enemyScene.instantiate()
+		enemy.load_from_data(enemyData)
 		if enemy == null:
 			odds += 1
 			continue
@@ -168,6 +171,9 @@ func SpawnShiny():
 	pass
 
 func SpawnBoss():
+	var boss = bossScene.instantiate()
+	call_deferred("add_child", boss)
+	boss.position = Vector2i(960, 120)
 	pass
 
 func Unlock(friendLock):

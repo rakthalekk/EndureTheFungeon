@@ -13,7 +13,7 @@ var facing = "left"
 
 var can_dodge = true
 
-var can_move = false
+var can_move = true
 
 var jokes: Array[Joke]
 var joke_names: Array[String]
