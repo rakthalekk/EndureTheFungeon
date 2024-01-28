@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://yoomgbtlkvw1"
+path="res://.godot/imported/bee singular.mp3-a33e0f11df06af1b38b57e1e70ec5a46.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/boss sfx/bee singular.mp3"
+dest_files=["res://.godot/imported/bee singular.mp3-a33e0f11df06af1b38b57e1e70ec5a46.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

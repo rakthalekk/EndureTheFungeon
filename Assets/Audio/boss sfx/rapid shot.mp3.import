@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cfcxdiqhvyh3s"
+path="res://.godot/imported/rapid shot.mp3-e95f4ee3bfd39e5fe958378e96269a96.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/boss sfx/rapid shot.mp3"
+dest_files=["res://.godot/imported/rapid shot.mp3-e95f4ee3bfd39e5fe958378e96269a96.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
