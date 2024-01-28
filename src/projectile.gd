@@ -4,7 +4,7 @@ extends CharacterBody2D
 var data: ProjectileData
 
 var BULLET = preload("res://src/projectile.tscn")
-var EXPLOSION = preload("res://src/explosion.tscn")
+var EXPLOSION = preload("res://src/explosions.tscn")
 var SOUND = preload("res://src/sound.tscn")
 
 var sound: AudioStream
@@ -175,8 +175,8 @@ func spawn_split_projectiles():
 
 func _spawn_explosion():
 	
-	var explosion = EXPLOSION.instantiate() as Projectile
-	
+	var explosion = EXPLOSION.instantiate()
+	print("explode: ", explosion, ", ", EXPLOSION)
 	explosion._setup_bullet(data.explosion_projectile, heading)
 	explosion.scale = Vector2(data.explode_radius, data.explode_radius)
 	get_parent().add_child(explosion)

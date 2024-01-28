@@ -95,12 +95,12 @@ max_uses = 18
 spread = 10.0
 use_random_spread = true
 
-[node name="FixedShotgun" type="Node" parent="."]
+[node name="GodotGun" type="Node" parent="."]
 script = ExtResource("2_dyf4u")
-text_name = "FixedShotgun"
-projectile_name = "Shotgun"
+text_name = "GodotGun"
+description = "It's Godot Time"
+projectile_name = "Godot"
 num_bullets = 3
-charge_delay = 0.5
-fire_delay = 0.6
+fire_delay = 0.7
 max_uses = 18
-spread = 30.0
+spread = 40.0

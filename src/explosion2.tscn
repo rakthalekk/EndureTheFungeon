@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://1gjp4j1xncux"]
+
+[ext_resource type="Script" path="res://src/projectile.gd" id="1_1jpsl"]
+[ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="2_8h8dc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b12mh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5r5au"]
+radius = 15.0333
+
+[node name="Projectile" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_1jpsl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b12mh")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_8h8dc")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+scale = Vector2(1.1, 1.1)
+shape = SubResource("CircleShape2D_5r5au")
+
+[node name="Sound" type="AudioStreamPlayer" parent="."]

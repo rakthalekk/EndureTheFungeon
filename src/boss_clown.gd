@@ -2,6 +2,9 @@ class_name BossClown
 extends Enemy
 
 
+
+
+
 func single():
 	for i in range(3):
 		for j in range(10):
@@ -129,10 +132,6 @@ func make_bullet(bullet_name: String):
 	bullet.global_position = global_position
 	bullet._setup_bullet(bullet_name, fire_direction)
 	get_tree().root.add_child(bullet)
-
-
-func _no_more_laughing():
-	get_tree().change_scene_to_file("res://src/win_screen.tscn")
 
 
 func _on_start_timer_timeout():
