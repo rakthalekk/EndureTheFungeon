@@ -9,8 +9,6 @@ var heading = Vector2.ZERO
 
 var facing = "left"
 
-var dodging = false
-
 var jokes: Array[Joke]
 var joke_names: Array[String]
 var current_joke: int
