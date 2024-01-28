@@ -4,7 +4,7 @@ extends CharacterBody2D
 var data: ProjectileData
 
 var BULLET = preload("res://src/projectile.tscn")
-var EXPLOSION = preload("res://src/explosions.tscn")
+var EXPLOSION = preload("res://src/explosion2.tscn")
 var SOUND = preload("res://src/sound.tscn")
 
 var sound: AudioStream
@@ -53,7 +53,7 @@ func _setup_bullet(bullet_name: String, newHeading: Vector2):
 	heading = newHeading
 	sprite.texture = data.texture
 	sprite.hframes = data.hframes
-	sprite.frame = 0
+	sprite.frame = data.frame
 	hitbox.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	sprite.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	
@@ -175,12 +175,19 @@ func spawn_split_projectiles():
 
 func _spawn_explosion():
 	
-	var explosion = EXPLOSION.instantiate()
+	var explosion = BULLET.instantiate() as Projectile
 	print("explode: ", explosion, ", ", EXPLOSION)
 	explosion._setup_bullet(data.explosion_projectile, heading)
 	explosion.scale = Vector2(data.explode_radius, data.explode_radius)
 	get_parent().add_child(explosion)
 	explosion.global_position = global_position
+	
+	#var explosion = EXPLOSION.instantiate() as Projectile
+	#print("explode: ", explosion, ", ", EXPLOSION)
+	#explosion._setup_bullet(data.explosion_projectile, heading)
+	#explosion.scale = Vector2(data.explode_radius, data.explode_radius)
+	#get_parent().add_child(explosion)
+	#explosion.global_position = global_position
 	#print("explode", explosion, ", " , explosion.scale)
 
 func _on_timer_end():
