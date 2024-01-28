@@ -31,7 +31,7 @@ func _get_major_reward() -> Pickup:
 		var joke_pickup = BASE_JOKE_PICKUP.instantiate()
 		joke_pickup.pickup_type = Pickup.PickupType.JOKE
 		joke_pickup.joke_restore_amount = jokePickupRestoreAmount
-		joke_pickup.joke_name = JokeDatabase._get_random_new_joke()
+		joke_pickup.joke_name = JokeDatabase._get_random_new_joke().text_name
 		return joke_pickup
 	else:
 		return _get_minor_reward()

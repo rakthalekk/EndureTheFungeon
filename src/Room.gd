@@ -6,12 +6,13 @@ static var dimensions := Vector2i(16 * 30 * 4, 9 * 30 * 4)
 var enemyScene = preload("res://src/enemy.tscn")
 var rng = RandomNumberGenerator.new()
 
+enum Type {Enemy, Item, Shiny, Boss, Start}
+var type: Type
+
 var coords: Vector2i
 var neighbors: Array[Room]
 var cam
-
-enum Type {Enemy, Item, Boss}
-var type: Type
+var visited := false
 
 var enemies: Array[Enemy] = []
 
@@ -19,7 +20,7 @@ func _init(pos := Vector2i.ZERO):
 	coords = pos
 	# hi tommy XD (Hi Car-sama~!!)
 	
-	type = Type.Enemy
+	type = Type.Enemy if rng.randi_range(0, 1) == 1 else Type.Item
 	pass
 
 func _ready():
@@ -50,12 +51,25 @@ func SetNeighbors(friends: Array[Room]):
 	pass
 
 func Lock(_body, friendLock):
+	if friendLock:
+		get_parent().ChangeActiveRoom(self)
+	
+	if visited == true:
+		return
+	
+	visited = true
+	
+	if (type == Type.Start):
+		return
+	
 	# only lock if enemy room
 	if (type == Type.Item):
 		SpawnItems()
 		return
 	
-	SpawnEnemies()
+	if type == Type.Shiny:
+		SpawnShiny()
+		return
 	
 	elapsed = 0
 	
@@ -65,23 +79,34 @@ func Lock(_body, friendLock):
 		
 		var dir: Vector2 = (friend.coords - coords)
 		dir = dir.normalized()
+		SetLockedCells(dir)
 		
 		if friendLock:
-			SetLockedCells(dir)
+			SpawnEnemies()
 	
 	pass
 
 func SpawnEnemies():
 	var tiles = get_used_cells(0)
 	var odds = 1
+	var enemies = []
+	var removedTiles = 0
 	
 	for tile in tiles:
-		if get_cell_tile_data(0, tile).get_custom_data("EnemySpawn") == true && rng.randi_range(1, odds) == 1:
-			var enemyData = EnemyDatabase.get_random_enemy_data()
-			var enemy = enemyScene.instantiate()
-			enemies.push_back(enemy)
-			call_deferred("add_child", enemy)
-			enemy.position = map_to_local(tile)
+		if get_cell_tile_data(0, tile).get_custom_data("EnemySpawn") == true:
+			enemies.push_back(tile)
+	
+	while rng.randi_range(1, odds) == 1:
+		var enemyData = EnemyDatabase.get_random_enemy_data()
+		var enemy = enemyScene.instantiate()		
+		call_deferred("add_child", enemy)
+		
+		var tile = enemies.pick_random()
+		enemy.position = map_to_local(tile)
+		enemies.remove_at(enemies.find(tile))
+		removedTiles += 1
+		
+		if removedTiles > 2:
 			odds += 1
 	
 	pass
@@ -89,16 +114,43 @@ func SpawnEnemies():
 func SpawnItems():
 	var tiles = get_used_cells(0)
 	var odds = 1
+	var items = []
+	var removedTiles = 0
 	
 	for tile in tiles:
-		if get_cell_tile_data(0, tile).get_custom_data("ItemSpawn") == true && rng.randi_range(1, odds) == 1:
-			var enemyData = EnemyDatabase.get_random_enemy_data()
-			var enemy = enemyScene.instantiate()
-			enemies.push_back(enemy)
-			call_deferred("add_child", enemy)
-			enemy.position = map_to_local(tile)
+		if get_cell_tile_data(0, tile).get_custom_data("ItemSpawn") == true:
+			items.push_back(tile)
+	
+	while rng.randi_range(1, odds) == 1:
+		var pickup: Pickup = PickupDatabase._get_minor_reward()
+		var tile = items.pick_random()
+		if tile == null:
+			continue
+		
+		call_deferred("add_child", pickup)
+		pickup.position = map_to_local(tile)
+		items.remove_at(items.find(tile))
+		removedTiles += 1
+		
+		if removedTiles > 2:
 			odds += 1
 			
+	pass
+
+func SpawnShiny():
+	var tiles = get_used_cells(0)
+	var items = []
+	
+	for tile in tiles:
+		if get_cell_tile_data(0, tile).get_custom_data("RareItemSpawn") == true:
+			items.push_back(tile)
+			
+	var pickup: Pickup = PickupDatabase._get_major_reward()
+	var tile = items.pick_random()
+	call_deferred("add_child", pickup)
+	pickup.position = map_to_local(tile)
+	items.remove_at(items.find(tile))
+	
 	pass
 
 func Unlock():

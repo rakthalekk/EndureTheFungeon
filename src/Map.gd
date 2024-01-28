@@ -4,8 +4,10 @@ var grid = []
 @export var grid_width := 9
 @export var grid_height := 9
 @export var startCoords := Vector2i(5, 5)
-@export var min_rooms := 5
-@export var max_rooms := 10
+@export var min_rooms := 10
+@export var max_rooms := 20
+@export var numItemRooms := 5
+@export var numRareItemRooms := 2
 
 var rng = RandomNumberGenerator.new()
 var roomScene := preload("res://src/Room.tscn")
@@ -13,6 +15,7 @@ var playerScene := preload("res://src/player.tscn")
 
 var cam
 var currentRoom: Room
+var roomAssignmentQueue: Array[Room] = []
 
 func _ready():
 	for i in grid_width:
@@ -37,11 +40,13 @@ func _process(_delta):
 	tween.tween_property(cam, "position", Vector2(currentRoom.coords * Room.dimensions + (Room.dimensions / 2)), 0.4)
 	
 func GenerateMap():
-	var numRooms = rng.randi_range(min_rooms, max_rooms) * 2 - 1
+	var numRooms = rng.randi_range(min_rooms, max_rooms) - 1
+	var totalRooms = numRooms
 	print(numRooms + 1)
 
 	var roomQueue: Array[Room] = [CreateRoom(startCoords)]
-	 
+	roomQueue.front().type = Room.Type.Start
+	
 	while (numRooms > 0):
 		if roomQueue.size() <= 0:
 			break
@@ -75,12 +80,36 @@ func GenerateMap():
 				
 			if room != null:
 				roomQueue.push_front(room)
+				roomAssignmentQueue.push_back(room)
 				numRooms -= 1
 
 	for i in grid_width:
 		for j in grid_height:
 			if grid[i][j] != null:
 				grid[i][j].SetNeighbors(GetNeighbors(grid[i][j]))
+				
+	var remainingRareItems = numRareItemRooms
+	var remainingItems = numItemRooms
+	
+	while !roomAssignmentQueue.is_empty():
+		var currRoom: Room = roomAssignmentQueue.pick_random()
+		roomAssignmentQueue.remove_at(roomAssignmentQueue.find(currRoom))
+		
+		if roomAssignmentQueue.size() == totalRooms - 1:
+			currRoom.type = Room.Type.Boss
+			continue
+		
+		if remainingRareItems > 0:
+			currRoom.type = Room.Type.Shiny
+			remainingRareItems -= 1
+			continue
+		
+		if remainingItems > 0:
+			currRoom.type = Room.Type.Item
+			remainingItems -= 1
+			continue
+		
+		currRoom.type = Room.Type.Enemy
 				
 	currentRoom = grid[startCoords.x][startCoords.y]
 	

@@ -305,11 +305,11 @@ texture_region_size = Vector2i(120, 120)
 7:4/0 = 0
 7:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 7:4/0/physics_layer_0/angular_velocity = 0.0
-7:4/0/custom_data_1 = true
+7:4/0/custom_data_2 = true
 8:4/0 = 0
 8:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 8:4/0/physics_layer_0/angular_velocity = 0.0
-8:4/0/custom_data_1 = true
+8:4/0/custom_data_2 = true
 9:4/0 = 0
 9:4/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 9:4/0/physics_layer_0/angular_velocity = 0.0
@@ -620,6 +620,10 @@ custom_data_layer_0/name = "EnemySpawn"
 custom_data_layer_0/type = 1
 custom_data_layer_1/name = "ItemSpawn"
 custom_data_layer_1/type = 1
+custom_data_layer_2/name = "RareItemSpawn"
+custom_data_layer_2/type = 1
+custom_data_layer_3/name = "BossSpawn"
+custom_data_layer_3/type = 1
 sources/0 = SubResource("TileSetAtlasSource_w8he1")
 sources/1 = SubResource("TileSetAtlasSource_isnja")
 sources/2 = SubResource("TileSetAtlasSource_1m6su")
@@ -661,7 +665,6 @@ position = Vector2(961, 542)
 shape = SubResource("RectangleShape2D_1efy5")
 
 [node name="LockTrigger" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 2
 
