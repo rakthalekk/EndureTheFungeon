@@ -22,13 +22,15 @@ func _ready():
 	joke_names.append(jokes[0].text_name)
 	jokes[0]._pick_up(self)
 	current_joke = 0;
-
+	sprite = get_node("Sprite2D")
+	print("hp: " , max_haha_points , ", i: " , i_frames)
 
 func _process(delta):
 	var mousePos = get_global_mouse_position();
 	heading = mousePos - global_position;
 	jokes[current_joke]._set_heading(heading, global_position)
 	if(i_timer > 0):
+		print("i frames: ", i_timer)
 		i_timer -= delta;
 	
 	if direction.x > 0:
@@ -49,10 +51,10 @@ func _physics_process(delta):
 	
 	if(Input.is_action_just_pressed("shoot")):
 		jokes[current_joke]._start_telling_joke()
-		print("shooting")
+		#print("shooting")
 	if(Input.is_action_just_released("shoot")):
 		jokes[current_joke]._stop_telling_joke()
-		print("no longer shooting")
+		#print("no longer shooting")
 	if(Input.is_action_just_pressed("next_weapon")):
 		_next_joke()
 		print("next weapon")
@@ -72,7 +74,7 @@ func _physics_process(delta):
 
 
 func _no_more_laughing():
-	#call game over
+	print("player is sad")
 	pass
 
 
@@ -120,3 +122,4 @@ func _handle_pickup(pickup: Pickup):
 	else:
 		return
 	pickup._consume()
+	

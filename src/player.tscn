@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://ciovhmka66u24"]
+[gd_scene load_steps=11 format=3 uid="uid://ciovhmka66u24"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_omtbe"]
 [ext_resource type="Texture2D" uid="uid://cart1ivff2e7d" path="res://Assets/Character/Player/Main_Character_Walk_Cycle_Leftt.png" id="2_3rvnn"]
@@ -48,10 +48,49 @@ _data = {
 "walk": SubResource("Animation_gwl20")
 }
 
+[sub_resource type="Animation" id="Animation_iyq4p"]
+resource_name = "hurt"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ggv4b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f3a7k"]
+_data = {
+"RESET": SubResource("Animation_ggv4b"),
+"hurt": SubResource("Animation_iyq4p")
+}
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
 collision_mask = 9
 script = ExtResource("1_omtbe")
+max_haha_points = 10
+i_frames = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 33.5)
@@ -65,4 +104,9 @@ hframes = 8
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_s2mnm")
+}
+
+[node name="EffectsAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_f3a7k")
 }
