@@ -2,6 +2,7 @@ class_name Player
 extends LivingBeing
 
 const MOUSE_RETICLE = preload("res://src/bullet_reticle.tscn")
+const GAME_OVER = preload("res://src/game_over.tscn")
 
 var direction = Vector2.ZERO
 
@@ -19,6 +20,7 @@ const SPEED = 700.0
 
 func _ready():
 	#MOUSE_RETICLE.instantiate()
+	super()
 	jokes.append(JokeDatabase._get_laugh());
 	joke_names.append(jokes[0].text_name)
 	jokes[0]._pick_up(self)
@@ -27,11 +29,14 @@ func _ready():
 	print("hp: " , max_haha_points , ", i: " , i_frames)
 
 func _process(delta):
+	super(delta)
+	if(dead):
+		return
 	var mousePos = get_global_mouse_position();
 	heading = mousePos - global_position;
 	jokes[current_joke]._set_heading(heading, global_position)
 	if(i_timer > 0):
-		print("i frames: ", i_timer)
+		#print("i frames: ", i_timer)
 		i_timer -= delta;
 	
 	if direction.x > 0:
@@ -54,6 +59,8 @@ func _process(delta):
 
 
 func _physics_process(delta):
+	if(dead):
+		return
 	if !dodging:
 		direction = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down")).normalized()
 		
@@ -106,7 +113,12 @@ func end_dodge():
 
 
 func _no_more_laughing():
+	if(dead):
+		return
+	dead = true
 	print("player is sad")
+	var game_over = GAME_OVER.instantiate();
+	get_parent().add_child(game_over)
 	pass
 
 
