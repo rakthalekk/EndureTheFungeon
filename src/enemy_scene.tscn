@@ -49,4 +49,3 @@ shape = SubResource("RectangleShape2D_tpi7p")
 
 [node name="BossClown" parent="." instance=ExtResource("2_fpl4w")]
 position = Vector2(947, 167)
-max_haha_points = 10
