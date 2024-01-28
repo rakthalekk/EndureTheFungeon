@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cun32e1vucc5a"]
+[gd_scene load_steps=14 format=3 uid="uid://cun32e1vucc5a"]
 
 [ext_resource type="Script" path="res://src/projectile_database.gd" id="1_2ityc"]
 [ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="2_3k8sg"]
@@ -12,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dp5wvfqe8dqwc" path="res://Assets/Projectiles/SmallTear3ExportFINAL.png" id="7_ma45g"]
 [ext_resource type="Texture2D" uid="uid://dojljya8psam7" path="res://Assets/Projectiles/Ligma3ExportFINAL.png" id="9_atl7i"]
 [ext_resource type="Texture2D" uid="uid://cae7st0gp1oj" path="res://Assets/Projectiles/YOURMOM3ExportFINAL.png" id="12_4w1pc"]
+[ext_resource type="Texture2D" uid="uid://cll3s7pccryl1" path="res://Assets/Projectiles/Sanic3ExportFINAL.png" id="12_gk804"]
 
 [node name="ProjectileDatabase" type="Node2D"]
 script = ExtResource("1_2ityc")
@@ -160,7 +161,7 @@ texture = ExtResource("5_rihhq")
 hframes = 4
 script = ExtResource("2_be0wl")
 speed = 400.0
-damage = 2
+damage = 3
 despawn_time = 7.0
 bullet_radius = 1.3
 align_to_heading = true
@@ -173,7 +174,6 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("9_atl7i")
 script = ExtResource("2_be0wl")
 speed = 600.0
-damage = 4
 despawn_time = 6.0
 bullet_radius = 1.2
 on_timer_end = 3
@@ -223,13 +223,14 @@ sine_frequency = 50.0
 [node name="Sanic" type="Sprite2D" parent="."]
 position = Vector2(98, 130)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("12_gk804")
 script = ExtResource("2_be0wl")
 speed = 50.0
 damage = 1
 despawn_time = 10.0
 acceleration = 3.0
 bullet_radius = 0.3
+align_to_heading = true
 move_type = 2
 
 [node name="YourMom" type="Sprite2D" parent="."]
