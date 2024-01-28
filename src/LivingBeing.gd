@@ -8,7 +8,7 @@ var i_timer: float
 
 var sprite: Sprite2D
 
-
+var dodging = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,8 +22,7 @@ func _process(delta):
 		i_timer -= delta;
 
 func _take_damage(damage: int):
-	
-	if(i_timer > 0):
+	if i_timer > 0 || dodging:
 		#print("i frames active")
 		return;
 	#print("took ",damage," damage")
