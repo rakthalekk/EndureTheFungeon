@@ -53,7 +53,7 @@ func _setup_bullet(bullet_name: String, newHeading: Vector2):
 	heading = newHeading
 	sprite.texture = data.texture
 	sprite.hframes = data.hframes
-	sprite.frame = 0
+	sprite.frame = data.frame
 	hitbox.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	sprite.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	
@@ -174,13 +174,18 @@ func spawn_split_projectiles():
 	queue_free()
 
 func _spawn_explosion():
-	
-	var explosion = EXPLOSION.instantiate() as Projectile
+	var explosion = BULLET.instantiate() as Projectile
 	
 	explosion._setup_bullet(data.explosion_projectile, heading)
 	explosion.scale = Vector2(data.explode_radius, data.explode_radius)
 	get_parent().add_child(explosion)
 	explosion.global_position = global_position
+	#var explosion = EXPLOSION.instantiate() as Projectile
+	#
+	#explosion._setup_bullet(data.explosion_projectile, heading)
+	#explosion.scale = Vector2(data.explode_radius, data.explode_radius)
+	#get_parent().add_child(explosion)
+	#explosion.global_position = global_position
 	#print("explode", explosion, ", " , explosion.scale)
 
 func _on_timer_end():
