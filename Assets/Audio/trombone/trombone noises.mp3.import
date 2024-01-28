@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://wuc5aodeu2ls"
+path="res://.godot/imported/trombone noises.mp3-3963f62a9b508ecc0e6673d63a1c5585.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/trombone/trombone noises.mp3"
+dest_files=["res://.godot/imported/trombone noises.mp3-3963f62a9b508ecc0e6673d63a1c5585.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -85,6 +85,9 @@ func _physics_process(delta):
 	
 	if(data.align_to_heading):
 		look_at(global_position + heading)
+		#if(heading.x < 0):
+			#sprite.flip_v = true
+			#sprite.flip_h = true
 	
 	lifespan -= delta
 	if(lifespan < 0):

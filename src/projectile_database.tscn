@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://cun32e1vucc5a"]
+[gd_scene load_steps=15 format=3 uid="uid://cun32e1vucc5a"]
 
 [ext_resource type="Script" path="res://src/projectile_database.gd" id="1_2ityc"]
 [ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="2_3k8sg"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bp11oh1efbvh8" path="res://Assets/Projectiles/ballsplosion.png" id="6_bvlgl"]
 [ext_resource type="Texture2D" uid="uid://dp5wvfqe8dqwc" path="res://Assets/Projectiles/SmallTear3ExportFINAL.png" id="7_ma45g"]
 [ext_resource type="Texture2D" uid="uid://dojljya8psam7" path="res://Assets/Projectiles/Ligma3ExportFINAL.png" id="9_atl7i"]
+[ext_resource type="Texture2D" uid="uid://bq2v6yav00sck" path="res://Assets/Projectiles/BEE3ExportFINAL.png" id="12_3icsl"]
 [ext_resource type="Texture2D" uid="uid://cae7st0gp1oj" path="res://Assets/Projectiles/YOURMOM3ExportFINAL.png" id="12_4w1pc"]
 [ext_resource type="Texture2D" uid="uid://cll3s7pccryl1" path="res://Assets/Projectiles/Sanic3ExportFINAL.png" id="12_gk804"]
 
@@ -210,12 +211,13 @@ sine_frequency = 100.0
 [node name="BEE" type="Sprite2D" parent="."]
 position = Vector2(422, 63)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("12_3icsl")
 script = ExtResource("2_be0wl")
 speed = 600.0
 damage = 1
 despawn_time = 10.0
 bullet_radius = 0.5
+align_to_heading = true
 move_type = 4
 sine_amplitude = 300.0
 sine_frequency = 50.0
