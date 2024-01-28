@@ -19,8 +19,10 @@ enum MoveType {STANDARD, TRAP, ACCELERATE, DIRECTSINE, LATERALSINE}
 
 @export var move_type: MoveType
 
-@export var split_projectile: ProjectileData
+@export var split_projectile: String
 @export var num_split_projectiles: int
+@export var split_angle: float
+
 @export var explode_radius: float
 @export var trap_move_time: float
 

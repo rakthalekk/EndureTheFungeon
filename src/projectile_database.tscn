@@ -28,8 +28,8 @@ damage = 1
 despawn_time = 3.0
 bullet_radius = 0.3
 
-[node name="BossBullet1" type="Sprite2D" parent="."]
-position = Vector2(196, 57)
+[node name="BossTriple" type="Sprite2D" parent="."]
+position = Vector2(179, 185)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_3k8sg")
 script = ExtResource("2_be0wl")
@@ -38,8 +38,48 @@ damage = 1
 despawn_time = 3.0
 bullet_radius = 0.6
 
-[node name="BossBullet2" type="Sprite2D" parent="."]
-position = Vector2(196, 57)
+[node name="BossBurst" type="Sprite2D" parent="."]
+position = Vector2(244, 186)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3k8sg")
+script = ExtResource("2_be0wl")
+speed = 700.0
+damage = 1
+despawn_time = 3.0
+bullet_radius = 0.6
+
+[node name="BossSweep" type="Sprite2D" parent="."]
+position = Vector2(308, 183)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3k8sg")
+script = ExtResource("2_be0wl")
+speed = 700.0
+damage = 1
+despawn_time = 3.0
+acceleration = 1.0
+bullet_radius = 0.6
+move_type = 2
+
+[node name="BossSplit" type="Sprite2D" parent="."]
+position = Vector2(210, 264)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3k8sg")
+script = ExtResource("2_be0wl")
+speed = 1000.0
+damage = 1
+despawn_time = 1.0
+acceleration = -2.0
+bullet_radius = 1.0
+on_enemy_hit = 2
+on_wall_hit = 2
+on_timer_end = 2
+move_type = 2
+split_projectile = "BossSplit2"
+num_split_projectiles = 10
+split_angle = 100.0
+
+[node name="BossSplit2" type="Sprite2D" parent="."]
+position = Vector2(346, 261)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_3k8sg")
 script = ExtResource("2_be0wl")
@@ -49,7 +89,7 @@ despawn_time = 3.0
 bullet_radius = 0.6
 
 [node name="Amogus" type="Sprite2D" parent="."]
-position = Vector2(119, 57)
+position = Vector2(161, 56)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_3k8sg")
 script = ExtResource("2_be0wl")
