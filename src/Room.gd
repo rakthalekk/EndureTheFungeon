@@ -4,6 +4,7 @@ extends TileMap
 
 static var dimensions := Vector2i(16 * 30 * 4, 9 * 30 * 4)
 var enemyScene = preload("res://src/enemy.tscn")
+var bossScene = preload("res://src/boss_clown.tscn")
 var rng = RandomNumberGenerator.new()
 
 enum Type {Enemy, Item, Shiny, Boss, Start}
@@ -151,6 +152,9 @@ func SpawnShiny():
 	pickup.position = map_to_local(tile)
 	items.remove_at(items.find(tile))
 	
+	pass
+
+func SpawnBoss():
 	pass
 
 func Unlock():
