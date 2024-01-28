@@ -46,7 +46,7 @@ func _setup_bullet(bullet_name: String, newHeading: Vector2):
 	heading = newHeading
 	hitbox.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	sprite.scale = Vector2(data.bullet_radius,data.bullet_radius)
-	print("setup " , bullet_name , " with lifespan ", lifespan)
+	#print("setup " , bullet_name , " with lifespan ", lifespan)
 
 
 func _setup_bullet_data(bullet_data: ProjectileData, newHeading: Vector2):
@@ -75,7 +75,7 @@ func _physics_process(delta):
 	
 	velocity = heading.normalized() * speed
 	
-	if(data.move_type):
+	if(data.move_type == ProjectileData.MoveType.LATERALSINE):
 		velocity += velocity.rotated(PI/2).normalized() * data.sine_amplitude * sin((data.despawn_time - lifespan) *data.sine_frequency / (2*PI))
 	#print("velocity: ", velocity)
 	move_and_slide()
@@ -159,10 +159,10 @@ func _spawn_explosion():
 	explosion.scale = Vector2(data.explode_radius, data.explode_radius)
 	get_parent().add_child(explosion)
 	explosion.global_position = global_position
-	print("explode", explosion, ", " , explosion.scale)
+	#print("explode", explosion, ", " , explosion.scale)
 
 func _on_timer_end():
-	print(projectile_name, " out of time")
+	#print(projectile_name, " out of time")
 	match data.on_timer_end:
 		ProjectileData.OnHit.BREAK:
 			queue_free()

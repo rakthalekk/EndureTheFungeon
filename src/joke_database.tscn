@@ -11,6 +11,7 @@ laugh = NodePath("Laugh")
 script = ExtResource("2_dyf4u")
 text_name = "Haha"
 projectile_name = "Haha"
+num_bullets = 1
 fire_delay = 0.5
 infinite_ammo = true
 
@@ -18,6 +19,7 @@ infinite_ammo = true
 script = ExtResource("2_dyf4u")
 text_name = "Haha"
 projectile_name = "Haha"
+num_bullets = 1
 fire_delay = 0.5
 infinite_ammo = true
 
@@ -25,6 +27,7 @@ infinite_ammo = true
 script = ExtResource("2_dyf4u")
 text_name = "Amogus"
 projectile_name = "Amogus"
+num_bullets = 1
 fire_delay = 2.0
 max_uses = 5
 
@@ -32,6 +35,7 @@ max_uses = 5
 script = ExtResource("2_dyf4u")
 text_name = "Trap"
 projectile_name = "Trap"
+num_bullets = 1
 fire_delay = 2.0
 max_uses = 5
 
@@ -39,6 +43,7 @@ max_uses = 5
 script = ExtResource("2_dyf4u")
 text_name = "DirectSine"
 projectile_name = "DirectSine"
+num_bullets = 1
 fire_delay = 1.0
 max_uses = 10
 
@@ -46,6 +51,46 @@ max_uses = 10
 script = ExtResource("2_dyf4u")
 text_name = "LateralSine"
 projectile_name = "LateralSine"
+num_bullets = 1
 is_automatic = true
 fire_delay = 0.3
 max_uses = 30
+
+[node name="Accelerator" type="Node" parent="."]
+script = ExtResource("2_dyf4u")
+text_name = "Accelerator"
+projectile_name = "Accelerator"
+num_bullets = 1
+is_automatic = true
+fire_delay = 0.25
+max_uses = 30
+
+[node name="Charged" type="Node" parent="."]
+script = ExtResource("2_dyf4u")
+text_name = "Charged"
+projectile_name = "Charged"
+num_bullets = 1
+is_charging = true
+charge_delay = 0.5
+fire_delay = 0.2
+max_uses = 18
+
+[node name="RandShotgun" type="Node" parent="."]
+script = ExtResource("2_dyf4u")
+text_name = "RandShotgun"
+projectile_name = "Shotgun"
+num_bullets = 3
+fire_delay = 0.6
+max_uses = 18
+spread = 30.0
+use_random_spread = true
+
+[node name="FixedShotgun" type="Node" parent="."]
+script = ExtResource("2_dyf4u")
+text_name = "FixedShotgun"
+projectile_name = "Shotgun"
+num_bullets = 3
+charge_delay = 0.5
+fire_delay = 0.6
+max_uses = 18
+spread = 30.0
