@@ -79,6 +79,10 @@ func _physics_process(delta):
 		velocity += velocity.rotated(PI/2).normalized() * data.sine_amplitude * sin((data.despawn_time - lifespan) *data.sine_frequency / (2*PI))
 	move_and_slide()
 	
+	
+	if(data.align_to_heading):
+		look_at(global_position + heading)
+	
 	lifespan -= delta
 	if(lifespan < 0):
 		_on_timer_end()

@@ -96,6 +96,16 @@ func GenerateMap():
 		roomAssignmentQueue.remove_at(roomAssignmentQueue.find(currRoom))
 		
 		if roomAssignmentQueue.size() == totalRooms - 1:
+			var invalid = false
+			for room in currRoom.neighbors:
+				var dir: Vector2 = (room.coords - currRoom.coords)
+				dir = dir.normalized()
+				if dir == Vector2.UP:
+					invalid = true
+			
+			if !invalid:
+				continue
+			
 			currRoom.type = Room.Type.Boss
 			continue
 		

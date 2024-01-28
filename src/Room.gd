@@ -14,6 +14,7 @@ var coords: Vector2i
 var neighbors: Array[Room]
 var cam
 var visited := false
+var locked := false
 
 var enemies: Array[Enemy] = []
 
@@ -25,6 +26,7 @@ func _init(pos := Vector2i.ZERO):
 	pass
 
 func _ready():
+	Signals.EnemyDied.connect(OnEnemyDied)
 	pass
 
 var elapsed = 0
@@ -32,8 +34,15 @@ var elapsed = 0
 func _process(delta):
 	elapsed += delta
 	
-	if elapsed >= 2:
-		Unlock()
+	#if enemies.size() <= 0 && :
+		
+	#if get_parent().currentRoom == self:
+		#if elapsed >= 1:
+			#Lock()
+			#for friend in neighbors:
+				#SetLockedCells((Vector2)(friend.coords - coords).normalized())
+		#if elapsed >= 2:
+			#Unlock(true)
 	
 	pass
 
@@ -47,6 +56,7 @@ func SetNeighbors(friends: Array[Room]):
 	for friend in friends:
 		var dir: Vector2 = (friend.coords - coords)
 		dir = dir.normalized()
+		DiggyDiggyHole(dir)
 		SetUnlockedCells(dir)
 
 	pass
@@ -83,32 +93,38 @@ func Lock(_body, friendLock):
 		SetLockedCells(dir)
 		
 		if friendLock:
-			SpawnEnemies()
-	
+			if (type == Type.Enemy):
+				SpawnEnemies()
+			else:
+				SpawnBoss()
 	pass
 
 func SpawnEnemies():
 	var tiles = get_used_cells(0)
 	var odds = 1
-	var enemies = []
+	var enemyTiles = []
 	var removedTiles = 0
 	
 	for tile in tiles:
 		if get_cell_tile_data(0, tile).get_custom_data("EnemySpawn") == true:
-			enemies.push_back(tile)
+			enemyTiles.push_back(tile)
 	
 	while rng.randi_range(1, odds) == 1:
 		var enemyData = EnemyDatabase.get_random_enemy_data()
 		var enemy = enemyScene.instantiate()
+		enemy.load_from_data(enemyData)
+		if enemy == null:
+			odds += 1
+			continue
+		
+		enemies.push_back(enemy)
 		call_deferred("add_child", enemy)
 		
-		var tile = enemies.pick_random()
+		var tile = enemyTiles.pick_random()
 		enemy.position = map_to_local(tile)
-		enemies.remove_at(enemies.find(tile))
+		enemyTiles.remove_at(enemyTiles.find(tile))
 		removedTiles += 1
-		
-		if removedTiles > 2:
-			odds += 1
+		odds += 1
 	
 	pass
 
@@ -122,7 +138,7 @@ func SpawnItems():
 		if get_cell_tile_data(0, tile).get_custom_data("ItemSpawn") == true:
 			items.push_back(tile)
 	
-	while rng.randi_range(1, odds) == 1:
+	while !items.is_empty() && rng.randi_range(1, odds) == 1:
 		var pickup: Pickup = PickupDatabase._get_minor_reward()
 		var tile = items.pick_random()
 		if tile == null:
@@ -155,17 +171,53 @@ func SpawnShiny():
 	pass
 
 func SpawnBoss():
+	var boss = bossScene.instantiate()
+	call_deferred("add_child", boss)
+	boss.position = Vector2i(960, 120)
 	pass
 
-func Unlock():
+func Unlock(friendLock):
 	for friend in neighbors:
 		var dir: Vector2 = (friend.coords - coords)
 		dir = dir.normalized()
 		SetUnlockedCells(dir)
+		
+		if (friendLock):
+			friend.Unlock(false)
 
 	pass
+
+func OnEnemyDied(enemy: Enemy):
+	if get_parent().currentRoom != self:
+		return
 	
+	while enemies.has(null):
+		enemies.remove_at(enemies.find(null))
+	
+	var idx = enemies.find(enemy)
+	if (idx >= 0):
+		enemies.remove_at(idx)
+	
+	if enemies.size() <= 0:
+		Unlock(true)
+		
+		var goodie = null
+		if (rng.randi_range(1, 5) == 5):
+			goodie = PickupDatabase._get_major_reward()
+		else:
+			goodie = PickupDatabase._get_minor_reward()
+		
+		if goodie != null:
+			call_deferred("add_child", goodie)
+			goodie.position = Vector2i(960, 540)
+			#print("goodie: ", goodie.name)
+			#print("room: ", position, " goodie: ", goodie.position, " diff: ", goodie.position - position)
+			
+	pass
+
 func SetUnlockedCells(dir: Vector2):
+	DiggyDiggyHole(dir)
+	
 	if dir == Vector2.UP:
 		set_cell(1, Vector2i(7, 0), 4, Vector2i(0, 0), 1)
 		set_cell(1, Vector2i(8, 0), 4, Vector2i(0, 0))
@@ -199,32 +251,62 @@ func SetUnlockedCells(dir: Vector2):
 	
 func SetLockedCells(dir: Vector2):
 	if dir == Vector2.UP:
-		set_cell(1, Vector2i(7, 0), 1, Vector2i(0, 0), 3)
-		set_cell(1, Vector2i(8, 0), 1, Vector2i(0, 0), 3)
+		set_cell(1, Vector2i(7, 0), 15, Vector2i(0, 0), 1)
+		set_cell(1, Vector2i(8, 0), 15, Vector2i(0, 0))
+		
+		set_cell(0, Vector2i(7, 0), 1, Vector2i(0, 0))
+		set_cell(0, Vector2i(8, 0), 1, Vector2i(0, 0))
 		
 		erase_cell(2, Vector2i(7, 0))
 		erase_cell(2, Vector2i(8, 0))
 	elif dir == Vector2.RIGHT:
-		set_cell(1, Vector2i(15, 3), 1, Vector2i(0, 0), 1)
-		set_cell(1, Vector2i(15, 4), 1, Vector2i(0, 0), 1)
-		set_cell(1, Vector2i(15, 5), 1, Vector2i(0, 0), 1)
+		set_cell(1, Vector2i(15, 3), 16, Vector2i(0, 0), 4)
+		set_cell(1, Vector2i(15, 4), 14, Vector2i(0, 0), 2)
+		set_cell(1, Vector2i(15, 5), 16, Vector2i(0, 0), 2)
+		
+		#set_cell(0, Vector2i(15, 3), 1, Vector2i(0, 0), 2)
+		set_cell(0, Vector2i(15, 4), 1, Vector2i(0, 0), 2)
+		#set_cell(0, Vector2i(15, 5), 1, Vector2i(0, 0), 2)
 		
 		erase_cell(2, Vector2i(15, 3))
 		erase_cell(2, Vector2i(15, 4))
 		erase_cell(2, Vector2i(15, 5))
 	elif dir == Vector2.DOWN:
-		set_cell(1, Vector2i(7, 8), 1, Vector2i(0, 0), 3)
-		set_cell(1, Vector2i(8, 8), 1, Vector2i(0, 0), 3)
+		set_cell(1, Vector2i(7, 8), 15, Vector2i(0, 0), 2)
+		set_cell(1, Vector2i(8, 8), 15, Vector2i(0, 0), 3)
+		
+		set_cell(0, Vector2i(7, 8), 1, Vector2i(0, 0), 3)
+		set_cell(0, Vector2i(8, 8), 1, Vector2i(0, 0), 3)
 		
 		erase_cell(2, Vector2i(7, 8))
 		erase_cell(2, Vector2i(8, 8))
 	elif dir == Vector2.LEFT:
-		set_cell(1, Vector2i(0, 3), 1, Vector2i(0, 0), 2)
-		set_cell(1, Vector2i(0, 4), 1, Vector2i(0, 0), 2)
-		set_cell(1, Vector2i(0, 5), 1, Vector2i(0, 0), 2)
+		set_cell(1, Vector2i(0, 3), 16, Vector2i(0, 0), 3)
+		set_cell(1, Vector2i(0, 4), 14, Vector2i(0, 0), 1)
+		set_cell(1, Vector2i(0, 5), 16, Vector2i(0, 0), 1)
+		
+		#set_cell(0, Vector2i(0, 3), 1, Vector2i(0, 0), 3)
+		set_cell(0, Vector2i(0, 4), 1, Vector2i(0, 0), 1)
+		#set_cell(0, Vector2i(0, 5), 1, Vector2i(0, 0), 1)
 		
 		erase_cell(2, Vector2i(0, 3))
 		erase_cell(2, Vector2i(0, 4))
 		erase_cell(2, Vector2i(0, 5))
 	
 	pass
+
+func DiggyDiggyHole(dir: Vector2):
+	if dir == Vector2.UP:
+		erase_cell(0, Vector2i(7, 0))
+		erase_cell(0, Vector2i(8, 0))
+	elif dir == Vector2.RIGHT:
+		#erase_cell(0, Vector2i(15, 3))
+		erase_cell(0, Vector2i(15, 4))
+		#erase_cell(0, Vector2i(15, 5))
+	elif dir == Vector2.DOWN:
+		erase_cell(0, Vector2i(7, 8))
+		erase_cell(0, Vector2i(8, 8))
+	elif dir == Vector2.LEFT:
+		#erase_cell(0, Vector2i(0, 3))
+		erase_cell(0, Vector2i(0, 4))
+		#erase_cell(0, Vector2i(0, 5))

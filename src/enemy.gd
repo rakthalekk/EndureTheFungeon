@@ -133,3 +133,8 @@ func _on_wait_timer_timeout():
 		direction = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	
 	$WanderTimer.start(1)
+
+func _no_more_laughing():
+	Signals.EnemyDied.emit(self)
+	super()
+	pass
