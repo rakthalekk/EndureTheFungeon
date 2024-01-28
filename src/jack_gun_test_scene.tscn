@@ -23,8 +23,26 @@ pickup_type = 1
 joke_name = "Amogus"
 joke_restore_amount = 1.0
 
+[node name="trap pickup" parent="." instance=ExtResource("3_6kw4w")]
+position = Vector2(164, 581)
+pickup_type = 1
+joke_name = "Trap"
+joke_restore_amount = 1.0
+
+[node name="DirectSine pickup" parent="." instance=ExtResource("3_6kw4w")]
+position = Vector2(1054, 107)
+pickup_type = 1
+joke_name = "DirectSine"
+joke_restore_amount = 1.0
+
+[node name="LateralSine pickup" parent="." instance=ExtResource("3_6kw4w")]
+position = Vector2(1687, 867)
+pickup_type = 1
+joke_name = "LateralSine"
+joke_restore_amount = 1.0
+
 [node name="amogus pickup2" parent="." instance=ExtResource("3_6kw4w")]
-position = Vector2(488, 892)
+position = Vector2(1824, 103)
 pickup_type = 1
 joke_name = "Amogus"
 joke_restore_amount = 1.0

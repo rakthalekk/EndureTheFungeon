@@ -4,13 +4,14 @@ extends CharacterBody2D
 var data: ProjectileData
 
 var BULLET = load("res://src/projectile.tscn")
+var EXPLOSION = load("res://src/explosion.tscn")
 
 @export var projectile_name: String
 
 var hitbox: Area2D
 var sprite: Sprite2D
 
-var speed: int
+var speed: float
 
 var heading := Vector2.ZERO
 var lifespan: float
@@ -45,6 +46,7 @@ func _setup_bullet(bullet_name: String, newHeading: Vector2):
 	heading = newHeading
 	hitbox.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	sprite.scale = Vector2(data.bullet_radius,data.bullet_radius)
+	print("setup " , bullet_name , " with lifespan ", lifespan)
 
 
 func _setup_bullet_data(bullet_data: ProjectileData, newHeading: Vector2):
@@ -66,7 +68,11 @@ func _physics_process(delta):
 		return
 	if(data.move_type == ProjectileData.MoveType.ACCELERATE):
 		speed = speed * (1 + (data.acceleration * delta))
-		
+	elif(data.move_type == ProjectileData.MoveType.TRAP):
+		speed = lerpf(data.speed, 0.0, min(1, (data.despawn_time - lifespan) / data.trap_move_time))
+	elif(data.move_type == ProjectileData.MoveType.DIRECTSINE):
+		speed = data.speed * (.5 * sin((data.despawn_time - lifespan) * data.sine_frequency / (2 * PI)) + .5)
+	
 	velocity = heading.normalized() * speed
 	
 	if(data.move_type):
@@ -99,7 +105,8 @@ func _hit_wall(body):
 		ProjectileData.OnHit.SPLIT:
 			spawn_split_projectiles()
 		ProjectileData.OnHit.EXPLODE:
-			#explode
+			_spawn_explosion()
+			queue_free()
 			pass
 		ProjectileData.OnHit.PIERCE:
 			piercing_count -= 1
@@ -120,7 +127,8 @@ func _hit_enemy(enemy: CharacterBody2D):
 		ProjectileData.OnHit.SPLIT:
 			spawn_split_projectiles()
 		ProjectileData.OnHit.EXPLODE:
-			#explode
+			_spawn_explosion()
+			queue_free()
 			pass
 		ProjectileData.OnHit.PIERCE:
 			piercing_count -= 1
@@ -144,8 +152,18 @@ func spawn_split_projectiles():
 	
 	queue_free()
 
+func _spawn_explosion():
+	
+	var explosion = EXPLOSION.instantiate() as Projectile
+	
+	explosion._setup_bullet(data.explosion_projectile, heading)
+	explosion.scale = Vector2(data.explode_radius, data.explode_radius)
+	get_parent().add_child(explosion)
+	explosion.global_position = global_position
+	print("explode", explosion, ", " , explosion.scale)
 
 func _on_timer_end():
+	print(projectile_name, " out of time")
 	match data.on_timer_end:
 		ProjectileData.OnHit.BREAK:
 			queue_free()
@@ -154,7 +172,8 @@ func _on_timer_end():
 		ProjectileData.OnHit.SPLIT:
 			spawn_split_projectiles()
 		ProjectileData.OnHit.EXPLODE:
-			#explode
+			_spawn_explosion()
+			queue_free()
 			pass
 		ProjectileData.OnHit.PIERCE:
 			queue_free()
