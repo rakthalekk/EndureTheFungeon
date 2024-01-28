@@ -9,7 +9,6 @@
 [node name="Player" parent="." instance=ExtResource("1_f2j53")]
 position = Vector2(312, 188)
 max_haha_points = 3
-i_frames = 0.5
 
 [node name="BulletReticle" parent="." instance=ExtResource("2_wjr11")]
 
