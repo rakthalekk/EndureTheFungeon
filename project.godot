@@ -21,6 +21,7 @@ JokeDatabase="*res://src/joke_database.tscn"
 ProjectileDatabase="*res://src/projectile_database.tscn"
 EnemyDatabase="*res://src/enemy_database.tscn"
 PickupDatabase="*res://src/pickup_database.tscn"
+Signals="*res://src/signals.gd"
 
 [display]
 
