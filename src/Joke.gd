@@ -40,11 +40,12 @@ func _process(delta):
 		if(charge_timer < 0 && is_automatic):
 			_tell_joke()
 	if(!can_fire && is_automatic && delay_timer > 0):
-		
+		print(can_fire, " ", delay_timer)
 		delay_timer -= delta
-		if(delay_timer < 0):
-			delay_timer = fire_delay;
+		if(delay_timer <= 0):
+			#delay_timer = fire_delay;
 			can_fire = true
+			print("can fire auto again")
 	if(!is_automatic && delay_timer > 0):
 		delay_timer -= delta
 	if(is_automatic && firing && can_fire && (infinite_ammo || current_uses > 0)):
@@ -70,8 +71,8 @@ func _tell_joke():
 	
 	delay_timer = fire_delay
 	
-	if(!is_automatic):
-		can_fire = false
+	#if(!is_automatic):
+	can_fire = false
 		
 	if(is_charging):
 		charge_timer = charge_delay

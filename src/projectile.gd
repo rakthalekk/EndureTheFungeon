@@ -4,6 +4,7 @@ extends CharacterBody2D
 var data: ProjectileData
 
 var BULLET = load("res://src/projectile.tscn")
+var EXPLOSION = load("res://src/explosion.tscn")
 
 @export var projectile_name: String
 
@@ -45,6 +46,7 @@ func _setup_bullet(bullet_name: String, newHeading: Vector2):
 	heading = newHeading
 	hitbox.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	sprite.scale = Vector2(data.bullet_radius,data.bullet_radius)
+	print("setup " , bullet_name , " with lifespan ", lifespan)
 
 
 func _setup_bullet_data(bullet_data: ProjectileData, newHeading: Vector2):
@@ -75,7 +77,7 @@ func _physics_process(delta):
 	
 	if(data.move_type):
 		velocity += velocity.rotated(PI/2).normalized() * data.sine_amplitude * sin((data.despawn_time - lifespan) *data.sine_frequency / (2*PI))
-	print("velocity: ", velocity)
+	#print("velocity: ", velocity)
 	move_and_slide()
 	
 	lifespan -= delta
@@ -102,7 +104,8 @@ func _hit_wall(body):
 		ProjectileData.OnHit.SPLIT:
 			spawn_split_projectiles()
 		ProjectileData.OnHit.EXPLODE:
-			#explode
+			_spawn_explosion()
+			queue_free()
 			pass
 		ProjectileData.OnHit.PIERCE:
 			piercing_count -= 1
@@ -123,7 +126,8 @@ func _hit_enemy(enemy: CharacterBody2D):
 		ProjectileData.OnHit.SPLIT:
 			spawn_split_projectiles()
 		ProjectileData.OnHit.EXPLODE:
-			#explode
+			_spawn_explosion()
+			queue_free()
 			pass
 		ProjectileData.OnHit.PIERCE:
 			piercing_count -= 1
@@ -147,8 +151,18 @@ func spawn_split_projectiles():
 	
 	queue_free()
 
+func _spawn_explosion():
+	
+	var explosion = EXPLOSION.instantiate() as Projectile
+	
+	explosion._setup_bullet(data.explosion_projectile, heading)
+	explosion.scale = Vector2(data.explode_radius, data.explode_radius)
+	get_parent().add_child(explosion)
+	explosion.global_position = global_position
+	print("explode", explosion, ", " , explosion.scale)
 
 func _on_timer_end():
+	print(projectile_name, " out of time")
 	match data.on_timer_end:
 		ProjectileData.OnHit.BREAK:
 			queue_free()
@@ -157,7 +171,8 @@ func _on_timer_end():
 		ProjectileData.OnHit.SPLIT:
 			spawn_split_projectiles()
 		ProjectileData.OnHit.EXPLODE:
-			#explode
+			_spawn_explosion()
+			queue_free()
 			pass
 		ProjectileData.OnHit.PIERCE:
 			queue_free()
