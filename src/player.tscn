@@ -1,13 +1,14 @@
-[gd_scene load_steps=19 format=3 uid="uid://ciovhmka66u24"]
+[gd_scene load_steps=21 format=3 uid="uid://ciovhmka66u24"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_omtbe"]
 [ext_resource type="Texture2D" uid="uid://c5a4201qim0wr" path="res://Assets/Character/Player/Main_Character_Walk_Cycle_Left_Sheet.png" id="2_ggwil"]
-[ext_resource type="Texture2D" uid="uid://cvufjl7tw3ncv" path="res://Assets/Character/Player/Main_Character_Left_Idle_Sheet.png" id="3_qyy8h"]
 [ext_resource type="Texture2D" uid="uid://kj455j1lqges" path="res://Assets/Character/Player/Main_Character_Dodge.png" id="3_x7qb3"]
 [ext_resource type="Texture2D" uid="uid://bi5bw7iwfksh4" path="res://Assets/Character/Player/Main_Character_Walk_Cycle_Right_Sheet.png" id="4_07gsr"]
 [ext_resource type="Texture2D" uid="uid://cx66cjmu4hh8d" path="res://Assets/Character/Player/Main_Character_Right_Idle_Sheet.png" id="4_jt6td"]
+[ext_resource type="Texture2D" uid="uid://csc8pt5h0fnju" path="res://Assets/Character/Player/Main_Character_Idle_Left_Updated.png" id="4_n0cx2"]
 [ext_resource type="Texture2D" uid="uid://dw2fnd4bwpi26" path="res://Assets/Character/Player/Main_Character_left_Throw_Sheet.png" id="7_o371k"]
 [ext_resource type="Texture2D" uid="uid://bloht7duycjwe" path="res://Assets/Character/Player/Main_Character_Right_Throw_Sheet.png" id="8_iwypr"]
+[ext_resource type="Texture2D" uid="uid://b462tm6ygsmjm" path="res://Assets/Character/Player/Main_Character_Death.png" id="9_rs38d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q67pi"]
 size = Vector2(118, 65)
@@ -173,7 +174,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("3_qyy8h")]
+"values": [ExtResource("4_n0cx2")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -352,9 +353,37 @@ tracks/2/keys = {
 "values": [8]
 }
 
+[sub_resource type="Animation" id="Animation_coho5"]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("9_rs38d")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:hframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s2mnm"]
 _data = {
 "RESET": SubResource("Animation_1daks"),
+"dead": SubResource("Animation_coho5"),
 "dodge": SubResource("Animation_18c1o"),
 "idle_left": SubResource("Animation_3yhs8"),
 "idle_right": SubResource("Animation_3rpsh"),
