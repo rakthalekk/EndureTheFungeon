@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ciovhmka66u24"]
+[gd_scene load_steps=25 format=3 uid="uid://ciovhmka66u24"]
 
 [ext_resource type="Script" path="res://src/player.gd" id="1_omtbe"]
 [ext_resource type="Texture2D" uid="uid://c5a4201qim0wr" path="res://Assets/Character/Player/Main_Character_Walk_Cycle_Left_Sheet.png" id="2_ggwil"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dw2fnd4bwpi26" path="res://Assets/Character/Player/Main_Character_left_Throw_Sheet.png" id="7_o371k"]
 [ext_resource type="Texture2D" uid="uid://b1k4c7flda1fn" path="res://Assets/Character/Player/Main_Character_Right_Throw_Sheet_Updated.png" id="8_8tomd"]
 [ext_resource type="Texture2D" uid="uid://b462tm6ygsmjm" path="res://Assets/Character/Player/Main_Character_Death.png" id="9_rs38d"]
+[ext_resource type="Texture2D" uid="uid://cp2dtl287cmgc" path="res://Assets/Projectiles/Charge_Sheet.png" id="10_nxl7j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q67pi"]
 size = Vector2(118, 65)
@@ -483,5 +484,11 @@ wait_time = 0.5
 libraries = {
 "": SubResource("AnimationLibrary_i30ss")
 }
+
+[node name="Charge" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.54902)
+position = Vector2(0, -122)
+texture = ExtResource("10_nxl7j")
+hframes = 10
 
 [connection signal="timeout" from="DodgeCooldown" to="." method="_on_dodge_cooldown_timeout"]
