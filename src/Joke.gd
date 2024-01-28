@@ -77,21 +77,22 @@ func _tell_joke():
 	pass
 
 func _start_telling_joke():
-	print("start telling joke " + text_name)
 	if(firing || !can_fire || (!infinite_ammo && current_uses <= 0)):
-		return;
-	firing = true;
+		return
+	
+	firing = true
+	
 	if(is_automatic || is_charging):
-		return;
+		return
+	
 	if(delay_timer <= 0):
 		print("firing with delay timer at " , delay_timer , " of " , fire_delay)
 		_tell_joke()
 	else:
 		print("firing under cooldown: " , delay_timer, " of ", fire_delay)
-	pass
 
-func _stop_telling_joke(unequip:bool = false):
-	print("stop telling joke " + text_name)
+
+func _stop_telling_joke(unequip: bool = false):
 	if(is_charging && !is_automatic):
 		if(charge_timer < 0 && !unequip):
 			_tell_joke()
@@ -106,3 +107,4 @@ func _stop_telling_joke(unequip:bool = false):
 func _restore_uses(percentage: float):
 	var ammo_restore = (int)(max_uses * percentage)
 	current_uses = min(current_uses + ammo_restore, max_uses)
+

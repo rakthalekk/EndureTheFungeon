@@ -12,7 +12,7 @@ position = Vector2(62, 57)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_3k8sg")
 script = ExtResource("2_be0wl")
-speed = 300.0
+speed = 600.0
 damage = 1
 despawn_time = 3.0
 acceleration = 1.0
@@ -27,6 +27,26 @@ speed = 1400.0
 damage = 1
 despawn_time = 3.0
 bullet_radius = 0.3
+
+[node name="BossBullet1" type="Sprite2D" parent="."]
+position = Vector2(196, 57)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3k8sg")
+script = ExtResource("2_be0wl")
+speed = 1000.0
+damage = 1
+despawn_time = 3.0
+bullet_radius = 0.6
+
+[node name="BossBullet2" type="Sprite2D" parent="."]
+position = Vector2(196, 57)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3k8sg")
+script = ExtResource("2_be0wl")
+speed = 700.0
+damage = 1
+despawn_time = 3.0
+bullet_radius = 0.6
 
 [node name="Amogus" type="Sprite2D" parent="."]
 position = Vector2(119, 57)

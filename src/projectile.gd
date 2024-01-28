@@ -18,12 +18,10 @@ var piercing_count: int
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print("setup")
 	if(hitbox):
 		hitbox.body_entered.connect(_projectile_hit)
 	else:
 		print("NO HITBOX ASSIGNED. PLEASE FIX")
-	print("setup complete")
 
 func _setup_bullet(bullet_name: String, newHeading: Vector2):
 	data = ProjectileDatabase.get_projectile_data(bullet_name)
@@ -33,7 +31,6 @@ func _setup_bullet(bullet_name: String, newHeading: Vector2):
 	heading = newHeading
 	hitbox.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	sprite.scale = Vector2(data.bullet_radius,data.bullet_radius)
-	print("finished setting up bullet " + bullet_name)
 	
 func _setup_bullet_data(bullet_data: ProjectileData, newHeading: Vector2):
 	data = bullet_data
@@ -71,7 +68,6 @@ func _physics_process(delta):
 
 
 func _hit_wall(body):
-	print("projectile hit wall")
 	match data.on_wall_hit:
 		ProjectileData.OnHit.BREAK:
 			queue_free()
@@ -91,7 +87,6 @@ func _hit_wall(body):
 
 
 func _hit_enemy(enemy: CharacterBody2D):
-	print("projectile hit enemy")
 	var enemyBody = enemy as Enemy
 	#deal damage
 	enemyBody._take_damage(data.damage)
@@ -114,7 +109,6 @@ func _hit_enemy(enemy: CharacterBody2D):
 
 
 func _on_timer_end():
-	print("projectile despawned")
 	match data.on_timer_end:
 		ProjectileData.OnHit.BREAK:
 			queue_free()
