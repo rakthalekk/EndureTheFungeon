@@ -1,16 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://cp7d5y4xrgpgw"]
+[gd_scene load_steps=7 format=3 uid="uid://cp7d5y4xrgpgw"]
 
 [ext_resource type="Texture2D" uid="uid://byhjbqnrngs8p" path="res://Assets/UI/MinimapIcons.png" id="2_2sis8"]
 [ext_resource type="Texture2D" uid="uid://bid4728262c4b" path="res://Assets/UI/MinimapBKGD.png" id="2_gyuvw"]
 [ext_resource type="Script" path="res://src/Map.gd" id="2_i3ts6"]
-[ext_resource type="PackedScene" uid="uid://bum3w87g78x1x" path="res://src/bullet_reticle.tscn" id="2_q8cf5"]
 [ext_resource type="Texture2D" uid="uid://c7ykj4p0fs3nv" path="res://Assets/UI/Minimap.png" id="3_i4yoe"]
-[ext_resource type="Texture2D" uid="uid://4msdwpxp60x1" path="res://Assets/UI/SwitchyWhirly.png" id="5_w4fmy"]
-[ext_resource type="Script" path="res://src/Revolver.gd" id="6_4pesj"]
-[ext_resource type="Texture2D" uid="uid://bxx67k1ocsh52" path="res://Assets/UI/RevolverBar.png" id="6_06hpt"]
-[ext_resource type="Texture2D" uid="uid://j80cchfssh8o" path="res://Assets/UI/HPbarTransparent.png" id="8_ntnjw"]
-[ext_resource type="Script" path="res://src/HPFBbars.gd" id="8_pl6gy"]
-[ext_resource type="Texture2D" uid="uid://c85ibwqx37m4g" path="res://Assets/UI/FPbarTransparent.png" id="9_xndus"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iq4dh"]
 texture = ExtResource("2_2sis8")
@@ -22,18 +15,6 @@ texture_region_size = Vector2i(64, 36)
 [sub_resource type="TileSet" id="TileSet_dufdh"]
 tile_size = Vector2i(64, 36)
 sources/1 = SubResource("TileSetAtlasSource_iq4dh")
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g2o4v"]
-bg_color = Color(0.396078, 0.0470588, 0.0470588, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ydod7"]
-bg_color = Color(0.835294, 0.0627451, 0.113725, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sf2k5"]
-bg_color = Color(0.396078, 0.0470588, 0.0470588, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_71cjx"]
-bg_color = Color(0.917647, 0.956863, 0.0431373, 1)
 
 [node name="Map" type="Node2D"]
 script = ExtResource("2_i3ts6")
@@ -58,114 +39,3 @@ layer_1/tile_data = PackedInt32Array(1, 1, 2, 0, 1, 0)
 [node name="MinimapBorder" type="Sprite2D" parent="CanvasLayer"]
 position = Vector2(1720, 136)
 texture = ExtResource("3_i4yoe")
-
-[node name="Revolver" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 24.0
-offset_right = 64.0
-offset_bottom = 40.0
-script = ExtResource("6_4pesj")
-
-[node name="PrevLabel" type="Sprite2D" parent="CanvasLayer/Revolver"]
-position = Vector2(1805, 1034)
-scale = Vector2(0.567627, 0.567627)
-texture = ExtResource("6_06hpt")
-
-[node name="PrevLabel" type="Label" parent="CanvasLayer/Revolver/PrevLabel"]
-anchors_preset = -1
-anchor_left = 0.0688406
-anchor_top = 0.172414
-anchor_right = 0.931159
-anchor_bottom = 0.836207
-offset_left = -138.0
-offset_top = -58.0
-offset_right = -138.0
-offset_bottom = -58.0
-theme_override_font_sizes/font_size = 30
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
-
-[node name="NextLabel" type="Sprite2D" parent="CanvasLayer/Revolver"]
-position = Vector2(1805, 821)
-scale = Vector2(0.567627, 0.567627)
-texture = ExtResource("6_06hpt")
-
-[node name="NextLabel" type="Label" parent="CanvasLayer/Revolver/NextLabel"]
-anchors_preset = -1
-anchor_left = 0.0688406
-anchor_top = 0.172414
-anchor_right = 0.931159
-anchor_bottom = 0.836207
-offset_left = -138.0
-offset_top = -58.0
-offset_right = -138.0
-offset_bottom = -58.0
-theme_override_font_sizes/font_size = 30
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
-
-[node name="MainLabel" type="Sprite2D" parent="CanvasLayer/Revolver"]
-position = Vector2(1649, 927)
-texture = ExtResource("6_06hpt")
-
-[node name="MainLabel" type="Label" parent="CanvasLayer/Revolver/MainLabel"]
-anchors_preset = -1
-anchor_left = 0.0688406
-anchor_top = 0.172414
-anchor_right = 0.931159
-anchor_bottom = 0.836207
-offset_left = -138.0
-offset_top = -58.0
-offset_right = -138.0
-offset_bottom = -58.0
-theme_override_font_sizes/font_size = 30
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 3
-metadata/_edit_use_anchors_ = true
-
-[node name="SwitchyWhirly" type="Sprite2D" parent="CanvasLayer/Revolver"]
-position = Vector2(1848, 926)
-texture = ExtResource("5_w4fmy")
-
-[node name="Health" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("8_pl6gy")
-
-[node name="HPbar" type="ProgressBar" parent="CanvasLayer/Health"]
-layout_mode = 0
-offset_left = 55.0
-offset_top = 27.0
-offset_right = 497.0
-offset_bottom = 54.0
-theme_override_styles/background = SubResource("StyleBoxFlat_g2o4v")
-theme_override_styles/fill = SubResource("StyleBoxFlat_ydod7")
-show_percentage = false
-
-[node name="HPbarTransparent" type="Sprite2D" parent="CanvasLayer/Health"]
-position = Vector2(258, 37)
-texture = ExtResource("8_ntnjw")
-
-[node name="FPbar" type="ProgressBar" parent="CanvasLayer/Health"]
-layout_mode = 0
-offset_left = 103.0
-offset_top = 92.0
-offset_right = 496.0
-offset_bottom = 108.0
-theme_override_styles/background = SubResource("StyleBoxFlat_sf2k5")
-theme_override_styles/fill = SubResource("StyleBoxFlat_71cjx")
-show_percentage = false
-
-[node name="FPbarTransparent" type="Sprite2D" parent="CanvasLayer/Health"]
-position = Vector2(258, 96)
-texture = ExtResource("9_xndus")
-
-[node name="BulletReticle" parent="." instance=ExtResource("2_q8cf5")]

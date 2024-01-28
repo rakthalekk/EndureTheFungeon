@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ckvdrid86i743" path="res://Assets/Character/Enemies/SadClownExport10FINAL.png" id="5_v0vqx"]
 [ext_resource type="Texture2D" uid="uid://6d7uxum43pff" path="res://Assets/Character/Enemies/PinkClown4ExportFINAL.png" id="6_n8sb5"]
 [ext_resource type="Texture2D" uid="uid://bphojlrxb5gjb" path="res://Assets/Character/Enemies/GreyClown4ExportFINAL.png" id="7_acoei"]
-[ext_resource type="Texture2D" uid="uid://c45s4rfip0hjj" path="res://Assets/Character/Enemies/Final_Boss_Idle_Sheet.png" id="8_nxeu5"]
+[ext_resource type="Texture2D" uid="uid://dpvv62fimh5lx" path="res://Assets/Character/Enemies/Final_Boss_Idle_Sheet.png" id="8_nxeu5"]
 
 [sub_resource type="Animation" id="Animation_wasfc"]
 length = 0.001
@@ -133,7 +133,7 @@ hframes = 12
 script = ExtResource("2_8oud8")
 speed = 300
 nearby_distance = 1000
-max_haha_points = 2
+max_haha_points = 5
 i_frames = 0.5
 shoot_pattern = 3
 
@@ -149,7 +149,7 @@ hframes = 12
 script = ExtResource("2_8oud8")
 speed = 300
 nearby_distance = 600
-max_haha_points = 2
+max_haha_points = 5
 i_frames = 0.5
 move_pattern = 1
 
@@ -165,7 +165,7 @@ hframes = 6
 script = ExtResource("2_8oud8")
 speed = 200
 nearby_distance = 600
-max_haha_points = 2
+max_haha_points = 5
 i_frames = 0.5
 move_pattern = 4
 shoot_pattern = 2
@@ -182,7 +182,7 @@ hframes = 6
 script = ExtResource("2_8oud8")
 speed = 200
 nearby_distance = 600
-max_haha_points = 2
+max_haha_points = 5
 i_frames = 0.5
 move_pattern = 4
 shoot_pattern = 2
@@ -199,7 +199,7 @@ hframes = 6
 script = ExtResource("2_8oud8")
 speed = 200
 nearby_distance = 600
-max_haha_points = 2
+max_haha_points = 5
 i_frames = 0.5
 move_pattern = 4
 shoot_pattern = 2
@@ -216,7 +216,7 @@ hframes = 8
 script = ExtResource("2_8oud8")
 speed = 300
 nearby_distance = 600
-max_haha_points = 1
+max_haha_points = 100
 i_frames = 0.5
 move_pattern = 4
 

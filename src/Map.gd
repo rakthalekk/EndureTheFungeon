@@ -18,7 +18,6 @@ var miniMap: TileMap
 var miniMapBackground: Sprite2D
 var currentRoom: Room
 var roomAssignmentQueue: Array[Room] = []
-var player: Player
 
 func _ready():
 	for i in grid_width:
@@ -28,7 +27,7 @@ func _ready():
 	
 	GenerateMap()
 	
-	player = playerScene.instantiate()
+	var player = playerScene.instantiate()
 	add_child(player)
 	cam = get_node("Camera2D")
 	
@@ -38,8 +37,6 @@ func _ready():
 	
 	miniMap = get_node("CanvasLayer/MiniMap")
 	miniMapBackground = get_node("CanvasLayer/MinimapBackground")
-	
-	get_node("CanvasLayer/Health").player = player
 	
 	pass
 

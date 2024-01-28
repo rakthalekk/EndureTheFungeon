@@ -1,7 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://c3lrji3lnvk2v"]
+[gd_scene load_steps=4 format=3 uid="uid://cniuuaah7lwy7"]
 
 [ext_resource type="Script" path="res://src/pickup.gd" id="1_8t2yj"]
-[ext_resource type="Texture2D" uid="uid://bnf8sryr72d6g" path="res://Assets/Items/pie(single!).png" id="2_36ht4"]
+[ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="2_q6yuv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_l34lb"]
 
@@ -14,4 +14,5 @@ script = ExtResource("1_8t2yj")
 shape = SubResource("CircleShape2D_l34lb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_36ht4")
+modulate = Color(0, 0.843137, 0, 1)
+texture = ExtResource("2_q6yuv")
