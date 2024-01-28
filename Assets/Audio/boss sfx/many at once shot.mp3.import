@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://daoxhnol0haph"
+path="res://.godot/imported/many at once shot.mp3-159592ca719d321d72287bb346d41e81.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/boss sfx/many at once shot.mp3"
+dest_files=["res://.godot/imported/many at once shot.mp3-159592ca719d321d72287bb346d41e81.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
