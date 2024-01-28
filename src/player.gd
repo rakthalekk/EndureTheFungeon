@@ -24,6 +24,7 @@ const SPEED = 700.0
 func _ready():
 	#MOUSE_RETICLE.instantiate()
 	super()
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	jokes.append(JokeDatabase._get_laugh());
 	joke_names.append(jokes[0].text_name)
 	jokes[0]._pick_up(self)

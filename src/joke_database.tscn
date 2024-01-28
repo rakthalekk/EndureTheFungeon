@@ -10,6 +10,7 @@ laugh = NodePath("Laugh")
 [node name="Laugh" type="Node" parent="."]
 script = ExtResource("2_dyf4u")
 text_name = "Haha"
+description = "Laughing is contagious, if you can’t think of any other he-he’s then this is a surefire way to get others laughing with you."
 projectile_name = "Haha"
 num_bullets = 1
 is_automatic = true
@@ -29,6 +30,7 @@ infinite_ammo = true
 [node name="Amogus" type="Node" parent="."]
 script = ExtResource("2_dyf4u")
 text_name = "Amogus"
+description = "Don’t be suspicious, Dooon’t be suspicious, DoN’t Be SuSpIcIouS, DoN’t Be SuSpIcIouS"
 projectile_name = "Amogus"
 num_bullets = 1
 fire_delay = 2.0
@@ -37,6 +39,7 @@ max_uses = 5
 [node name="Ligma" type="Node" parent="."]
 script = ExtResource("2_dyf4u")
 text_name = "Ligma"
+description = "A mine-like disease. Set it down and wait for the glorious destruction."
 projectile_name = "Ligma"
 num_bullets = 1
 fire_delay = 2.0
@@ -71,6 +74,7 @@ max_uses = 30
 [node name="YourMom" type="Node" parent="."]
 script = ExtResource("2_dyf4u")
 text_name = "YourMom"
+description = "A possible comeback for almost any insult or joke. Needs time to power up for optimal comedic timing."
 projectile_name = "YourMom"
 num_bullets = 1
 is_charging = true
@@ -80,7 +84,8 @@ max_uses = 18
 
 [node name="KnockKnock" type="Node" parent="."]
 script = ExtResource("2_dyf4u")
-text_name = "RandShotgun"
+text_name = "KnockKnock"
+description = "Knock knock. Who’s there? Shotgun. Shotgun who? ‘unintelligible shooting and screaming’"
 projectile_name = "Shotgun"
 num_bullets = 2
 fire_delay = 0.6

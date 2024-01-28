@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cun32e1vucc5a"]
+[gd_scene load_steps=13 format=3 uid="uid://cun32e1vucc5a"]
 
 [ext_resource type="Script" path="res://src/projectile_database.gd" id="1_2ityc"]
 [ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="2_3k8sg"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://bp11oh1efbvh8" path="res://Assets/Projectiles/ballsplosion.png" id="6_bvlgl"]
 [ext_resource type="Texture2D" uid="uid://dp5wvfqe8dqwc" path="res://Assets/Projectiles/SmallTear3ExportFINAL.png" id="7_ma45g"]
 [ext_resource type="Texture2D" uid="uid://dojljya8psam7" path="res://Assets/Projectiles/Ligma3ExportFINAL.png" id="9_atl7i"]
+[ext_resource type="Texture2D" uid="uid://cae7st0gp1oj" path="res://Assets/Projectiles/YOURMOM3ExportFINAL.png" id="12_4w1pc"]
 
 [node name="ProjectileDatabase" type="Node2D"]
 script = ExtResource("1_2ityc")
@@ -234,12 +235,13 @@ move_type = 2
 [node name="YourMom" type="Sprite2D" parent="."]
 position = Vector2(429, 129)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("12_4w1pc")
 script = ExtResource("2_be0wl")
 speed = 2200.0
-damage = 3
+damage = 4
 despawn_time = 10.0
 bullet_radius = 0.85
+align_to_heading = true
 max_bounces = 5
 on_wall_hit = 1
 sine_amplitude = 300.0
