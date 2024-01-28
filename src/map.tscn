@@ -1,6 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://cp7d5y4xrgpgw"]
+[gd_scene load_steps=7 format=3 uid="uid://cp7d5y4xrgpgw"]
 
+[ext_resource type="Texture2D" uid="uid://byhjbqnrngs8p" path="res://Assets/UI/MinimapIcons.png" id="2_2sis8"]
+[ext_resource type="Texture2D" uid="uid://bid4728262c4b" path="res://Assets/UI/MinimapBKGD.png" id="2_gyuvw"]
 [ext_resource type="Script" path="res://src/Map.gd" id="2_i3ts6"]
+[ext_resource type="Texture2D" uid="uid://c7ykj4p0fs3nv" path="res://Assets/UI/Minimap.png" id="3_i4yoe"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_iq4dh"]
+texture = ExtResource("2_2sis8")
+texture_region_size = Vector2i(64, 36)
+0:0/0 = 0
+0:1/0 = 0
+0:2/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_dufdh"]
+tile_size = Vector2i(64, 36)
+sources/1 = SubResource("TileSetAtlasSource_iq4dh")
 
 [node name="Map" type="Node2D"]
 script = ExtResource("2_i3ts6")
@@ -8,3 +22,20 @@ min_rooms = 15
 numItemRooms = 3
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="MinimapBackground" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(1769, 136)
+texture = ExtResource("2_gyuvw")
+
+[node name="MiniMap" type="TileMap" parent="CanvasLayer"]
+position = Vector2(1735, 119)
+tile_set = SubResource("TileSet_dufdh")
+format = 2
+layer_0/tile_data = PackedInt32Array(131071, 1, 1, 0, 1, 1, 65536, 1, 1, 1, 1, 1, 65537, 1, 1, 131073, 1, 1, 131072, 1, 1)
+layer_1/tile_data = PackedInt32Array(1, 1, 2, 0, 1, 0)
+
+[node name="MinimapBorder" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(1769, 136)
+texture = ExtResource("3_i4yoe")
