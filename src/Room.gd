@@ -99,7 +99,7 @@ func SpawnEnemies():
 	
 	while rng.randi_range(1, odds) == 1:
 		var enemyData = EnemyDatabase.get_random_enemy_data()
-		var enemy = enemyScene.instantiate()		
+		var enemy = enemyScene.instantiate()
 		call_deferred("add_child", enemy)
 		
 		var tile = enemies.pick_random()

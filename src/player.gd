@@ -33,7 +33,7 @@ func _ready():
 
 func _process(delta):
 	#super(delta)
-	if(dead || !can_move):
+	if dead:
 		return
 	var mousePos = get_global_mouse_position();
 	heading = mousePos - global_position;
@@ -62,7 +62,7 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	if(dead || !can_move):
+	if dead:
 		return
 	if !dodging:
 		direction = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down")).normalized()
@@ -85,20 +85,6 @@ func _physics_process(delta):
 	
 	velocity = direction * SPEED
 	
-	if(Input.is_action_just_pressed("shoot")):
-		jokes[current_joke]._start_telling_joke()
-		#print("shooting")
-	if(Input.is_action_just_released("shoot")):
-		jokes[current_joke]._stop_telling_joke()
-		#print("no longer shooting")
-	if(Input.is_action_just_pressed("next_weapon")):
-		_next_joke()
-		print("next weapon")
-	if(Input.is_action_just_pressed("prev_weapon")):
-		_prev_joke()
-		print("prev weapon")
-		
-	
 	move_and_slide()
 	
 	for i in get_slide_collision_count():
@@ -116,10 +102,14 @@ func end_dodge():
 
 
 func _no_more_laughing():
-	if(dead || !can_move):
+	if dead:
 		return
+	
+	$AnimationPlayer.play("dead")
 	dead = true
-	print("player is sad")
+	
+	await get_tree().create_timer(2).timeout
+	
 	var game_over = GAME_OVER.instantiate();
 	get_parent().add_child(game_over)
 	pass
@@ -131,7 +121,6 @@ func _learn_joke(new_joke: Joke):
 		jokes.append(new_joke)
 		new_joke._pick_up(self)
 		print("learned new joke: ", new_joke.text_name)
-	
 
 
 func _next_joke():
@@ -143,6 +132,7 @@ func _next_joke():
 	if(Input.is_action_pressed("shoot")):
 		jokes[current_joke]._start_telling_joke()
 
+
 func _prev_joke():
 	jokes[current_joke]._stop_telling_joke(true)
 	current_joke -= 1
@@ -151,7 +141,8 @@ func _prev_joke():
 	#change visual displays to match new joke
 	if(Input.is_action_pressed("shoot")):
 		jokes[current_joke]._start_telling_joke()
-		
+
+
 func _handle_pickup(pickup: Pickup):
 	if(pickup.used):
 		return
@@ -161,23 +152,19 @@ func _handle_pickup(pickup: Pickup):
 	elif(pickup.pickup_type == pickup.PickupType.JOKE):
 		var joke_id = joke_names.find(pickup.joke_name);
 		if(joke_id == -1):
-			print("trying to learn joke")
 			_learn_joke(JokeDatabase._get_joke(pickup.joke_name))
 		else:
-			print("trying to restore joke uses")
 			jokes[joke_id]._restore_uses(pickup.joke_restore_amount)
 	else:
 		return
 	pickup._consume()
-	
 
-func _start_game():
-	can_move = true
-	
+
 func _win_game():
 	can_move = false
 	var you_win = YOU_WIN.instantiate()
 	get_parent().add_child(you_win)
+
 
 func _on_dodge_cooldown_timeout():
 	can_dodge = true

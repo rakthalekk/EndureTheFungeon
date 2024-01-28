@@ -1,13 +1,61 @@
-[gd_scene load_steps=4 format=3 uid="uid://blke40aohuyab"]
+[gd_scene load_steps=11 format=3 uid="uid://blke40aohuyab"]
 
 [ext_resource type="Script" path="res://src/enemy_database.gd" id="1_p5nma"]
 [ext_resource type="Script" path="res://src/enemy_data.gd" id="2_8oud8"]
 [ext_resource type="Texture2D" uid="uid://dll7ebg306ktc" path="res://Assets/Character/Enemies/FunGuyAAAAExport5FINAL.png" id="2_65wj0"]
+[ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="4_evdsa"]
+[ext_resource type="Texture2D" uid="uid://c5dnhokagw4dt" path="res://Assets/Character/Enemies/FunGuyBLEU3ExportFINAL.png" id="4_hw7u6"]
+
+[sub_resource type="Animation" id="Animation_8s0qt"]
+resource_name = "active"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_wasfc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dgbce"]
+_data = {
+"RESET": SubResource("Animation_wasfc"),
+"active": SubResource("Animation_8s0qt")
+}
+
+[sub_resource type="Animation" id="Animation_3f6c7"]
+resource_name = "active"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dcljn"]
+_data = {
+"active": SubResource("Animation_3f6c7")
+}
 
 [node name="EnemyDatabase" type="Node2D"]
 script = ExtResource("1_p5nma")
 
-[node name="Enemy" type="Sprite2D" parent="."]
+[node name="FunGuy" type="Sprite2D" parent="."]
 position = Vector2(199, 192)
 texture = ExtResource("2_65wj0")
 hframes = 12
@@ -16,3 +64,40 @@ speed = 300
 nearby_distance = 600
 max_haha_points = 5
 i_frames = 0.5
+shoot_pattern = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FunGuy"]
+libraries = {
+"": SubResource("AnimationLibrary_dgbce")
+}
+
+[node name="FunGuyBlue" type="Sprite2D" parent="."]
+position = Vector2(530, 191)
+texture = ExtResource("4_hw7u6")
+hframes = 12
+script = ExtResource("2_8oud8")
+speed = 300
+nearby_distance = 600
+max_haha_points = 5
+i_frames = 0.5
+move_pattern = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="FunGuyBlue"]
+libraries = {
+"": SubResource("AnimationLibrary_dgbce")
+}
+
+[node name="Boss" type="Sprite2D" parent="."]
+position = Vector2(1010, 167)
+texture = ExtResource("4_evdsa")
+script = ExtResource("2_8oud8")
+speed = 300
+nearby_distance = 600
+max_haha_points = 100
+i_frames = 0.5
+move_pattern = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Boss"]
+libraries = {
+"": SubResource("AnimationLibrary_dcljn")
+}
