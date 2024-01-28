@@ -101,21 +101,29 @@ func Lock(_body, friendLock):
 
 func SpawnEnemies():
 	var tiles = get_used_cells(0)
-	var odds = 1
+	var odds := 1
 	var enemyTiles = []
-	var removedTiles = 0
+	var spawnedEnemies := 0
 	
 	for tile in tiles:
 		if get_cell_tile_data(0, tile).get_custom_data("EnemySpawn") == true:
 			enemyTiles.push_back(tile)
 	
-	while rng.randi_range(1, odds) == 1:
+	while rng.randi_range(1, odds) == 1 && spawnedEnemies < 4:
 		var enemyData = EnemyDatabase.get_random_enemy_data()
-		var enemy = enemyScene.instantiate()
-		enemy.load_from_data(enemyData)
-		if enemy == null:
-			odds += 1
+		
+		if enemyData.name == "Boss":
 			continue
+		
+		#print(enemyData.name)
+		var enemy = enemyScene.instantiate() as Enemy
+		enemy.enemy_name = enemyData.name
+		enemy.load_from_data(enemyData)
+		spawnedEnemies += 1
+		
+		#if enemy == null:
+			#odds += 1
+			#continue
 		
 		enemies.push_back(enemy)
 		call_deferred("add_child", enemy)
@@ -123,7 +131,7 @@ func SpawnEnemies():
 		var tile = enemyTiles.pick_random()
 		enemy.position = map_to_local(tile)
 		enemyTiles.remove_at(enemyTiles.find(tile))
-		removedTiles += 1
+
 		odds += 1
 	
 	pass
