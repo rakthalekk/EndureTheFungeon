@@ -1,3 +1,4 @@
+class_name Explosion2
 extends AnimationPlayer
 
 @export var anim_time: float
