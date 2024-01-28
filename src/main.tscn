@@ -6,3 +6,5 @@
 
 [node name="Player" parent="." instance=ExtResource("1_tynu3")]
 position = Vector2(449, 258)
+max_haha_points = 0
+i_frames = 0.0
