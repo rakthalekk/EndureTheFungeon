@@ -12,6 +12,7 @@ script = ExtResource("2_dyf4u")
 text_name = "Haha"
 projectile_name = "Haha"
 num_bullets = 1
+is_automatic = true
 fire_delay = 0.5
 infinite_ammo = true
 

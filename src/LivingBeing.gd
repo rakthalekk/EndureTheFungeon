@@ -6,9 +6,13 @@ var current_haha_points: int
 @export var i_frames: float
 var i_timer: float
 
+var sprite: Sprite2D
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	current_haha_points = max_haha_points
 	pass # Replace with function body.
 
 
@@ -18,12 +22,19 @@ func _process(delta):
 		i_timer -= delta;
 
 func _take_damage(damage: int):
+	
 	if(i_timer > 0):
+		#print("i frames active")
 		return;
+	#print("took ",damage," damage")
 	current_haha_points -= damage;
 	i_timer = i_frames
+	#print("setting up i frames: ", i_timer, " ", i_frames)
 	if(current_haha_points < 0):
 		_no_more_laughing();
+	var anim = get_node("EffectsAnimation") as AnimationPlayer
+	if(anim):
+		anim.play("hurt")
 
 func _heal(healing: int, ignore_max: bool = false):
 	print("healed by ", healing)
@@ -42,4 +53,5 @@ func _decrease_health_max(max_haha_hit: int, damage: bool = false):
 		current_haha_points = max_haha_points
 
 func _no_more_laughing():
+	queue_free()
 	pass

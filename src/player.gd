@@ -3,12 +3,13 @@ extends LivingBeing
 
 const MOUSE_RETICLE = preload("res://src/bullet_reticle.tscn")
 
-const LEFT_SPRITE = preload("res://Assets/Character/Player/Main_Character_Walk_Cycle_Leftt.png")
-const RIGHT_SPRITE = preload("res://Assets/Character/Player/Main_Character_Walk_Cycle_Right.png")
-
 var direction = Vector2.ZERO
 
-var heading = Vector2.ZERO;
+var heading = Vector2.ZERO
+
+var facing = "left"
+
+var dodging = false
 
 var jokes: Array[Joke]
 var joke_names: Array[String]
@@ -22,37 +23,64 @@ func _ready():
 	joke_names.append(jokes[0].text_name)
 	jokes[0]._pick_up(self)
 	current_joke = 0;
-
+	sprite = get_node("Sprite2D")
+	print("hp: " , max_haha_points , ", i: " , i_frames)
 
 func _process(delta):
 	var mousePos = get_global_mouse_position();
 	heading = mousePos - global_position;
 	jokes[current_joke]._set_heading(heading, global_position)
 	if(i_timer > 0):
+		print("i frames: ", i_timer)
 		i_timer -= delta;
 	
 	if direction.x > 0:
-		$Sprite2D.texture = RIGHT_SPRITE
-		$AnimationPlayer.play("walk")
+		facing = "right"
 	elif direction.x < 0:
-		$Sprite2D.texture = LEFT_SPRITE
-		$AnimationPlayer.play("walk")
-	elif direction.y != 0:
-		$AnimationPlayer.play("walk")
-	else:
-		$AnimationPlayer.play("idle")
+		facing = "left"
+	
+	var current_anim = $AnimationPlayer.current_animation
+	if !dodging:
+		if (current_anim == "throw_left" || current_anim == "throw_right") && $AnimationPlayer.is_playing():
+			return
+		
+		if jokes[current_joke].firing:
+			$AnimationPlayer.play("throw_" + facing)
+		
+		elif direction.length() > 0:
+			$AnimationPlayer.play("walk_" + facing)
+		else:
+			$AnimationPlayer.play("idle_" + facing)
 
 
 func _physics_process(delta):
-	direction = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down")).normalized()
+	if !dodging:
+		direction = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down")).normalized()
+		
+		if Input.is_action_just_pressed("dodge"):
+			dodging = true
+			$AnimationPlayer.play("dodge")
+		
+		if(Input.is_action_just_pressed("shoot")):
+			jokes[current_joke]._start_telling_joke()
+
+		if(Input.is_action_just_released("shoot")):
+			jokes[current_joke]._stop_telling_joke()
+
+		if(Input.is_action_just_pressed("next_weapon")):
+			_next_joke()
+
+		if(Input.is_action_just_pressed("prev_weapon")):
+			_prev_joke()
+	
 	velocity = direction * SPEED
 	
 	if(Input.is_action_just_pressed("shoot")):
 		jokes[current_joke]._start_telling_joke()
-		print("shooting")
+		#print("shooting")
 	if(Input.is_action_just_released("shoot")):
 		jokes[current_joke]._stop_telling_joke()
-		print("no longer shooting")
+		#print("no longer shooting")
 	if(Input.is_action_just_pressed("next_weapon")):
 		_next_joke()
 		print("next weapon")
@@ -71,8 +99,12 @@ func _physics_process(delta):
 			_handle_pickup(collider as Pickup)
 
 
+func end_dodge():
+	dodging = false
+
+
 func _no_more_laughing():
-	#call game over
+	print("player is sad")
 	pass
 
 
@@ -120,3 +152,8 @@ func _handle_pickup(pickup: Pickup):
 	else:
 		return
 	pickup._consume()
+	
+
+
+func _on_dodge_cooldown_timeout():
+	pass # Replace with function body.

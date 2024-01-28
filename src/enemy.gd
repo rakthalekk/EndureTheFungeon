@@ -20,6 +20,7 @@ var fire_direction: Vector2
 
 
 func _ready():
+	super()
 	player = get_tree().get_first_node_in_group("player")
 	data = EnemyDatabase.get_enemy_data(enemy_name)
 	
