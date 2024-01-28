@@ -28,6 +28,16 @@ damage = 1
 despawn_time = 3.0
 bullet_radius = 0.3
 
+[node name="Shotgun" type="Sprite2D" parent="."]
+position = Vector2(119, 57)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3k8sg")
+script = ExtResource("2_be0wl")
+speed = 800.0
+damage = 1
+despawn_time = 1.0
+bullet_radius = 0.3
+
 [node name="BossTriple" type="Sprite2D" parent="."]
 position = Vector2(179, 185)
 scale = Vector2(0.2, 0.2)
@@ -190,5 +200,31 @@ damage = 1
 despawn_time = 10.0
 bullet_radius = 0.5
 move_type = 4
+sine_amplitude = 300.0
+sine_frequency = 50.0
+
+[node name="Accelerator" type="Sprite2D" parent="."]
+position = Vector2(98, 130)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3k8sg")
+script = ExtResource("2_be0wl")
+speed = 50.0
+damage = 1
+despawn_time = 10.0
+acceleration = 3.0
+bullet_radius = 0.3
+move_type = 2
+
+[node name="Charged" type="Sprite2D" parent="."]
+position = Vector2(429, 129)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3k8sg")
+script = ExtResource("2_be0wl")
+speed = 2200.0
+damage = 3
+despawn_time = 10.0
+bullet_radius = 0.85
+max_bounces = 5
+on_wall_hit = 1
 sine_amplitude = 300.0
 sine_frequency = 50.0
