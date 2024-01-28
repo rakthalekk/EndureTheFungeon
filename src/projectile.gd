@@ -4,7 +4,7 @@ extends CharacterBody2D
 var data: ProjectileData
 
 var BULLET = preload("res://src/projectile.tscn")
-var EXPLOSION = preload("res://src/explosion2.tscn")
+var EXPLOSION = preload("res://src/explosions.tscn")
 var SOUND = preload("res://src/sound.tscn")
 
 var sound: AudioStream
