@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dlpumv8mumxxl"
+path="res://.godot/imported/ligma plant bomb.mp3-44c282bb7e75ba3e16b4fe7395a8c98a.mp3str"
+
+[deps]
+
+source_file="res://Assets/Audio/player attack/ligma plant bomb.mp3"
+dest_files=["res://.godot/imported/ligma plant bomb.mp3-44c282bb7e75ba3e16b4fe7395a8c98a.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
