@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://ukuetwo4vkgg"
+path="res://.godot/imported/BE NOT AMUSED.ogg-ea24774c7a54a1e2104c360572374e5a.oggvorbisstr"
+
+[deps]
+
+source_file="res://Assets/Audio/trombone/BE NOT AMUSED.ogg"
+dest_files=["res://.godot/imported/BE NOT AMUSED.ogg-ea24774c7a54a1e2104c360572374e5a.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

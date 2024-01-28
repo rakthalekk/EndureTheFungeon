@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="2_3k8sg"]
 [ext_resource type="Script" path="res://src/projectile_data.gd" id="2_be0wl"]
 [ext_resource type="Texture2D" uid="uid://bvsakwrt3k15" path="res://Assets/Projectiles/redBALL4ExportFINAL.png" id="2_t85ss"]
-[ext_resource type="Texture2D" uid="uid://b2kcpmi2ynwmu" path="res://Assets/Projectiles/HAHAOUTLINE3ExportFINAL.png" id="4_etiv2"]
+[ext_resource type="Texture2D" uid="uid://cxkqkkabn2n2u" path="res://Assets/Projectiles/HAHA5FINAL.png" id="4_xkt6n"]
 [ext_resource type="AudioStream" uid="uid://bkw3v2opxi68o" path="res://Assets/Audio/player attack/haha 1.mp3" id="5_gmr1t"]
 [ext_resource type="Texture2D" uid="uid://dxxtxt2en4f24" path="res://Assets/Projectiles/SUSExport3FINAL.png" id="5_rihhq"]
 [ext_resource type="Texture2D" uid="uid://dhig63ikhnyyb" path="res://Assets/Projectiles/Knock2ExportFINAL.png" id="5_ylqrb"]
@@ -22,7 +22,6 @@
 [ext_resource type="AudioStream" uid="uid://bnhk5ux1dabvb" path="res://Assets/Audio/boss sfx/single shot.wav" id="15_ki27y"]
 [ext_resource type="AudioStream" uid="uid://cnm0uten876pp" path="res://Assets/Audio/boss sfx/bomb shot.wav" id="16_ym3gd"]
 [ext_resource type="AudioStream" uid="uid://ptfcn6mfav3n" path="res://Assets/Audio/boss sfx/bomb explosion.wav" id="17_kndn7"]
-[ext_resource type="Texture2D" uid="uid://cll3s7pccryl1" path="res://Assets/Projectiles/Sanic3ExportFINAL.png" id="12_gk804"]
 
 [node name="ProjectileDatabase" type="Node2D"]
 script = ExtResource("1_2ityc")
@@ -42,7 +41,7 @@ bullet_radius = 0.3
 [node name="Haha" type="Sprite2D" parent="."]
 position = Vector2(219, 127)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("4_etiv2")
+texture = ExtResource("4_xkt6n")
 script = ExtResource("2_be0wl")
 speed = 900.0
 damage = 1
@@ -56,7 +55,7 @@ sounds = Array[AudioStream]([ExtResource("5_gmr1t"), ExtResource("6_pf5nj"), Ext
 [node name="Shotgun" type="Sprite2D" parent="."]
 position = Vector2(119, 57)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("5_hrvav")
+texture = ExtResource("5_ylqrb")
 script = ExtResource("2_be0wl")
 speed = 1100.0
 damage = 1
@@ -180,7 +179,7 @@ texture = ExtResource("5_rihhq")
 hframes = 4
 script = ExtResource("2_be0wl")
 speed = 400.0
-damage = 3
+damage = 2
 despawn_time = 7.0
 bullet_radius = 1.3
 align_to_heading = true
@@ -193,6 +192,7 @@ scale = Vector2(0.2, 0.2)
 texture = ExtResource("9_atl7i")
 script = ExtResource("2_be0wl")
 speed = 600.0
+damage = 4
 despawn_time = 6.0
 bullet_radius = 1.2
 on_timer_end = 3
@@ -226,7 +226,7 @@ bullet_radius = 0.5
 move_type = 3
 sine_frequency = 100.0
 
-[node name="BEE" type="Sprite2D" parent="."]
+[node name="LateralSine" type="Sprite2D" parent="."]
 position = Vector2(422, 63)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_3k8sg")
@@ -239,17 +239,16 @@ move_type = 4
 sine_amplitude = 300.0
 sine_frequency = 50.0
 
-[node name="Sanic" type="Sprite2D" parent="."]
+[node name="Accelerator" type="Sprite2D" parent="."]
 position = Vector2(98, 130)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("12_gk804")
+texture = ExtResource("2_3k8sg")
 script = ExtResource("2_be0wl")
 speed = 50.0
 damage = 1
 despawn_time = 10.0
 acceleration = 3.0
 bullet_radius = 0.3
-align_to_heading = true
 move_type = 2
 
 [node name="YourMom" type="Sprite2D" parent="."]
