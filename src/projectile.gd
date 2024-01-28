@@ -44,6 +44,9 @@ func _setup_bullet(bullet_name: String, newHeading: Vector2):
 	piercing_count = data.piercing_max
 	speed = data.speed
 	heading = newHeading
+	sprite.texture = data.texture
+	sprite.hframes = data.hframes
+	sprite.frame = 0
 	hitbox.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	sprite.scale = Vector2(data.bullet_radius,data.bullet_radius)
 	#print("setup " , bullet_name , " with lifespan ", lifespan)
