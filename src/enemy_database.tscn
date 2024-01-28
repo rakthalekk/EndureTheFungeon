@@ -1,13 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://blke40aohuyab"]
+[gd_scene load_steps=18 format=3 uid="uid://blke40aohuyab"]
 
 [ext_resource type="Script" path="res://src/enemy_database.gd" id="1_p5nma"]
 [ext_resource type="Script" path="res://src/enemy_data.gd" id="2_8oud8"]
 [ext_resource type="Texture2D" uid="uid://dll7ebg306ktc" path="res://Assets/Character/Enemies/FunGuyAAAAExport5FINAL.png" id="2_65wj0"]
-[ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="4_evdsa"]
 [ext_resource type="Texture2D" uid="uid://c5dnhokagw4dt" path="res://Assets/Character/Enemies/FunGuyBLEU3ExportFINAL.png" id="4_hw7u6"]
 [ext_resource type="Texture2D" uid="uid://ckvdrid86i743" path="res://Assets/Character/Enemies/SadClownExport10FINAL.png" id="5_v0vqx"]
 [ext_resource type="Texture2D" uid="uid://6d7uxum43pff" path="res://Assets/Character/Enemies/PinkClown4ExportFINAL.png" id="6_n8sb5"]
 [ext_resource type="Texture2D" uid="uid://bphojlrxb5gjb" path="res://Assets/Character/Enemies/GreyClown4ExportFINAL.png" id="7_acoei"]
+[ext_resource type="Texture2D" uid="uid://dpvv62fimh5lx" path="res://Assets/Character/Enemies/Final_Boss_Idle_Sheet.png" id="8_nxeu5"]
 
 [sub_resource type="Animation" id="Animation_wasfc"]
 length = 0.001
@@ -47,6 +47,21 @@ _data = {
 "active": SubResource("Animation_8s0qt")
 }
 
+[sub_resource type="Animation" id="Animation_1txkl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_p7quo"]
 resource_name = "active"
 length = 0.6
@@ -64,7 +79,30 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="Animation" id="Animation_1txkl"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6v1gt"]
+_data = {
+"RESET": SubResource("Animation_1txkl"),
+"active": SubResource("Animation_p7quo")
+}
+
+[sub_resource type="Animation" id="Animation_3f6c7"]
+resource_name = "active"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_j2q5j"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -79,17 +117,9 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6v1gt"]
-_data = {
-"RESET": SubResource("Animation_1txkl"),
-"active": SubResource("Animation_p7quo")
-}
-
-[sub_resource type="Animation" id="Animation_3f6c7"]
-resource_name = "active"
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dcljn"]
 _data = {
+"RESET": SubResource("Animation_j2q5j"),
 "active": SubResource("Animation_3f6c7")
 }
 
@@ -181,7 +211,8 @@ libraries = {
 
 [node name="Boss" type="Sprite2D" parent="."]
 position = Vector2(1280, 595)
-texture = ExtResource("4_evdsa")
+texture = ExtResource("8_nxeu5")
+hframes = 8
 script = ExtResource("2_8oud8")
 speed = 300
 nearby_distance = 600

@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dyyk4ksg0wtxo"]
+[gd_scene load_steps=9 format=3 uid="uid://dyyk4ksg0wtxo"]
 
 [ext_resource type="Script" path="res://src/enemy.gd" id="1_ph1ng"]
 [ext_resource type="Texture2D" uid="uid://dll7ebg306ktc" path="res://Assets/Character/Enemies/FunGuyAAAAExport5FINAL.png" id="2_dso32"]
+[ext_resource type="AudioStream" uid="uid://bwy55fsmtnq6o" path="res://Assets/Audio/anything take damage.mp3" id="3_djhpi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0swf5"]
 size = Vector2(129, 183)
@@ -84,6 +85,9 @@ one_shot = true
 libraries = {
 "": SubResource("AnimationLibrary_e1k5q")
 }
+
+[node name="HurtSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_djhpi")
 
 [connection signal="body_entered" from="Hitbox" to="." method="_on_hitbox_body_entered"]
 [connection signal="timeout" from="ShootTimer" to="." method="_on_timer_timeout"]
