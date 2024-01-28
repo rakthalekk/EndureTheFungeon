@@ -31,6 +31,8 @@ func _ready():
 	current_joke = 0;
 	sprite = get_node("Sprite2D")
 	print("hp: " , max_haha_points , ", i: " , i_frames, " jokes: " , jokes.size())
+	
+	Signals.ChangedWeapon.emit(self)
 
 func _process(delta):
 	#super(delta)
@@ -126,6 +128,8 @@ func _learn_joke(new_joke: Joke):
 		jokes.append(new_joke)
 		new_joke._pick_up(self)
 		print("learned new joke: ", new_joke.text_name)
+	
+	Signals.ChangedWeapon.emit(self)
 
 
 func _next_joke():
@@ -140,6 +144,8 @@ func _next_joke():
 	#change visual displays to match new joke
 	if(Input.is_action_pressed("shoot")):
 		jokes[current_joke]._start_telling_joke()
+	
+	Signals.ChangedWeapon.emit(self)
 
 
 func _prev_joke():
@@ -151,6 +157,8 @@ func _prev_joke():
 	#change visual displays to match new joke
 	if(Input.is_action_pressed("shoot")):
 		jokes[current_joke]._start_telling_joke()
+	
+	Signals.ChangedWeapon.emit(self)
 
 
 func _handle_pickup(pickup: Pickup):
@@ -180,3 +188,16 @@ func _win_game():
 
 func _on_dodge_cooldown_timeout():
 	can_dodge = true
+
+func _get_current_joke():
+	return jokes[current_joke]
+	
+func _get_previous_joke():
+	var idx = current_joke - 1 if current_joke > 0 else jokes.size() - 1
+	
+	return jokes[idx]
+	
+func _get_next_joke():
+	var idx = current_joke + 1 if current_joke < jokes.size() - 1 else 0
+	
+	return jokes[idx]
