@@ -11,3 +11,5 @@ script = ExtResource("1_p5nma")
 position = Vector2(129, 96)
 texture = ExtResource("2_pql0y")
 script = ExtResource("2_8oud8")
+speed = 300
+nearby_distance = 600
