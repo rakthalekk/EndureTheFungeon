@@ -5,8 +5,8 @@ var data: ProjectileData
 
 @export var projectile_name: String
 
-@export var hitbox: Area2D
-@export var sprite: Sprite2D
+var hitbox: Area2D
+var sprite: Sprite2D
 
 var speed: int
 
@@ -15,15 +15,18 @@ var lifespan: float
 var piercing_count: int
 
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	hitbox = get_node("Hitbox")
+	sprite = get_node("Sprite2D")
+	
 	if(hitbox):
 		hitbox.body_entered.connect(_projectile_hit)
 	else:
 		print("NO HITBOX ASSIGNED. PLEASE FIX")
 
 func _setup_bullet(bullet_name: String, newHeading: Vector2):
+	await ready
 	data = ProjectileDatabase.get_projectile_data(bullet_name)
 	lifespan = data.despawn_time
 	piercing_count = data.piercing_max
