@@ -161,6 +161,7 @@ func _handle_pickup(pickup: Pickup):
 	elif(pickup.pickup_type == pickup.PickupType.JOKE):
 		var joke_id = joke_names.find(pickup.joke_name);
 		if(joke_id == -1):
+			print("learning ", pickup.joke_name)
 			_learn_joke(JokeDatabase._get_joke(pickup.joke_name))
 			print("trying to learn joke. now at ", jokes.size())
 		else:

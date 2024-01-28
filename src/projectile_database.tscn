@@ -1,11 +1,16 @@
-[gd_scene load_steps=7 format=3 uid="uid://cun32e1vucc5a"]
+[gd_scene load_steps=12 format=3 uid="uid://cun32e1vucc5a"]
 
 [ext_resource type="Script" path="res://src/projectile_database.gd" id="1_2ityc"]
 [ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="2_3k8sg"]
 [ext_resource type="Script" path="res://src/projectile_data.gd" id="2_be0wl"]
+[ext_resource type="Texture2D" uid="uid://bvsakwrt3k15" path="res://Assets/Projectiles/redBALL4ExportFINAL.png" id="2_t85ss"]
 [ext_resource type="Texture2D" uid="uid://cxkqkkabn2n2u" path="res://Assets/Projectiles/HAHA5FINAL.png" id="4_xkt6n"]
 [ext_resource type="Texture2D" uid="uid://dxxtxt2en4f24" path="res://Assets/Projectiles/SUSExport3FINAL.png" id="5_rihhq"]
+[ext_resource type="Texture2D" uid="uid://c2ws1hwbh17o" path="res://Assets/Projectiles/Knock2ExportFINAL.png" id="5_ylqrb"]
+[ext_resource type="Texture2D" uid="uid://kl2k80ks17ha" path="res://Assets/Projectiles/Tear3ExportFINAL.png" id="6_124t7"]
 [ext_resource type="Texture2D" uid="uid://bp11oh1efbvh8" path="res://Assets/Projectiles/ballsplosion.png" id="6_bvlgl"]
+[ext_resource type="Texture2D" uid="uid://dp5wvfqe8dqwc" path="res://Assets/Projectiles/SmallTear3ExportFINAL.png" id="7_ma45g"]
+[ext_resource type="Texture2D" uid="uid://dojljya8psam7" path="res://Assets/Projectiles/Ligma3ExportFINAL.png" id="9_atl7i"]
 
 [node name="ProjectileDatabase" type="Node2D"]
 script = ExtResource("1_2ityc")
@@ -13,7 +18,8 @@ script = ExtResource("1_2ityc")
 [node name="Basic" type="Sprite2D" parent="."]
 position = Vector2(62, 57)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("2_t85ss")
+hframes = 4
 script = ExtResource("2_be0wl")
 speed = 600.0
 damage = 1
@@ -37,17 +43,18 @@ sine_frequency = 200.0
 [node name="Shotgun" type="Sprite2D" parent="."]
 position = Vector2(119, 57)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("5_ylqrb")
 script = ExtResource("2_be0wl")
-speed = 800.0
+speed = 1100.0
 damage = 1
-despawn_time = 1.0
+despawn_time = 0.6
 bullet_radius = 0.3
+align_to_heading = true
 
 [node name="BossTriple" type="Sprite2D" parent="."]
 position = Vector2(179, 185)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("6_124t7")
 script = ExtResource("2_be0wl")
 speed = 1000.0
 damage = 1
@@ -57,7 +64,7 @@ bullet_radius = 0.6
 [node name="BossBurst" type="Sprite2D" parent="."]
 position = Vector2(214, 185)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("6_124t7")
 script = ExtResource("2_be0wl")
 speed = 700.0
 damage = 1
@@ -67,7 +74,7 @@ bullet_radius = 0.6
 [node name="BossSweep" type="Sprite2D" parent="."]
 position = Vector2(250, 185)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("7_ma45g")
 script = ExtResource("2_be0wl")
 speed = 700.0
 damage = 1
@@ -79,7 +86,7 @@ move_type = 2
 [node name="BossWavy" type="Sprite2D" parent="."]
 position = Vector2(287, 185)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("6_124t7")
 script = ExtResource("2_be0wl")
 speed = 600.0
 damage = 1
@@ -93,7 +100,7 @@ sine_frequency = 50.0
 [node name="BossWiggly" type="Sprite2D" parent="."]
 position = Vector2(320, 186)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("7_ma45g")
 script = ExtResource("2_be0wl")
 speed = 1000.0
 damage = 1
@@ -108,7 +115,7 @@ sine_frequency = 100.0
 [node name="BossBouncy" type="Sprite2D" parent="."]
 position = Vector2(352, 186)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("7_ma45g")
 script = ExtResource("2_be0wl")
 speed = 800.0
 damage = 1
@@ -120,7 +127,7 @@ on_wall_hit = 1
 [node name="BossSplit" type="Sprite2D" parent="."]
 position = Vector2(210, 264)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("6_124t7")
 script = ExtResource("2_be0wl")
 speed = 1000.0
 damage = 1
@@ -138,7 +145,7 @@ split_angle = 360.0
 [node name="BossSplit2" type="Sprite2D" parent="."]
 position = Vector2(236, 265)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("7_ma45g")
 script = ExtResource("2_be0wl")
 speed = 700.0
 damage = 1
@@ -159,10 +166,10 @@ align_to_heading = true
 piercing_max = 10
 on_enemy_hit = 4
 
-[node name="Trap" type="Sprite2D" parent="."]
+[node name="Ligma" type="Sprite2D" parent="."]
 position = Vector2(221, 58)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("9_atl7i")
 script = ExtResource("2_be0wl")
 speed = 600.0
 damage = 4
@@ -224,7 +231,7 @@ acceleration = 3.0
 bullet_radius = 0.3
 move_type = 2
 
-[node name="Charged" type="Sprite2D" parent="."]
+[node name="YourMom" type="Sprite2D" parent="."]
 position = Vector2(429, 129)
 scale = Vector2(0.2, 0.2)
 texture = ExtResource("2_3k8sg")
