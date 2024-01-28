@@ -2,8 +2,7 @@ class_name BossClown
 extends Enemy
 
 
-func _process(delta):
-	pass
+
 
 
 func single():
@@ -106,7 +105,7 @@ func bouncy():
 		make_bullet("BossBouncy")
 		await get_tree().create_timer(.15).timeout
 	
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(4).timeout
 
 
 func get_random_attack():

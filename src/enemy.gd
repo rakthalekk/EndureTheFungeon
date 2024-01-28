@@ -2,14 +2,9 @@ class_name Enemy
 extends LivingBeing
 
 
-enum MoveType {APPROACH, FLEE, STRAFE, CRAWL, IDLE}
-enum ShootType {DIRECT, SPIRAL, SPREAD, BOSS}
-
 const BULLET = preload("res://src/enemy_bullet.tscn")
 
 @export var enemy_name := "Enemy"
-@export var move_pattern: MoveType
-@export var shoot_pattern: ShootType
 
 var data: EnemyData
 
@@ -22,12 +17,27 @@ var fire_direction: Vector2
 func _ready():
 	super()
 	player = get_tree().get_first_node_in_group("player")
-	data = EnemyDatabase.get_enemy_data(enemy_name)
+	load_from_data(EnemyDatabase.get_enemy_data(enemy_name))
 	
 	assign_movement_type()
 
 
+func _process(delta):
+	print("why the fuck is process not being called")
+
+
+func load_from_data(enemy_data: EnemyData):
+	data = enemy_data
+	max_haha_points = enemy_data.max_haha_points
+	i_frames = enemy_data.i_frames
+	$Sprite2D.texture = enemy_data.texture
+	$Sprite2D.hframes = enemy_data.hframes
+
+
 func _physics_process(delta):
+	if i_timer > 0:
+		i_timer -= delta
+	
 	movement()
 	
 	velocity = direction * data.speed
@@ -36,46 +46,48 @@ func _physics_process(delta):
 
 
 func assign_movement_type():
-	if move_pattern == MoveType.STRAFE:
+	if data.move_pattern == EnemyData.MoveType.STRAFE:
 		$WanderTimer.start(randf_range(1, 2))
 		direction = Vector2(1, 0)
-	elif move_pattern == MoveType.CRAWL:
+	elif data.move_pattern == EnemyData.MoveType.CRAWL:
 		$WaitTimer.start(1)
 	
-	if shoot_pattern == ShootType.SPIRAL:
+	if data.shoot_pattern == EnemyData.ShootType.SPIRAL:
 		fire_direction = Vector2(0, 1)
 		$ShootTimer.start(0.5)
 
 
 func movement():
-	match move_pattern:
-		MoveType.APPROACH:
+	match data.move_pattern:
+		EnemyData.MoveType.APPROACH:
 			if global_position.distance_to(player.global_position) < data.nearby_distance:
 				direction = (player.global_position - global_position).normalized()
 			else:
 				direction = Vector2.ZERO
-		MoveType.FLEE:
+		EnemyData.MoveType.FLEE:
 			if global_position.distance_to(player.global_position) < data.nearby_distance:
 				direction = (global_position - player.global_position).normalized()
 			else:
 				direction = Vector2.ZERO
-		MoveType.STRAFE:
+		EnemyData.MoveType.STRAFE:
 			pass
-		MoveType.CRAWL:
+		EnemyData.MoveType.CRAWL:
 			pass
+		EnemyData.MoveType.IDLE:
+			direction = Vector2.ZERO
 
 
 func shoot():
-	match shoot_pattern:
-		ShootType.DIRECT:
+	match data.shoot_pattern:
+		EnemyData.ShootType.DIRECT:
 			fire_direction = (player.global_position - global_position).normalized()
 			$ShootTimer.start(0.7)
 			create_bullet()
-		ShootType.SPIRAL:
+		EnemyData.ShootType.SPIRAL:
 			fire_direction = fire_direction.rotated(deg_to_rad(30))
 			$ShootTimer.start(0.3)
 			create_bullet()
-		ShootType.SPREAD:
+		EnemyData.ShootType.SPREAD:
 			fire_direction = (player.global_position - global_position).normalized()
 			create_bullet()
 			fire_direction = fire_direction.rotated(deg_to_rad(20))
@@ -83,6 +95,8 @@ func shoot():
 			fire_direction = fire_direction.rotated(deg_to_rad(-40))
 			create_bullet()
 			$ShootTimer.start(2)
+		EnemyData.ShootType.NONE:
+			pass
 
 
 func create_bullet():
@@ -102,10 +116,10 @@ func _on_timer_timeout():
 
 
 func _on_wander_timer_timeout():
-	if move_pattern == MoveType.STRAFE:
+	if data.move_pattern == EnemyData.MoveType.STRAFE:
 		direction = -direction
 		$WanderTimer.start(randf_range(1, 2))
-	elif move_pattern == MoveType.CRAWL:
+	elif data.move_pattern == EnemyData.MoveType.CRAWL:
 		direction = Vector2.ZERO
 		$WaitTimer.start(randf_range(1, 2))
 
