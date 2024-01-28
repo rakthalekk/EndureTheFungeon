@@ -3,7 +3,6 @@ extends LivingBeing
 
 const MOUSE_RETICLE = preload("res://src/bullet_reticle.tscn")
 const GAME_OVER = preload("res://src/game_over.tscn")
-const YOU_WIN = preload("res://src/you_win.tscn")
 
 var direction = Vector2.ZERO
 
@@ -49,6 +48,18 @@ func _process(delta):
 		facing = "right"
 	elif direction.x < 0:
 		facing = "left"
+	var charge = get_node("Charge")
+	if(jokes[current_joke].is_charging):
+		charge.visible = true
+		if(!jokes[current_joke].firing):
+			charge.frame = 0
+		elif(jokes[current_joke].charge_timer < 0):
+			charge.frame = 10
+		else:
+			print((jokes[current_joke].charge_delay - jokes[current_joke].charge_timer) / jokes[current_joke].charge_delay)
+			charge.frame = (int)(10 * (jokes[current_joke].charge_delay - jokes[current_joke].charge_timer) / jokes[current_joke].charge_delay)
+	else:
+		charge.visible = false
 	
 	var current_anim = $AnimationPlayer.current_animation
 	if !dodging:
@@ -119,7 +130,7 @@ func _no_more_laughing():
 	
 	await get_tree().create_timer(2).timeout
 	
-	get_tree().change_scene_to_file("res://src/enemy_scene.tscn")
+	get_tree().change_scene_to_file("res://src/game_over.tscn")
 
 
 func _learn_joke(new_joke: Joke):
@@ -178,12 +189,6 @@ func _handle_pickup(pickup: Pickup):
 	else:
 		return
 	pickup._consume()
-
-
-func _win_game():
-	can_move = false
-	var you_win = YOU_WIN.instantiate()
-	get_parent().add_child(you_win)
 
 
 func _on_dodge_cooldown_timeout():

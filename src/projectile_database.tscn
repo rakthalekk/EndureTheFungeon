@@ -1,17 +1,30 @@
-[gd_scene load_steps=13 format=3 uid="uid://cun32e1vucc5a"]
+[gd_scene load_steps=23 format=3 uid="uid://cun32e1vucc5a"]
 
 [ext_resource type="Script" path="res://src/projectile_database.gd" id="1_2ityc"]
 [ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="2_3k8sg"]
 [ext_resource type="Script" path="res://src/projectile_data.gd" id="2_be0wl"]
 [ext_resource type="Texture2D" uid="uid://bvsakwrt3k15" path="res://Assets/Projectiles/redBALL4ExportFINAL.png" id="2_t85ss"]
 [ext_resource type="Texture2D" uid="uid://cxkqkkabn2n2u" path="res://Assets/Projectiles/HAHA5FINAL.png" id="4_xkt6n"]
+[ext_resource type="AudioStream" uid="uid://bkw3v2opxi68o" path="res://Assets/Audio/player attack/haha 1.mp3" id="5_gmr1t"]
 [ext_resource type="Texture2D" uid="uid://dxxtxt2en4f24" path="res://Assets/Projectiles/SUSExport3FINAL.png" id="5_rihhq"]
-[ext_resource type="Texture2D" uid="uid://c2ws1hwbh17o" path="res://Assets/Projectiles/Knock2ExportFINAL.png" id="5_ylqrb"]
-[ext_resource type="Texture2D" uid="uid://kl2k80ks17ha" path="res://Assets/Projectiles/Tear3ExportFINAL.png" id="6_124t7"]
+[ext_resource type="Texture2D" uid="uid://dhig63ikhnyyb" path="res://Assets/Projectiles/Knock2ExportFINAL.png" id="5_ylqrb"]
+[ext_resource type="Texture2D" uid="uid://bsahm04nofxby" path="res://Assets/Projectiles/Tear3ExportFINAL.png" id="6_124t7"]
 [ext_resource type="Texture2D" uid="uid://bp11oh1efbvh8" path="res://Assets/Projectiles/ballsplosion.png" id="6_bvlgl"]
+[ext_resource type="AudioStream" uid="uid://c86fyve72s43d" path="res://Assets/Audio/player attack/haha 2.mp3" id="6_pf5nj"]
+[ext_resource type="AudioStream" uid="uid://s2apmd4f2bwm" path="res://Assets/Audio/player attack/haha 3.mp3" id="7_48npf"]
+[ext_resource type="Texture2D" uid="uid://dlsdm2g0ntai6" path="res://Assets/Projectiles/SmallTear3ExportFINAL.png" id="7_ma45g"]
+[ext_resource type="Texture2D" uid="uid://c1uwnfs371u2j" path="res://Assets/Projectiles/Ligma3ExportFINAL.png" id="9_atl7i"]
+[ext_resource type="AudioStream" uid="uid://cfcxdiqhvyh3s" path="res://Assets/Audio/boss sfx/rapid shot.mp3" id="10_lkeud"]
+[ext_resource type="AudioStream" uid="uid://daoxhnol0haph" path="res://Assets/Audio/boss sfx/many at once shot.mp3" id="11_hxcqn"]
 [ext_resource type="Texture2D" uid="uid://dp5wvfqe8dqwc" path="res://Assets/Projectiles/SmallTear3ExportFINAL.png" id="7_ma45g"]
 [ext_resource type="Texture2D" uid="uid://dojljya8psam7" path="res://Assets/Projectiles/Ligma3ExportFINAL.png" id="9_atl7i"]
+[ext_resource type="Texture2D" uid="uid://bq2v6yav00sck" path="res://Assets/Projectiles/BEE3ExportFINAL.png" id="12_3icsl"]
 [ext_resource type="Texture2D" uid="uid://cae7st0gp1oj" path="res://Assets/Projectiles/YOURMOM3ExportFINAL.png" id="12_4w1pc"]
+[ext_resource type="AudioStream" uid="uid://yoomgbtlkvw1" path="res://Assets/Audio/boss sfx/bee singular.mp3" id="13_c65i7"]
+[ext_resource type="AudioStream" uid="uid://bkoqnxycyf6oy" path="res://Assets/Audio/boss sfx/marching shot.wav" id="14_lxsp2"]
+[ext_resource type="AudioStream" uid="uid://bnhk5ux1dabvb" path="res://Assets/Audio/boss sfx/single shot.wav" id="15_ki27y"]
+[ext_resource type="AudioStream" uid="uid://cnm0uten876pp" path="res://Assets/Audio/boss sfx/bomb shot.wav" id="16_ym3gd"]
+[ext_resource type="AudioStream" uid="uid://ptfcn6mfav3n" path="res://Assets/Audio/boss sfx/bomb explosion.wav" id="17_kndn7"]
 
 [node name="ProjectileDatabase" type="Node2D"]
 script = ExtResource("1_2ityc")
@@ -40,6 +53,7 @@ bullet_radius = 0.4
 move_type = 4
 sine_amplitude = 30.0
 sine_frequency = 200.0
+sounds = Array[AudioStream]([ExtResource("5_gmr1t"), ExtResource("6_pf5nj"), ExtResource("7_48npf")])
 
 [node name="Shotgun" type="Sprite2D" parent="."]
 position = Vector2(119, 57)
@@ -61,6 +75,7 @@ speed = 1000.0
 damage = 1
 despawn_time = 3.0
 bullet_radius = 0.6
+sounds = Array[AudioStream]([ExtResource("10_lkeud")])
 
 [node name="BossBurst" type="Sprite2D" parent="."]
 position = Vector2(214, 185)
@@ -71,6 +86,7 @@ speed = 700.0
 damage = 1
 despawn_time = 3.0
 bullet_radius = 0.6
+sounds = Array[AudioStream]([ExtResource("11_hxcqn")])
 
 [node name="BossSweep" type="Sprite2D" parent="."]
 position = Vector2(250, 185)
@@ -83,6 +99,7 @@ despawn_time = 3.0
 acceleration = 1.0
 bullet_radius = 0.6
 move_type = 2
+sounds = Array[AudioStream]([ExtResource("10_lkeud")])
 
 [node name="BossWavy" type="Sprite2D" parent="."]
 position = Vector2(287, 185)
@@ -97,6 +114,7 @@ bullet_radius = 0.6
 move_type = 4
 sine_amplitude = 300.0
 sine_frequency = 50.0
+sounds = Array[AudioStream]([ExtResource("13_c65i7")])
 
 [node name="BossWiggly" type="Sprite2D" parent="."]
 position = Vector2(320, 186)
@@ -112,6 +130,7 @@ move_type = 3
 num_split_projectiles = 3
 split_angle = 100.0
 sine_frequency = 100.0
+sounds = Array[AudioStream]([ExtResource("14_lxsp2")])
 
 [node name="BossBouncy" type="Sprite2D" parent="."]
 position = Vector2(352, 186)
@@ -124,6 +143,7 @@ despawn_time = 4.0
 acceleration = 1.0
 bullet_radius = 0.6
 on_wall_hit = 1
+sounds = Array[AudioStream]([ExtResource("15_ki27y")])
 
 [node name="BossSplit" type="Sprite2D" parent="."]
 position = Vector2(210, 264)
@@ -142,6 +162,7 @@ move_type = 2
 split_projectile = "BossSplit2"
 num_split_projectiles = 10
 split_angle = 360.0
+sounds = Array[AudioStream]([ExtResource("16_ym3gd")])
 
 [node name="BossSplit2" type="Sprite2D" parent="."]
 position = Vector2(236, 265)
@@ -152,6 +173,7 @@ speed = 700.0
 damage = 1
 despawn_time = 3.0
 bullet_radius = 0.6
+sounds = Array[AudioStream]([ExtResource("17_kndn7")])
 
 [node name="Amogus" type="Sprite2D" parent="."]
 position = Vector2(166, 61)
@@ -210,12 +232,13 @@ sine_frequency = 100.0
 [node name="LateralSine" type="Sprite2D" parent="."]
 position = Vector2(422, 63)
 scale = Vector2(0.2, 0.2)
-texture = ExtResource("2_3k8sg")
+texture = ExtResource("12_3icsl")
 script = ExtResource("2_be0wl")
 speed = 600.0
 damage = 1
 despawn_time = 10.0
 bullet_radius = 0.5
+align_to_heading = true
 move_type = 4
 sine_amplitude = 300.0
 sine_frequency = 50.0

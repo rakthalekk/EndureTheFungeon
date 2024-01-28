@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://djvpa36t4et04"]
+[gd_scene load_steps=4 format=3 uid="uid://djvpa36t4et04"]
 
 [ext_resource type="Script" path="res://MainMenu.gd" id="1_wuoac"]
 [ext_resource type="Texture2D" uid="uid://l11c7kl026c8" path="res://icon.svg" id="2_0uyob"]
+[ext_resource type="Texture2D" uid="uid://d202jm6e11qvu" path="res://Assets/UI/titlescreenFULL.png" id="2_ugumc"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -12,21 +13,30 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wuoac")
 
-[node name="Play" type="Button" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ugumc")
+
+[node name="Play" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 903.0
+offset_top = 724.0
+offset_right = 1039.0
+offset_bottom = 860.0
+texture_normal = ExtResource("2_0uyob")
+
+[node name="Quit" type="TextureButton" parent="."]
 layout_mode = 0
 offset_left = 898.0
-offset_top = 299.0
+offset_top = 896.0
 offset_right = 1034.0
-offset_bottom = 435.0
-icon = ExtResource("2_0uyob")
-
-[node name="Quit" type="Button" parent="."]
-layout_mode = 0
-offset_left = 891.0
-offset_top = 674.0
-offset_right = 1027.0
-offset_bottom = 810.0
-icon = ExtResource("2_0uyob")
+offset_bottom = 1032.0
+texture_normal = ExtResource("2_0uyob")
 
 [connection signal="pressed" from="Play" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="Quit" to="." method="_on_quit_pressed"]

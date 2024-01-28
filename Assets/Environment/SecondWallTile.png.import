@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxnugol8tgc04"
-path="res://.godot/imported/Charge_Sheet.png-46b98a7234b521545070247f669d4925.ctex"
+uid="uid://cxgky80udauo"
+path="res://.godot/imported/SecondWallTile.png-084fe460ab869311fa3f6a266b633130.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Projectiles/Charge_Sheet.png"
-dest_files=["res://.godot/imported/Charge_Sheet.png-46b98a7234b521545070247f669d4925.ctex"]
+source_file="res://Assets/Environment/SecondWallTile.png"
+dest_files=["res://.godot/imported/SecondWallTile.png-084fe460ab869311fa3f6a266b633130.ctex"]
 
 [params]
 
