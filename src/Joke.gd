@@ -5,6 +5,7 @@ const BASE_PROJECTILE = preload("res://src/projectile.tscn")
 
 @export var text_name: String
 @export var projectile_name: String
+@export var num_bullets: int
 @export var is_automatic: bool
 @export var is_charging: bool
 @export var charge_delay: float
@@ -13,6 +14,8 @@ var charge_timer: float
 var delay_timer: float
 @export var infinite_ammo: bool
 @export var max_uses: int
+@export var spread: float
+@export var use_random_spread: bool
 var current_uses: int
 var firing: bool
 var can_fire: bool
@@ -27,6 +30,8 @@ func _ready():
 	current_uses = max_uses
 	charge_timer = charge_delay
 	can_fire = true
+	if(num_bullets < 0):
+		num_bullets = 0
 	pass # Replace with function body.
 
 func _pick_up(player: Player):
@@ -39,11 +44,12 @@ func _process(delta):
 		if(charge_timer < 0 && is_automatic):
 			_tell_joke()
 	if(!can_fire && is_automatic && delay_timer > 0):
-		
+		#print(can_fire, " ", delay_timer)
 		delay_timer -= delta
-		if(delay_timer < 0):
-			delay_timer = fire_delay;
+		if(delay_timer <= 0):
+			#delay_timer = fire_delay;
 			can_fire = true
+			#print("can fire auto again")
 	if(!is_automatic && delay_timer > 0):
 		delay_timer -= delta
 	if(is_automatic && firing && can_fire && (infinite_ammo || current_uses > 0)):
@@ -54,23 +60,31 @@ func _set_heading(heading: Vector2, position: Vector2):
 	current_heading = heading;
 
 func _tell_joke():
-	print("tell joke " + text_name)
+	#print("tell joke " + text_name)
 	if(!can_fire || (!infinite_ammo && current_uses <=0) || delay_timer > 0):
-		print("can't fire: ", can_fire, infinite_ammo, current_uses, delay_timer, fire_delay)
+		#print("can't fire: ", can_fire, infinite_ammo, current_uses, delay_timer, fire_delay)
 		return;
-	
-	var projectile = BASE_PROJECTILE.instantiate() as Projectile
-	projectile._setup_bullet(projectile_name, current_heading)
-	projectile.global_position = owning_player.global_position
-	owning_player.get_parent().add_child(projectile)
-	
+	for i in num_bullets:
+		var projectile = BASE_PROJECTILE.instantiate() as Projectile
+		var proj_heading = current_heading
+		if(spread > 0):
+			if(use_random_spread):
+				proj_heading = current_heading.rotated(deg_to_rad(randf_range(-spread,spread)))
+			else:
+				proj_heading = current_heading.rotated(deg_to_rad(-spread + (((2 * spread)/(num_bullets+1))*(i+1))))
+		
+		
+		projectile._setup_bullet(projectile_name, proj_heading)
+		projectile.global_position = owning_player.global_position
+		owning_player.get_parent().add_child(projectile)
+		
 	if(!infinite_ammo):
 		current_uses -= 1
 	
 	delay_timer = fire_delay
 	
-	if(!is_automatic):
-		can_fire = false
+	#if(!is_automatic):
+	can_fire = false
 		
 	if(is_charging):
 		charge_timer = charge_delay
@@ -86,10 +100,11 @@ func _start_telling_joke():
 		return
 	
 	if(delay_timer <= 0):
-		print("firing with delay timer at " , delay_timer , " of " , fire_delay)
+		#print("firing with delay timer at " , delay_timer , " of " , fire_delay)
 		_tell_joke()
 	else:
-		print("firing under cooldown: " , delay_timer, " of ", fire_delay)
+		#print("firing under cooldown: " , delay_timer, " of ", fire_delay)
+		pass
 
 
 func _stop_telling_joke(unequip: bool = false):
@@ -100,7 +115,11 @@ func _stop_telling_joke(unequip: bool = false):
 			charge_timer = charge_delay
 	
 	if(!is_automatic):
-		can_fire = true
+		can_fire = true;
+	firing = false;
+	pass
 	
-	firing = false
+func _restore_uses(percentage: float):
+	var ammo_restore = (int)(max_uses * percentage)
+	current_uses = min(current_uses + ammo_restore, max_uses)
 

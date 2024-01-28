@@ -53,8 +53,22 @@ func _physics_process(delta):
 	if(Input.is_action_just_released("shoot")):
 		jokes[current_joke]._stop_telling_joke()
 		print("no longer shooting")
+	if(Input.is_action_just_pressed("next_weapon")):
+		_next_joke()
+		print("next weapon")
+	if(Input.is_action_just_pressed("prev_weapon")):
+		_prev_joke()
+		print("prev weapon")
+		
 	
 	move_and_slide()
+	
+	for i in get_slide_collision_count():
+		var collision = get_slide_collision(i)
+		var collider = collision.get_collider()
+		
+		if(collider is Pickup):
+			_handle_pickup(collider as Pickup)
 
 
 func _no_more_laughing():
@@ -67,6 +81,8 @@ func _learn_joke(new_joke: Joke):
 		joke_names.append(new_joke.text_name)
 		jokes.append(new_joke)
 		new_joke._pick_up(self)
+		print("learned new joke: ", new_joke.text_name)
+	
 
 
 func _next_joke():
@@ -86,3 +102,21 @@ func _prev_joke():
 	#change visual displays to match new joke
 	if(Input.is_action_pressed("shoot")):
 		jokes[current_joke]._start_telling_joke()
+		
+func _handle_pickup(pickup: Pickup):
+	if(pickup.used):
+		return
+	pickup._use()
+	if(pickup.pickup_type == pickup.PickupType.HEALTH):
+		_heal(pickup.heal_amount)
+	elif(pickup.pickup_type == pickup.PickupType.JOKE):
+		var joke_id = joke_names.find(pickup.joke_name);
+		if(joke_id == -1):
+			print("trying to learn joke")
+			_learn_joke(JokeDatabase._get_joke(pickup.joke_name))
+		else:
+			print("trying to restore joke uses")
+			jokes[joke_id]._restore_uses(pickup.joke_restore_amount)
+	else:
+		return
+	pickup._consume()

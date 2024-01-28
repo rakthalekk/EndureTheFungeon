@@ -1,11 +1,72 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpuypxw8m07tg"]
+[gd_scene load_steps=4 format=3 uid="uid://bpuypxw8m07tg"]
 
 [ext_resource type="PackedScene" uid="uid://ciovhmka66u24" path="res://src/player.tscn" id="1_f2j53"]
 [ext_resource type="PackedScene" uid="uid://bum3w87g78x1x" path="res://src/bullet_reticle.tscn" id="2_wjr11"]
+[ext_resource type="PackedScene" uid="uid://cniuuaah7lwy7" path="res://src/pickup.tscn" id="3_6kw4w"]
 
 [node name="Node" type="Node"]
 
 [node name="Player" parent="." instance=ExtResource("1_f2j53")]
 position = Vector2(312, 188)
+max_haha_points = 3
+i_frames = 0.5
 
 [node name="BulletReticle" parent="." instance=ExtResource("2_wjr11")]
+
+[node name="Health Pickup" parent="." instance=ExtResource("3_6kw4w")]
+position = Vector2(1128, 658)
+heal_amount = 1
+
+[node name="amogus pickup" parent="." instance=ExtResource("3_6kw4w")]
+position = Vector2(1603, 281)
+pickup_type = 1
+joke_name = "Amogus"
+joke_restore_amount = 1.0
+
+[node name="amogus pickup2" parent="." instance=ExtResource("3_6kw4w")]
+position = Vector2(1824, 103)
+pickup_type = 1
+joke_name = "Amogus"
+joke_restore_amount = 1.0
+
+[node name="trap pickup" parent="." instance=ExtResource("3_6kw4w")]
+position = Vector2(164, 581)
+pickup_type = 1
+joke_name = "Trap"
+joke_restore_amount = 1.0
+
+[node name="DirectSine pickup" parent="." instance=ExtResource("3_6kw4w")]
+position = Vector2(1054, 107)
+pickup_type = 1
+joke_name = "DirectSine"
+joke_restore_amount = 1.0
+
+[node name="LateralSine pickup" parent="." instance=ExtResource("3_6kw4w")]
+position = Vector2(1687, 867)
+pickup_type = 1
+joke_name = "LateralSine"
+joke_restore_amount = 1.0
+
+[node name="Accelerator pickup" parent="." instance=ExtResource("3_6kw4w")]
+position = Vector2(901, 949)
+pickup_type = 1
+joke_name = "Accelerator"
+joke_restore_amount = 1.0
+
+[node name="Charged pickup" parent="." instance=ExtResource("3_6kw4w")]
+position = Vector2(143, 938)
+pickup_type = 1
+joke_name = "Charged"
+joke_restore_amount = 1.0
+
+[node name="FixedShot pickup" parent="." instance=ExtResource("3_6kw4w")]
+position = Vector2(883, 422)
+pickup_type = 1
+joke_name = "FixedShotgun"
+joke_restore_amount = 1.0
+
+[node name="RandShot pickup" parent="." instance=ExtResource("3_6kw4w")]
+position = Vector2(669, 642)
+pickup_type = 1
+joke_name = "RandShotgun"
+joke_restore_amount = 1.0
