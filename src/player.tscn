@@ -8,9 +8,8 @@ size = Vector2(118, 116)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_omtbe")
-max_haha_points = null
-i_frames = null
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 2)

@@ -102,3 +102,7 @@ func _stop_telling_joke(unequip:bool = false):
 		can_fire = true;
 	firing = false;
 	pass
+	
+func _restore_uses(percentage: float):
+	var ammo_restore = (int)(max_uses * percentage)
+	current_uses = min(current_uses + ammo_restore, max_uses)
