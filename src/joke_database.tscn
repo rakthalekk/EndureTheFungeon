@@ -78,7 +78,7 @@ description = "A possible comeback for almost any insult or joke. Needs time to 
 projectile_name = "YourMom"
 num_bullets = 1
 is_charging = true
-charge_delay = 0.5
+charge_delay = 1.5
 fire_delay = 0.2
 max_uses = 18
 
