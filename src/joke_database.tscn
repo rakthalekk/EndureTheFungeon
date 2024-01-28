@@ -27,3 +27,25 @@ text_name = "Amogus"
 projectile_name = "Amogus"
 fire_delay = 2.0
 max_uses = 5
+
+[node name="Trap" type="Node" parent="."]
+script = ExtResource("2_dyf4u")
+text_name = "Trap"
+projectile_name = "Trap"
+fire_delay = 2.0
+max_uses = 5
+
+[node name="DirectSine" type="Node" parent="."]
+script = ExtResource("2_dyf4u")
+text_name = "DirectSine"
+projectile_name = "DirectSine"
+fire_delay = 1.0
+max_uses = 10
+
+[node name="LateralSine" type="Node" parent="."]
+script = ExtResource("2_dyf4u")
+text_name = "LateralSine"
+projectile_name = "LateralSine"
+is_automatic = true
+fire_delay = 0.3
+max_uses = 30

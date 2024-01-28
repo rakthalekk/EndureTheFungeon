@@ -10,7 +10,7 @@ var BULLET = load("res://src/projectile.tscn")
 var hitbox: Area2D
 var sprite: Sprite2D
 
-var speed: int
+var speed: float
 
 var heading := Vector2.ZERO
 var lifespan: float
@@ -66,9 +66,16 @@ func _physics_process(delta):
 		return
 	if(data.move_type == ProjectileData.MoveType.ACCELERATE):
 		speed = speed * (1 + (data.acceleration * delta))
-		
+	elif(data.move_type == ProjectileData.MoveType.TRAP):
+		speed = lerpf(data.speed, 0.0, min(1, (data.despawn_time - lifespan) / data.trap_move_time))
+	elif(data.move_type == ProjectileData.MoveType.DIRECTSINE):
+		speed = data.speed * (.5 * sin((data.despawn_time - lifespan) * data.sine_frequency / (2 * PI)) + .5)
+	
 	velocity = heading.normalized() * speed
 	
+	if(data.move_type):
+		velocity += velocity.rotated(PI/2).normalized() * data.sine_amplitude * sin((data.despawn_time - lifespan) *data.sine_frequency / (2*PI))
+	print("velocity: ", velocity)
 	move_and_slide()
 	
 	lifespan -= delta
