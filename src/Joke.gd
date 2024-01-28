@@ -4,6 +4,7 @@ extends Node
 const BASE_PROJECTILE = preload("res://src/projectile.tscn")
 
 @export var text_name: String
+@export var description: String
 @export var projectile_name: String
 @export var num_bullets: int
 @export var is_automatic: bool
