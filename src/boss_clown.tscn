@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://ou86lt83rcm8"]
 
 [ext_resource type="Script" path="res://src/boss_clown.gd" id="1_yyhjv"]
-[ext_resource type="Texture2D" uid="uid://dpvv62fimh5lx" path="res://Assets/Character/Enemies/Final_Boss_Idle_Sheet.png" id="2_73sva"]
+[ext_resource type="Texture2D" uid="uid://c45s4rfip0hjj" path="res://Assets/Character/Enemies/Final_Boss_Idle_Sheet.png" id="2_73sva"]
 [ext_resource type="AudioStream" uid="uid://bwy55fsmtnq6o" path="res://Assets/Audio/anything take damage.mp3" id="3_76c48"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n7uty"]
