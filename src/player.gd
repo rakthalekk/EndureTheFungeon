@@ -3,6 +3,7 @@ extends LivingBeing
 
 const MOUSE_RETICLE = preload("res://src/bullet_reticle.tscn")
 const GAME_OVER = preload("res://src/game_over.tscn")
+const YOU_WIN = preload("res://src/you_win.tscn")
 
 var direction = Vector2.ZERO
 
@@ -11,6 +12,8 @@ var heading = Vector2.ZERO
 var facing = "left"
 
 var can_dodge = true
+
+var can_move = false
 
 var jokes: Array[Joke]
 var joke_names: Array[String]
@@ -29,8 +32,8 @@ func _ready():
 	print("hp: " , max_haha_points , ", i: " , i_frames)
 
 func _process(delta):
-	super(delta)
-	if(dead):
+	#super(delta)
+	if(dead || !can_move):
 		return
 	var mousePos = get_global_mouse_position();
 	heading = mousePos - global_position;
@@ -59,7 +62,7 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	if(dead):
+	if(dead || !can_move):
 		return
 	if !dodging:
 		direction = Vector2(Input.get_axis("move_left", "move_right"), Input.get_axis("move_up", "move_down")).normalized()
@@ -113,7 +116,7 @@ func end_dodge():
 
 
 func _no_more_laughing():
-	if(dead):
+	if(dead || !can_move):
 		return
 	dead = true
 	print("player is sad")
@@ -168,6 +171,13 @@ func _handle_pickup(pickup: Pickup):
 	pickup._consume()
 	
 
+func _start_game():
+	can_move = true
+	
+func _win_game():
+	can_move = false
+	var you_win = YOU_WIN.instantiate()
+	get_parent().add_child(you_win)
 
 func _on_dodge_cooldown_timeout():
 	can_dodge = true
