@@ -27,6 +27,7 @@ func _ready():
 func load_from_data(enemy_data: EnemyData):
 	data = enemy_data
 	max_haha_points = enemy_data.max_haha_points
+	current_haha_points = max_haha_points
 	i_frames = enemy_data.i_frames
 	$Sprite2D.texture = enemy_data.texture
 	$Sprite2D.hframes = enemy_data.hframes

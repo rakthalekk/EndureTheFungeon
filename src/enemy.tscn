@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dll7ebg306ktc" path="res://Assets/Character/Enemies/FunGuyAAAAExport5FINAL.png" id="2_dso32"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0swf5"]
-size = Vector2(129, 68)
+size = Vector2(129, 183)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_v1sgm"]
 radius = 48.0937
@@ -49,9 +49,10 @@ _data = {
 [node name="Enemy" type="CharacterBody2D"]
 collision_layer = 4
 script = ExtResource("1_ph1ng")
+enemy_name = "FunGuy"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 60)
+position = Vector2(0.5, 2.5)
 shape = SubResource("RectangleShape2D_0swf5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

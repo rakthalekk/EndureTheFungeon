@@ -105,14 +105,18 @@ func _no_more_laughing():
 	if dead:
 		return
 	
-	$AnimationPlayer.play("dead")
 	dead = true
+
+	$EffectsAnimation.play("RESET")
+	$AnimationPlayer.play("RESET")
+	
+	await get_tree().create_timer(.01).timeout
+	
+	$AnimationPlayer.play("dead")
 	
 	await get_tree().create_timer(2).timeout
 	
-	var game_over = GAME_OVER.instantiate();
-	get_parent().add_child(game_over)
-	pass
+	get_tree().change_scene_to_file("res://src/enemy_scene.tscn")
 
 
 func _learn_joke(new_joke: Joke):
