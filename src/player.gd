@@ -29,7 +29,7 @@ func _ready():
 	jokes[0]._pick_up(self)
 	current_joke = 0;
 	sprite = get_node("Sprite2D")
-	print("hp: " , max_haha_points , ", i: " , i_frames)
+	print("hp: " , max_haha_points , ", i: " , i_frames, " jokes: " , jokes.size())
 
 func _process(delta):
 	#super(delta)
@@ -84,19 +84,6 @@ func _physics_process(delta):
 			_prev_joke()
 	
 	velocity = direction * SPEED
-	
-	if(Input.is_action_just_pressed("shoot")):
-		jokes[current_joke]._start_telling_joke()
-		#print("shooting")
-	if(Input.is_action_just_released("shoot")):
-		jokes[current_joke]._stop_telling_joke()
-		#print("no longer shooting")
-	if(Input.is_action_just_pressed("next_weapon")):
-		_next_joke()
-		print("next weapon")
-	if(Input.is_action_just_pressed("prev_weapon")):
-		_prev_joke()
-		print("prev weapon")
 		
 	
 	move_and_slide()
@@ -135,15 +122,20 @@ func _learn_joke(new_joke: Joke):
 
 
 func _next_joke():
+	print("next joke")
 	jokes[current_joke]._stop_telling_joke(true)
+	print(current_joke)
 	current_joke += 1
+	print(current_joke)
 	if(current_joke >= jokes.size()):
+		#print(current_joke, " higher than ", jokes.size())
 		current_joke = 0;
 	#change visual displays to match new joke
 	if(Input.is_action_pressed("shoot")):
 		jokes[current_joke]._start_telling_joke()
 
 func _prev_joke():
+	print("prev joke")
 	jokes[current_joke]._stop_telling_joke(true)
 	current_joke -= 1
 	if(current_joke < 0):
@@ -161,8 +153,8 @@ func _handle_pickup(pickup: Pickup):
 	elif(pickup.pickup_type == pickup.PickupType.JOKE):
 		var joke_id = joke_names.find(pickup.joke_name);
 		if(joke_id == -1):
-			print("trying to learn joke")
 			_learn_joke(JokeDatabase._get_joke(pickup.joke_name))
+			print("trying to learn joke. now at ", jokes.size())
 		else:
 			print("trying to restore joke uses")
 			jokes[joke_id]._restore_uses(pickup.joke_restore_amount)
