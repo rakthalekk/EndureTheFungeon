@@ -14,6 +14,8 @@ var roomScene := preload("res://src/Room.tscn")
 var playerScene := preload("res://src/player.tscn")
 
 var cam
+var miniMap: TileMap
+var miniMapBackground: Sprite2D
 var currentRoom: Room
 var roomAssignmentQueue: Array[Room] = []
 
@@ -32,7 +34,10 @@ func _ready():
 	player.position = startCoords * Room.dimensions + (Room.dimensions / 2)
 	#player.scale *= 0.2d
 	cam.position = player.position
-
+	
+	miniMap = get_node("CanvasLayer/MiniMap")
+	miniMapBackground = get_node("CanvasLayer/MinimapBackground")
+	
 	pass
 
 func _process(_delta):
@@ -103,7 +108,7 @@ func GenerateMap():
 				if dir == Vector2.UP:
 					invalid = true
 			
-			if !invalid:
+			if invalid:
 				continue
 			
 			currRoom.type = Room.Type.Boss
@@ -127,6 +132,7 @@ func GenerateMap():
 
 func ChangeActiveRoom(room: Room):
 	currentRoom = room
+	UpdateMinimap(currentRoom)
 
 func CreateRoom(pos: Vector2i):
 	if InBounds(pos) && !GridContains(pos):
@@ -210,3 +216,25 @@ func GetNeighbors(room: Room):
 		neighbors.push_back(GetRoom(coords + Vector2i.LEFT))
 
 	return neighbors
+
+func UpdateMinimap(room: Room, depth := 0):
+	var neighbors = room.neighbors
+	if depth == 0:
+		miniMap.clear()
+	
+	for neighbor in neighbors:
+		if depth < 1:
+			UpdateMinimap(neighbor, depth + 1)
+		
+		miniMap.set_cell(0, neighbor.coords, 1, Vector2i(0, 1))
+	
+	miniMap.set_cell(0, room.coords, 1, Vector2i(0, 1))
+	
+	if room == currentRoom:
+		miniMap.set_cell(1, room.coords, 1, Vector2i(0, 0))
+	
+	if room.type == Room.Type.Boss:
+		miniMap.set_cell(1, room.coords, 1, Vector2i(0, 2))
+		
+	var offset = Vector2(currentRoom.coords * Vector2i(64, 36)) + Vector2(32, 18)
+	miniMap.position = miniMapBackground.position - offset
