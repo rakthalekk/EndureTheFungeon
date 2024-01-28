@@ -13,6 +13,7 @@ var charge_timer: float
 var delay_timer: float
 @export var infinite_ammo: bool
 @export var max_uses: int
+#@export var spread: float
 var current_uses: int
 var firing: bool
 var can_fire: bool

@@ -59,3 +59,40 @@ despawn_time = 7.0
 bullet_radius = 0.7
 piercing_max = 10
 on_enemy_hit = 4
+
+[node name="Trap" type="Sprite2D" parent="."]
+position = Vector2(119, 57)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3k8sg")
+script = ExtResource("2_be0wl")
+speed = 600.0
+damage = 4
+despawn_time = 10.0
+bullet_radius = 1.2
+move_type = 1
+trap_move_time = 1.5
+
+[node name="DirectSine" type="Sprite2D" parent="."]
+position = Vector2(119, 57)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3k8sg")
+script = ExtResource("2_be0wl")
+speed = 400.0
+damage = 1
+despawn_time = 10.0
+bullet_radius = 0.5
+move_type = 3
+sine_frequency = 100.0
+
+[node name="LateralSine" type="Sprite2D" parent="."]
+position = Vector2(119, 57)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_3k8sg")
+script = ExtResource("2_be0wl")
+speed = 600.0
+damage = 1
+despawn_time = 10.0
+bullet_radius = 0.5
+move_type = 4
+sine_amplitude = 300.0
+sine_frequency = 50.0
